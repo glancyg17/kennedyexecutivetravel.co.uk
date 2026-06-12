@@ -1,6 +1,6 @@
 # Kennedy Executive Travel — Site Guide
 
-Static site, hosted on GitHub Pages at `kennedyexecutivetravel.com`.
+Static site, hosted on GitHub Pages at `kennedyexecutivetravel.co.uk`.
 
 ## File structure
 
