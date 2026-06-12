@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kennedy Executive Travel — Premier Chauffeur Services in Central Scotland</title>
+<meta property="og:image" content="https://kennedyexecutivetravel.com/assets/images/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kennedyexecutivetravel.com/assets/images/og-image.jpg">
+<link rel="icon" type="image/png" href="assets/icons/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0c0b0b;
+  --black2:#131111;
+  --red:#9e1c1c;
+  --red-lt:#c42222;
+  --gold:#c8a45a;
+  --gold-lt:#dfc07a;
+  --cream:#f0ebe0;
+  --mid:#7a6f6f;
+  --border-red:rgba(158,28,28,0.25);
+  --border-gold:rgba(200,164,90,0.18);
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:64px;background:rgba(12,11,11,0.97);border-bottom:1px solid var(--border-red)}
+.nav-logo-link{display:flex;align-items:center;height:100%}
+.nav-logo-img{height:40px;width:auto;display:block}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--cream)}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-phone{font-size:0.78rem;letter-spacing:0.06em;color:var(--gold);text-decoration:none}
+.nav-book{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;background:var(--red);color:var(--cream);padding:0.5rem 1.4rem;text-decoration:none;transition:background 0.2s;cursor:pointer;border:none}
+.nav-book:hover{background:var(--red-lt)}
+
+/* HERO — full bleed background */
+.hero{padding-top:64px;min-height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.hero-bg-img{position:absolute;inset:0;background:#1a1212 center/cover no-repeat}
+.hero-bg-img.no-img{background:linear-gradient(135deg,#1e1212 0%,#0c0b0b 60%,#150e0e 100%);display:flex;align-items:center;justify-content:center;font-size:0.65rem;letter-spacing:0.2em;color:rgba(200,164,90,0.12);text-transform:uppercase}
+.hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,11,11,0.97) 0%,rgba(12,11,11,0.55) 45%,rgba(12,11,11,0.35) 100%)}
+.hero-content{position:relative;z-index:2;padding:6rem 3rem 8rem;max-width:760px}
+.hero-eyebrow{font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--red-lt);margin-bottom:2rem}
+.hero-script{font-family:'Dancing Script',cursive;font-weight:600;font-size:clamp(3.8rem,6.5vw,7rem);color:var(--cream);line-height:1.15;margin-bottom:0.3rem}
+.hero-script-gold{color:var(--gold)}
+.hero-divider{width:3rem;height:1px;background:var(--red);margin:2rem 0}
+.hero-tagline{font-size:0.92rem;letter-spacing:0.04em;line-height:1.95;color:var(--cream);opacity:0.75;max-width:460px;margin-bottom:3rem}
+.hero-tagline strong{color:var(--cream);font-weight:400;opacity:1}
+.hero-cta-group{display:flex;flex-wrap:wrap;gap:0.8rem;align-items:center;margin-bottom:4rem}
+.btn-red{font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;background:var(--red);color:var(--cream);padding:0.9rem 2.5rem;text-decoration:none;display:inline-block;transition:background 0.2s;cursor:pointer;border:none}
+.btn-red:hover{background:var(--red-lt)}
+.btn-outline-gold{font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;border:0.5px solid var(--gold);color:var(--gold);padding:0.9rem 2.5rem;text-decoration:none;display:inline-block;transition:all 0.2s}
+.btn-outline-gold:hover{background:rgba(200,164,90,0.07)}
+.hero-proof{display:flex;gap:3rem;flex-wrap:wrap}
+.hero-proof-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--gold);line-height:1}
+.hero-proof-label{font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-top:0.25rem}
+.hero-scroll-hint{position:absolute;bottom:3rem;right:3rem;z-index:3;display:flex;flex-direction:column;align-items:center;gap:0.5rem}
+.hero-scroll-hint span{font-size:0.56rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--mid)}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--red),transparent);animation:scrollpulse 2s ease-in-out infinite}
+@keyframes scrollpulse{0%,100%{opacity:0.3}50%{opacity:1}}
+
+/* TICKER */
+.ticker-wrap{overflow:hidden;border-top:1px solid var(--border-red);border-bottom:1px solid var(--border-red);padding:1rem 0;background:var(--black2)}
+.ticker-track{display:flex;white-space:nowrap;animation:ticker 50s linear infinite}
+.ticker-track:hover{animation-play-state:paused}
+.ticker-item{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--mid);padding:0 2.5rem;flex-shrink:0}
+.ticker-item em{color:var(--cream);font-style:italic}
+.ticker-sep{color:var(--red);padding:0 0.5rem;font-size:0.9rem;line-height:2}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.s{padding:7rem 3rem;border-top:1px solid var(--border-red)}
+.eyebrow{font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--red-lt);margin-bottom:1.2rem}
+.h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:var(--cream);line-height:1.15;margin-bottom:1.5rem}
+.h2 em{font-style:italic;color:var(--gold)}
+.body-copy{font-size:0.88rem;color:var(--mid);line-height:1.95;max-width:500px}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:5fr 4fr;gap:6rem;align-items:center}
+.about-img{aspect-ratio:3/4;background:#1a1212 center/cover no-repeat;position:relative}
+.about-img-accent{position:absolute;bottom:-1.5rem;right:-1.5rem;width:60%;height:60%;border:1px solid var(--red);z-index:-1;pointer-events:none}
+.about-quote-block{margin-top:3rem;padding:2rem 2rem 2rem 2.5rem;border-left:2px solid var(--red);background:rgba(158,28,28,0.05)}
+.about-quote-text{font-family:'Dancing Script',cursive;font-weight:600;font-size:1.7rem;color:var(--cream);line-height:1.45}
+.about-quote-attr{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-top:0.8rem}
+
+/* FLEET */
+.fleet-s{padding:7rem 3rem;border-top:1px solid var(--border-red);background:var(--black2)}
+.fleet-header{display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:end;margin-bottom:4rem}
+.fleet-price-note{font-size:0.78rem;color:var(--mid);letter-spacing:0.06em}
+.fleet-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border-red)}
+.fleet-card{position:relative;overflow:hidden;cursor:pointer;border-right:1px solid var(--border-red);transition:background 0.3s;display:flex;flex-direction:column}
+.fleet-card:last-child{border-right:none}
+.fleet-card:hover{background:rgba(158,28,28,0.05)}
+.fleet-card-link{text-decoration:none;color:inherit;display:flex;flex-direction:column;flex:1}
+.fleet-card-img{width:100%;aspect-ratio:3/2;background:#1e1313;display:block;overflow:hidden}
+.fleet-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.fleet-card-body{padding:2rem;display:flex;flex-direction:column;flex:1}
+.fleet-tier{font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--red-lt);margin-bottom:0.6rem}
+.fleet-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:300;color:var(--cream);margin-bottom:0.4rem}
+.fleet-spec{font-size:0.75rem;color:var(--mid);line-height:1.7;margin-bottom:1.5rem;flex:1}
+.fleet-price-row{display:flex;justify-content:space-between;align-items:center;padding-top:1.2rem;border-top:0.5px solid var(--border-red)}
+.fleet-price{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold)}
+.fleet-price sub{font-size:0.62rem;font-family:'Jost',sans-serif;font-weight:300;color:var(--mid);letter-spacing:0.08em;vertical-align:baseline}
+.fleet-reserve{font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;background:var(--red);color:var(--cream);padding:0.5rem 1rem;border:none;cursor:pointer;transition:background 0.2s}
+.fleet-reserve:hover{background:var(--red-lt)}
+.fleet-view-link{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);display:block;text-align:center;padding:0.8rem;border-top:0.5px solid var(--border-red);transition:color 0.2s;text-decoration:none}
+.fleet-card:hover .fleet-view-link{color:var(--gold)}
+
+/* LOWER TIER CARDS — same grid, slightly muted */
+.fleet-grid-lower{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border-red);margin-top:1.5rem}
+.fleet-card-lower{position:relative;overflow:hidden;cursor:pointer;border-right:1px solid var(--border-red);transition:background 0.3s;display:flex;flex-direction:column}
+.fleet-card-lower:last-child{border-right:none}
+.fleet-card-lower:hover{background:rgba(158,28,28,0.04)}
+.fleet-lower-img{width:100%;aspect-ratio:3/2;background:#181212;display:block;overflow:hidden}
+.fleet-lower-img img{width:100%;height:100%;object-fit:cover;display:block}
+.fleet-lower-body{padding:1.6rem 2rem;display:flex;flex-direction:column;flex:1}
+.fleet-lower-tier{font-size:0.56rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--mid);margin-bottom:0.5rem}
+.fleet-lower-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--cream);margin-bottom:0.3rem}
+.fleet-lower-spec{font-size:0.72rem;color:var(--mid);line-height:1.65;margin-bottom:1.2rem;flex:1}
+.fleet-lower-row{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:0.5px solid var(--border-red)}
+.fleet-lower-price{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold)}
+.fleet-lower-price sub{font-size:0.6rem;font-family:'Jost',sans-serif;font-weight:300;color:var(--mid);vertical-align:baseline}
+.fleet-lower-link{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s}
+.fleet-card-lower:hover .fleet-lower-link{color:var(--gold)}
+
+/* SERVICES */
+.services-grid{margin-top:4rem;display:grid;grid-template-columns:repeat(2,1fr);background:var(--border-red);gap:1px;border:1px solid var(--border-red)}
+.svc{background:var(--black);padding:2rem 2.5rem;display:flex;gap:2rem;align-items:flex-start;transition:background 0.25s}
+.svc:hover{background:rgba(158,28,28,0.06)}
+.svc-icon{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--red);line-height:1;flex-shrink:0;width:1.8rem;text-align:center;margin-top:0.1rem}
+.svc-name{font-size:0.88rem;letter-spacing:0.04em;color:var(--cream);margin-bottom:0.3rem}
+.svc-desc{font-size:0.75rem;color:var(--mid);line-height:1.65}
+
+/* REVIEWS */
+.reviews-s{padding:7rem 3rem;border-top:1px solid var(--border-red);background:var(--black2)}
+.reviews-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem}
+.reviews-link{font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--mid);text-decoration:none;border-bottom:0.5px solid var(--border-red);padding-bottom:2px}
+.reviews-link:hover{color:var(--gold);border-color:var(--gold)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-red);border:1px solid var(--border-red)}
+.review-card{background:var(--black2);padding:2.5rem 2rem}
+.review-stars{display:flex;gap:4px;margin-bottom:1.5rem}
+.review-star{width:9px;height:9px;background:var(--red);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.review-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--cream);line-height:1.75;margin-bottom:2rem}
+.review-author{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold)}
+.review-town{font-size:0.68rem;color:var(--mid);margin-top:0.2rem}
+
+/* BOOK */
+.book-s{padding:8rem 3rem;border-top:1px solid var(--border-red);text-align:center;position:relative;overflow:hidden}
+.book-bg-script{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Dancing Script',cursive;font-weight:600;font-size:16vw;color:rgba(158,28,28,0.05);pointer-events:none;white-space:nowrap;line-height:1}
+.book-sub{font-size:0.88rem;color:var(--mid);letter-spacing:0.05em;margin-bottom:3rem}
+.book-actions{display:flex;gap:1.2rem;justify-content:center;align-items:center;flex-wrap:wrap}
+.book-or{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid)}
+.book-wa{font-size:0.8rem;color:var(--gold);text-decoration:none;letter-spacing:0.06em}
+.book-wa:hover{color:var(--gold-lt)}
+
+/* FOOTER */
+footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem}
+.footer-logo-img{height:36px;width:auto;display:block}
+.footer-links{display:flex;gap:2rem;justify-content:center;list-style:none}
+.footer-links a{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none}
+.footer-links a:hover{color:var(--gold)}
+.footer-right{text-align:right}
+.footer-copy{font-size:0.62rem;letter-spacing:0.06em;color:rgba(122,111,111,0.5)}
+.footer-social{display:flex;gap:1.2rem;justify-content:flex-end;margin-top:0.5rem}
+.footer-social a{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(122,111,111,0.5);text-decoration:none}
+.footer-social a:hover{color:var(--red-lt)}
+
+/* RESERVE MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(8,7,7,0.88);z-index:500;display:none;align-items:center;justify-content:center;padding:2rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--black2);border:1px solid var(--border-red);width:100%;max-width:520px;padding:3rem;position:relative}
+.modal-close{position:absolute;top:1.2rem;right:1.5rem;font-size:1.2rem;color:var(--mid);cursor:pointer;background:none;border:none;line-height:1}
+.modal-close:hover{color:var(--cream)}
+.modal-eyebrow{font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--red-lt);margin-bottom:0.6rem}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--cream);margin-bottom:0.3rem}
+.modal-vehicle{font-size:0.78rem;color:var(--gold);margin-bottom:2rem;letter-spacing:0.05em}
+.modal-field{margin-bottom:1.2rem}
+.modal-field label{display:block;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:0.5rem}
+.modal-field input,.modal-field textarea,.modal-field select{width:100%;background:var(--black);border:0.5px solid var(--border-red);color:var(--cream);padding:0.75rem 1rem;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;transition:border-color 0.2s}
+.modal-field input:focus,.modal-field textarea:focus,.modal-field select:focus{border-color:var(--red)}
+.modal-field select option{background:var(--black2)}
+.modal-field textarea{resize:vertical;min-height:80px}
+.modal-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.modal-submit{width:100%;margin-top:0.8rem;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;background:var(--red);color:var(--cream);padding:0.95rem;border:none;cursor:pointer;transition:background 0.2s}
+.modal-submit:hover{background:var(--red-lt)}
+.modal-note{font-size:0.68rem;color:var(--mid);text-align:center;margin-top:1rem;line-height:1.6}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-content{padding:4rem 1.5rem 6rem}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .fleet-grid,.fleet-grid-lower{grid-template-columns:1fr}
+  .fleet-card,.fleet-card-lower{border-right:none;border-bottom:1px solid var(--border-red)}
+  .reviews-grid,.services-grid{grid-template-columns:1fr}
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .s,.fleet-s,.reviews-s,.book-s{padding:5rem 1.5rem}
+  footer{grid-template-columns:1fr;text-align:center}
+  .footer-right{text-align:center}
+  .footer-social{justify-content:center}
+  .modal-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- RESERVE MODAL -->
+<div class="modal-overlay" id="reserveModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <p class="modal-eyebrow">Reserve your journey</p>
+    <h2 class="modal-title">Make a reservation</h2>
+    <p class="modal-vehicle" id="modalVehicle"></p>
+    <form action="https://formsubmit.co/kennedyexecutivetravel@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New reservation request — Kennedy Executive Travel">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="vehicle" id="modalVehicleInput">
+      <div class="modal-row">
+        <div class="modal-field"><label>Your name</label><input type="text" name="name" required placeholder="Full name"></div>
+        <div class="modal-field"><label>Phone number</label><input type="tel" name="phone" required placeholder="07700 000000"></div>
+      </div>
+      <div class="modal-field"><label>Email address</label><input type="email" name="email" required placeholder="your@email.com"></div>
+      <div class="modal-row">
+        <div class="modal-field"><label>Journey date</label><input type="date" name="date" required></div>
+        <div class="modal-field"><label>Pick-up time</label><input type="time" name="time"></div>
+      </div>
+      <div class="modal-field"><label>Pick-up location</label><input type="text" name="pickup" placeholder="Address or airport"></div>
+      <div class="modal-field"><label>Drop-off location</label><input type="text" name="dropoff" placeholder="Destination"></div>
+      <div class="modal-field"><label>Additional notes</label><textarea name="notes" placeholder="Number of passengers, luggage, special requests..."></textarea></div>
+      <button type="submit" class="modal-submit">Send reservation request</button>
+      <p class="modal-note">We'll confirm availability and pricing within a few hours.</p>
+    </form>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo-link">
+    <img src="assets/images/logo.png" alt="Kennedy Executive Travel" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="fleet.html">Fleet</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="reviews.html">Reviews</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:07961834904" class="nav-phone">07961 834 904</a>
+    <button class="nav-book" onclick="openModal('Any vehicle')">Reserve now</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-img" style="background-image:url('assets/images/hero.jpg')"></div>
+  <div class="hero-bg-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Central Scotland's premier chauffeur service</p>
+    <div class="hero-script">Where every<br>journey feels<br><span class="hero-script-gold">personal.</span></div>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">VIP transfers, airport runs, weddings, events &amp; private tours across <strong>Glasgow, Edinburgh, Central Scotland, Fife &amp; the Lothians.</strong></p>
+    <div class="hero-cta-group">
+      <button class="btn-red" onclick="openModal('Any vehicle')">Reserve a journey</button>
+      <a href="fleet.html" class="btn-outline-gold">View the fleet</a>
+    </div>
+    <div class="hero-proof">
+      <div class="hero-proof-item"><div class="hero-proof-num">100+</div><div class="hero-proof-label">Five-star reviews</div></div>
+      <div class="hero-proof-item"><div class="hero-proof-num">On Time</div><div class="hero-proof-label">Every journey</div></div>
+      <div class="hero-proof-item"><div class="hero-proof-num">All UK</div><div class="hero-proof-label">Airports</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item"><em>"Had the cork popping as soon as we got in"</em> — Lynne, Burnside</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item"><em>"At least ten plus stars"</em> — Ann, Blantyre</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item"><em>"You start as a customer but end up a personal friend"</em></span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item"><em>"VIP package for our daughter's 21st — couldn't fault it"</em> — Fiona, Irvine</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item"><em>"A true gentleman and a great business"</em> — Bailey, Hamilton</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item"><em>"Stress free, hassle free, professional &amp; affordable"</em> — Steven, Burnbank</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item"><em>"Had the cork popping as soon as we got in"</em> — Lynne, Burnside</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item"><em>"At least ten plus stars"</em> — Ann, Blantyre</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item"><em>"You start as a customer but end up a personal friend"</em></span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item"><em>"VIP package for our daughter's 21st — couldn't fault it"</em> — Fiona, Irvine</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item"><em>"A true gentleman and a great business"</em> — Bailey, Hamilton</span>
+    <span class="ticker-sep">✦</span>
+    <span class="ticker-item"><em>"Stress free, hassle free, professional &amp; affordable"</em> — Steven, Burnbank</span>
+    <span class="ticker-sep">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="s">
+  <div class="about-grid">
+    <div>
+      <p class="eyebrow">About us</p>
+      <h2 class="h2">A service built on<br><em>personal pride.</em></h2>
+      <p class="body-copy">Based in Central Scotland, we've built our reputation on one principle: every journey is an occasion. Whether it's a quiet airport run at 5am or a full VIP night out with champagne on arrival — the same care, the same attention to detail, the same standard every time.</p>
+      <p class="body-copy" style="margin-top:1rem">We cover Glasgow, Edinburgh, Fife, the Lothians and all points between. Long-distance runs available on request.</p>
+      <div class="about-quote-block">
+        <p class="about-quote-text">"You start as a customer but will end up a personal friend."</p>
+        <p class="about-quote-attr">— Kennedy Executive Travel</p>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div class="about-img" style="background-image:url('assets/images/about.jpg')"></div>
+      <div class="about-img-accent"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section class="fleet-s">
+  <div class="fleet-header">
+    <div>
+      <p class="eyebrow">The fleet</p>
+      <h2 class="h2" style="margin-bottom:0">Every vehicle.<br><em>One standard of service.</em></h2>
+    </div>
+    <p class="fleet-price-note">Journeys from £39</p>
+  </div>
+
+  <!-- VIP TIER -->
+  <p style="font-size:0.6rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">VIP Range</p>
+  <div class="fleet-grid">
+    <div class="fleet-card">
+      <a href="mercedes-g63.html" class="fleet-card-link">
+        <div class="fleet-card-img"><img src="assets/images/g63-hero.jpg" alt="Mercedes G63 AMG"></div>
+        <div class="fleet-card-body">
+          <p class="fleet-tier">VIP</p>
+          <h3 class="fleet-name">Mercedes G63 AMG</h3>
+          <p class="fleet-spec">4 passengers · 2023 · Petrol · Automatic<br>The statement vehicle. Nothing else on the road commands the same presence.</p>
+          <div class="fleet-price-row">
+            <span class="fleet-price">£149 <sub>from</sub></span>
+            <button class="fleet-reserve" onclick="event.preventDefault();openModal('Mercedes G63 AMG')">Reserve now</button>
+          </div>
+        </div>
+      </a>
+      <a href="mercedes-g63.html" class="fleet-view-link">View vehicle →</a>
+    </div>
+    <div class="fleet-card">
+      <a href="mercedes-maybach.html" class="fleet-card-link">
+        <div class="fleet-card-img"><img src="assets/images/maybach-hero.jpg" alt="Mercedes Maybach"></div>
+        <div class="fleet-card-body">
+          <p class="fleet-tier">VIP</p>
+          <h3 class="fleet-name">Mercedes Maybach</h3>
+          <p class="fleet-spec">Up to 8 passengers · 2022 · Diesel · Automatic<br>The rear cabin experience that turns a transfer into an occasion.</p>
+          <div class="fleet-price-row">
+            <span class="fleet-price">£149 <sub>from</sub></span>
+            <button class="fleet-reserve" onclick="event.preventDefault();openModal('Mercedes Maybach')">Reserve now</button>
+          </div>
+        </div>
+      </a>
+      <a href="mercedes-maybach.html" class="fleet-view-link">View vehicle →</a>
+    </div>
+    <div class="fleet-card">
+      <a href="audi-sq7.html" class="fleet-card-link">
+        <div class="fleet-card-img"><img src="assets/images/sq7-hero.jpg" alt="Audi SQ7"></div>
+        <div class="fleet-card-body">
+          <p class="fleet-tier">VIP</p>
+          <h3 class="fleet-name">Audi SQ7</h3>
+          <p class="fleet-spec">Up to 6 passengers · 2023 · Diesel · Automatic<br>Performance and presence for those who want both.</p>
+          <div class="fleet-price-row">
+            <span class="fleet-price">£119 <sub>from</sub></span>
+            <button class="fleet-reserve" onclick="event.preventDefault();openModal('Audi SQ7')">Reserve now</button>
+          </div>
+        </div>
+      </a>
+      <a href="audi-sq7.html" class="fleet-view-link">View vehicle →</a>
+    </div>
+  </div>
+
+  <!-- LOWER TIERS -->
+  <p style="font-size:0.6rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--mid);margin-top:3rem;margin-bottom:1rem">Also available</p>
+  <div class="fleet-grid-lower">
+    <div class="fleet-card-lower">
+      <a href="executive.html" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;flex:1">
+        <div class="fleet-lower-img"><img src="assets/images/executive-hero.jpg" alt="Executive Range"></div>
+        <div class="fleet-lower-body">
+          <p class="fleet-lower-tier">Executive Range</p>
+          <h3 class="fleet-lower-name">Mercedes V-Class, C-Class &amp; Porsche Cayenne</h3>
+          <p class="fleet-lower-spec">Up to 7 passengers · Diesel &amp; petrol · Automatic<br>Premium comfort without the VIP price tag.</p>
+          <div class="fleet-lower-row">
+            <span class="fleet-lower-price">£89 <sub>from</sub></span>
+            <a href="executive.html" class="fleet-lower-link">View range →</a>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="fleet-card-lower">
+      <a href="group.html" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;flex:1">
+        <div class="fleet-lower-img"><img src="assets/images/group-hero.jpg" alt="Mini Buses"></div>
+        <div class="fleet-lower-body">
+          <p class="fleet-lower-tier">Mini Buses</p>
+          <h3 class="fleet-lower-name">Mini Buses &amp; Ford Transit</h3>
+          <p class="fleet-lower-spec">8 to 16 passengers · 8, 12, 14 &amp; 17-seat options<br>Hen dos, proms, airport runs, corporate groups.</p>
+          <div class="fleet-lower-row">
+            <span class="fleet-lower-price">£79 <sub>from</sub></span>
+            <a href="group.html" class="fleet-lower-link">View range →</a>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="fleet-card-lower">
+      <a href="standard.html" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;flex:1">
+        <div class="fleet-lower-img"><img src="assets/images/standard-hero.jpg" alt="Standard Range"></div>
+        <div class="fleet-lower-body">
+          <p class="fleet-lower-tier">Standard Range</p>
+          <h3 class="fleet-lower-name">BMW 3 Series M-Sport &amp; VW EOS</h3>
+          <p class="fleet-lower-spec">Convertibles · Available for chauffeur or self-drive rental<br>Perfect for summer runs, a casual transfer, or a weekend away.</p>
+          <div class="fleet-lower-row">
+            <span class="fleet-lower-price">£39 <sub>from</sub></span>
+            <a href="standard.html" class="fleet-lower-link">View range →</a>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="s">
+  <p class="eyebrow">Services</p>
+  <h2 class="h2">Whatever the occasion,<br><em>we have it covered.</em></h2>
+  <div class="services-grid">
+    <div class="svc"><span class="svc-icon">✈</span><div><p class="svc-name">Airport Transfers</p><p class="svc-desc">All UK airports · Flight tracking · Meet &amp; greet</p></div></div>
+    <div class="svc"><span class="svc-icon">♦</span><div><p class="svc-name">Wedding Chauffeur</p><p class="svc-desc">VIP luxury to standard · Multiple stops · Your whole day planned</p></div></div>
+    <div class="svc"><span class="svc-icon">★</span><div><p class="svc-name">VIP Transportation</p><p class="svc-desc">High-profile &amp; corporate · Discreet · Champagne on arrival</p></div></div>
+    <div class="svc"><span class="svc-icon">⛳</span><div><p class="svc-name">Golfing</p><p class="svc-desc">Scotland's finest courses · Local knowledge · Relaxed transfers</p></div></div>
+    <div class="svc"><span class="svc-icon">♪</span><div><p class="svc-name">Concerts &amp; Events</p><p class="svc-desc">Arrive in style · No parking stress · Safe journey home</p></div></div>
+    <div class="svc"><span class="svc-icon">◈</span><div><p class="svc-name">Private Tours</p><p class="svc-desc">Central Scotland's landmarks &amp; hidden gems · Fully bespoke</p></div></div>
+    <div class="svc"><span class="svc-icon">◻</span><div><p class="svc-name">Corporate Travel</p><p class="svc-desc">Executives &amp; teams · Punctuality guaranteed · Account work</p></div></div>
+    <div class="svc"><span class="svc-icon">✦</span><div><p class="svc-name">Proms &amp; Parties</p><p class="svc-desc">Groups up to 16 · Glow sticks, drinks, confetti · Unforgettable</p></div></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-s">
+  <div class="reviews-top">
+    <div>
+      <p class="eyebrow">Reviews</p>
+      <h2 class="h2" style="margin-bottom:0">100+ five-star reviews<br><em>from real customers.</em></h2>
+    </div>
+    <a href="reviews.html" class="reviews-link">Read them all →</a>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+      <p class="review-text">"Cannot recommend Kennedy Executive Travel enough. Walked out the airport and they were right there — no faffing about. Will not use any other company having used them."</p>
+      <p class="review-author">Naomi Smith</p>
+      <p class="review-town">Strathaven</p>
+    </div>
+    <div class="review-card">
+      <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+      <p class="review-text">"Changed the pick-up time at very short notice, dropped off at two extra addresses on the way back. Great selection of drinks — more than we asked for. Worth every penny."</p>
+      <p class="review-author">Gayle Lyndsay</p>
+      <p class="review-town">Cambuslang</p>
+    </div>
+    <div class="review-card">
+      <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+      <p class="review-text">"The executive drinks package was worth every penny. Service with a smile. At the very least 10 plus stars — I can't wait to rebook for my next special event."</p>
+      <p class="review-author">Ann Callahan</p>
+      <p class="review-town">Blantyre</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class="book-s">
+  <div class="book-bg-script">Kennedy</div>
+  <p class="eyebrow">Make a booking</p>
+  <h2 class="h2" style="max-width:none;font-size:clamp(2.5rem,5vw,4.2rem);margin-bottom:1rem">Ready when <em>you are.</em></h2>
+  <p class="book-sub">Call us, send a message, or fill in a quick enquiry — we'll get back to you personally.</p>
+  <div class="book-actions">
+    <button class="btn-red" onclick="openModal('Any vehicle')">Reserve a journey</button>
+    <span class="book-or">or</span>
+    <a href="tel:07961834904" class="btn-outline-gold">Call 07961 834 904</a>
+    <span class="book-or">or</span>
+    <a href="https://wa.me/447961834904" class="book-wa">WhatsApp us →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="assets/images/logo.png" alt="Kennedy Executive Travel" class="footer-logo-img">
+  <ul class="footer-links">
+    <li><a href="fleet.html">Fleet</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="reviews.html">Reviews</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+  </ul>
+  <div class="footer-right">
+    <p class="footer-copy">© 2026 Kennedy Executive Travel · Central Scotland</p>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/kennedykabs">Facebook</a>
+      <a href="https://www.instagram.com/kennedy_executive_travel">Instagram</a>
+      <a href="https://www.tiktok.com/@kennedy.executive">TikTok</a>
+      <a href="https://x.com/kennedy_travel">X</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function openModal(vehicle) {
+  document.getElementById('modalVehicle').textContent = vehicle !== 'Any vehicle' ? vehicle : '';
+  document.getElementById('modalVehicleInput').value = vehicle;
+  document.getElementById('reserveModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('reserveModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('reserveModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>
