@@ -45,7 +45,6 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-
 .hero-bg-img.no-img{background:linear-gradient(135deg,#1e1212 0%,#0c0b0b 60%,#150e0e 100%);display:flex;align-items:center;justify-content:center;font-size:0.65rem;letter-spacing:0.2em;color:rgba(200,164,90,0.12);text-transform:uppercase}
 .hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,11,11,0.97) 0%,rgba(12,11,11,0.55) 45%,rgba(12,11,11,0.35) 100%)}
 .hero-content{position:relative;z-index:2;padding:6rem 3rem 8rem;max-width:760px}
-.hero-eyebrow{font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--red-lt);margin-bottom:2rem}
 .hero-script{font-family:'Dancing Script',cursive;font-weight:600;font-size:clamp(3.8rem,6.5vw,7rem);color:var(--cream);line-height:1.15;margin-bottom:0.3rem}
 .hero-script-gold{color:var(--gold)}
 .hero-divider{width:3rem;height:1px;background:var(--red);margin:2rem 0}
@@ -65,9 +64,11 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-
 @keyframes scrollpulse{0%,100%{opacity:0.3}50%{opacity:1}}
 
 /* TICKER */
-.ticker-wrap{overflow:hidden;border-top:1px solid var(--border-red);border-bottom:1px solid var(--border-red);padding:1rem 0;background:var(--black2)}
-.ticker-track{display:flex;white-space:nowrap;animation:ticker 50s linear infinite}
-.ticker-track:hover{animation-play-state:paused}
+.ticker-wrap{overflow:hidden;border-top:1px solid var(--border-red);border-bottom:1px solid var(--border-red);padding:1rem 0;background:var(--black2);cursor:grab}
+.ticker-wrap.dragging{cursor:grabbing}
+.ticker-track{display:flex;white-space:nowrap;animation:ticker 25s linear infinite;will-change:transform}
+.ticker-track.paused{animation-play-state:paused}
+.ticker-wrap:hover .ticker-track:not(.paused){animation-play-state:paused}
 .ticker-item{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--mid);padding:0 2.5rem;flex-shrink:0}
 .ticker-item em{color:var(--cream);font-style:italic}
 .ticker-sep{color:var(--red);padding:0 0.5rem;font-size:0.9rem;line-height:2}
@@ -331,8 +332,8 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 </section>
 
 <!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker-track">
+<div class="ticker-wrap" id="tickerWrap">
+  <div class="ticker-track" id="tickerTrack">
     <span class="ticker-item"><em>"Had the cork popping as soon as we got in"</em> — Lynne, Burnside</span>
     <span class="ticker-sep">✦</span>
     <span class="ticker-item"><em>"At least ten plus stars"</em> — Ann, Blantyre</span>
@@ -385,7 +386,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
   <div class="fleet-header">
     <div>
       <p class="eyebrow">The fleet</p>
-      <h2 class="h2" style="margin-bottom:0">Many vehicles.<br><em>One standard of service.</em></h2>
+      <h2 class="h2" style="margin-bottom:0">Every vehicle.<br><em>One standard of service.</em></h2>
     </div>
     <p class="fleet-price-note">Journeys from £39</p>
   </div>
@@ -599,6 +600,130 @@ function toggleMenu() {
   document.getElementById('burgerBtn').classList.toggle('open');
   document.getElementById('mobileMenu').classList.toggle('open');
 }
+
+/* TICKER DRAG / SWIPE */
+(function() {
+  var wrap = document.getElementById('tickerWrap');
+  var track = document.getElementById('tickerTrack');
+  if (!wrap || !track) return;
+
+  var isDown = false;
+  var startX = 0;
+  var startOffset = 0;
+  var currentOffset = 0;
+  var velocity = 0;
+  var lastX = 0;
+  var lastTime = 0;
+  var momentumFrame = null;
+  var resumeTimeout = null;
+  var halfWidth = 0;
+
+  function getCurrentTranslateX() {
+    var style = window.getComputedStyle(track);
+    var matrix = new DOMMatrixReadOnly(style.transform);
+    return matrix.m41;
+  }
+
+  function setTranslate(x) {
+    track.style.transform = 'translateX(' + x + 'px)';
+  }
+
+  function normalize(x) {
+    // Wrap offset within [-halfWidth, 0] so it loops seamlessly
+    halfWidth = track.scrollWidth / 2;
+    while (x <= -halfWidth) x += halfWidth;
+    while (x > 0) x -= halfWidth;
+    return x;
+  }
+
+  function pauseCSS() {
+    track.classList.add('paused');
+    currentOffset = getCurrentTranslateX();
+    setTranslate(currentOffset);
+  }
+
+  function resumeCSS() {
+    track.classList.remove('paused');
+    track.style.transform = '';
+    track.style.animation = 'none';
+    requestAnimationFrame(function() {
+      track.style.animation = '';
+    });
+  }
+
+  function startDrag(x) {
+    clearTimeout(resumeTimeout);
+    cancelAnimationFrame(momentumFrame);
+    isDown = true;
+    wrap.classList.add('dragging');
+    pauseCSS();
+    startX = x;
+    lastX = x;
+    lastTime = Date.now();
+    velocity = 0;
+    startOffset = currentOffset;
+  }
+
+  function moveDrag(x) {
+    if (!isDown) return;
+    var dx = x - startX;
+    currentOffset = normalize(startOffset + dx);
+    setTranslate(currentOffset);
+
+    var now = Date.now();
+    var dt = now - lastTime;
+    if (dt > 0) {
+      velocity = (x - lastX) / dt;
+    }
+    lastX = x;
+    lastTime = now;
+  }
+
+  function endDrag() {
+    if (!isDown) return;
+    isDown = false;
+    wrap.classList.remove('dragging');
+    applyMomentum();
+  }
+
+  function applyMomentum() {
+    function step() {
+      velocity *= 0.95;
+      if (Math.abs(velocity) < 0.02) {
+        // Settle back to CSS animation
+        resumeTimeout = setTimeout(resumeCSS, 200);
+        return;
+      }
+      currentOffset = normalize(currentOffset + velocity * 16);
+      setTranslate(currentOffset);
+      momentumFrame = requestAnimationFrame(step);
+    }
+    if (Math.abs(velocity) > 0.02) {
+      step();
+    } else {
+      resumeTimeout = setTimeout(resumeCSS, 200);
+    }
+  }
+
+  // Mouse events
+  wrap.addEventListener('mousedown', function(e) {
+    startDrag(e.clientX);
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', function(e) {
+    if (isDown) moveDrag(e.clientX);
+  });
+  window.addEventListener('mouseup', endDrag);
+
+  // Touch events
+  wrap.addEventListener('touchstart', function(e) {
+    startDrag(e.touches[0].clientX);
+  }, { passive: true });
+  wrap.addEventListener('touchmove', function(e) {
+    moveDrag(e.touches[0].clientX);
+  }, { passive: true });
+  wrap.addEventListener('touchend', endDrag);
+})();
 
 function openModal(vehicle) {
   var select = document.getElementById('modalVehicleInput');
