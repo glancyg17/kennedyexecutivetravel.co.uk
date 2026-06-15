@@ -58,6 +58,43 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-
 
 /* GALLERY */
 .gallery{padding:3rem 3rem;display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;background:var(--border-red);border:1px solid var(--border-red)}
+
+/* CYCLING GALLERY */
+.cycle-gallery-s{padding:0 3rem 5rem}
+.cycle-gallery-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.cycle-gallery-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--cream)}
+.cycle-gallery-title em{font-style:italic;color:var(--gold)}
+.cycle-gallery-controls{display:flex;gap:0.6rem}
+.cycle-arrow{width:36px;height:36px;border:1px solid var(--border-red);background:none;color:var(--mid);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-size:0.9rem}
+.cycle-arrow:hover{border-color:var(--red);color:var(--gold)}
+.cycle-gallery-viewport{overflow:hidden;border:1px solid var(--border-red)}
+.cycle-gallery-track{display:flex;transition:transform 0.5s ease}
+.cycle-gallery-item{flex:0 0 25%;aspect-ratio:4/3;border-right:1px solid var(--border-red);overflow:hidden;cursor:pointer}
+.cycle-gallery-item:last-child{border-right:none}
+.cycle-gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s}
+.cycle-gallery-item:hover img{transform:scale(1.06)}
+
+/* LIGHTBOX */
+.lightbox-overlay{position:fixed;inset:0;background:rgba(8,7,7,0.95);z-index:600;display:none;align-items:center;justify-content:center;padding:2rem}
+.lightbox-overlay.open{display:flex}
+.lightbox-content{position:relative;max-width:1100px;width:100%;display:flex;flex-direction:column;align-items:center}
+.lightbox-img-wrap{width:100%;display:flex;align-items:center;justify-content:center}
+.lightbox-img-wrap img{max-width:100%;max-height:78vh;object-fit:contain;border:1px solid var(--border-red)}
+.lightbox-close{position:absolute;top:-3rem;right:0;font-size:1.4rem;color:var(--mid);background:none;border:none;cursor:pointer;transition:color 0.2s}
+.lightbox-close:hover{color:var(--cream)}
+.lightbox-nav{display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:1.2rem}
+.lightbox-arrow{width:44px;height:44px;border:1px solid var(--border-red);background:none;color:var(--mid);cursor:pointer;font-size:1.1rem;transition:all 0.2s;display:flex;align-items:center;justify-content:center}
+.lightbox-arrow:hover{border-color:var(--red);color:var(--gold)}
+.lightbox-counter{font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--mid)}
+
+@media(max-width:900px){
+  .cycle-gallery-item{flex:0 0 50%}
+  .lightbox-close{top:-2.5rem}
+  .lightbox-img-wrap img{max-height:65vh}
+}
+@media(max-width:560px){
+  .cycle-gallery-item{flex:0 0 100%}
+}
 .gallery-hero{grid-row:1 / 3;background:#1e1313;min-height:400px;overflow:hidden}
 .gallery-hero img{width:100%;height:100%;object-fit:cover;display:block}
 .gallery-item{background:#1e1313;aspect-ratio:4/3;overflow:hidden}
@@ -161,7 +198,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
   .related-card:last-child{border-bottom:none}
   nav.main-nav{padding:0 1.5rem}
   .nav-links{display:none}
-  .breadcrumb,.v-header,.gallery,.v-content,.related,.book-s{padding-left:1.5rem;padding-right:1.5rem}
+  .breadcrumb,.v-header,.gallery,.v-content,.related,.book-s,.cycle-gallery-s{padding-left:1.5rem;padding-right:1.5rem}
   footer{grid-template-columns:1fr;text-align:center}
   .footer-right{text-align:center}
   .footer-social{justify-content:center}
@@ -278,6 +315,43 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
   <div class="gallery-item"><img src="assets/images/maybach-5.jpg" alt="Mercedes Maybach"></div>
 </div>
 
+<!-- CYCLING GALLERY -->
+<section class="cycle-gallery-s">
+  <div class="cycle-gallery-header">
+    <p class="cycle-gallery-title">More of the <em>Maybach.</em></p>
+    <div class="cycle-gallery-controls">
+      <button class="cycle-arrow" onclick="cycleGallery('maybachGallery',-1)" aria-label="Previous images">‹</button>
+      <button class="cycle-arrow" onclick="cycleGallery('maybachGallery',1)" aria-label="Next images">›</button>
+    </div>
+  </div>
+  <div class="cycle-gallery-viewport">
+    <div class="cycle-gallery-track" id="maybachGallery">
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',0)"><img src="assets/images/gallery-maybach-1.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',1)"><img src="assets/images/gallery-maybach-2.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',2)"><img src="assets/images/gallery-maybach-3.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',3)"><img src="assets/images/gallery-maybach-4.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',4)"><img src="assets/images/gallery-maybach-5.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',5)"><img src="assets/images/gallery-maybach-6.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',6)"><img src="assets/images/gallery-maybach-7.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',7)"><img src="assets/images/gallery-maybach-8.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',8)"><img src="assets/images/gallery-maybach-9.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',9)"><img src="assets/images/gallery-maybach-10.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',10)"><img src="assets/images/gallery-maybach-11.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',11)"><img src="assets/images/gallery-maybach-12.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',12)"><img src="assets/images/gallery-maybach-13.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',13)"><img src="assets/images/gallery-maybach-14.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',14)"><img src="assets/images/gallery-maybach-15.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',15)"><img src="assets/images/gallery-maybach-16.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',16)"><img src="assets/images/gallery-maybach-17.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',17)"><img src="assets/images/gallery-maybach-18.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',18)"><img src="assets/images/gallery-maybach-19.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',19)"><img src="assets/images/gallery-maybach-20.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',20)"><img src="assets/images/gallery-maybach-21.jpg" alt="More of the <em>Maybach.</em>"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('maybachGallery',21)"><img src="assets/images/gallery-maybach-22.jpg" alt="More of the <em>Maybach.</em>"></div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTENT -->
 <div class="v-content">
   <div>
@@ -372,11 +446,145 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
   </div>
 </footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <div class="lightbox-content">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div class="lightbox-img-wrap">
+      <img id="lightboxImg" src="" alt="">
+    </div>
+    <div class="lightbox-nav">
+      <button class="lightbox-arrow" onclick="navLightbox(-1)" aria-label="Previous image">‹</button>
+      <span class="lightbox-counter" id="lightboxCounter"></span>
+      <button class="lightbox-arrow" onclick="navLightbox(1)" aria-label="Next image">›</button>
+    </div>
+  </div>
+</div>
+
 <script>
 function toggleMenu() {
   document.getElementById('burgerBtn').classList.toggle('open');
   document.getElementById('mobileMenu').classList.toggle('open');
 }
+
+/* CYCLING GALLERY */
+var galleryState = {};
+
+function getItemsPerView() {
+  var w = window.innerWidth;
+  if (w <= 560) return 1;
+  if (w <= 900) return 2;
+  return 4;
+}
+
+function initGallery(id) {
+  var track = document.getElementById(id);
+  if (!track) return;
+  var total = track.children.length;
+  galleryState[id] = { index: 0, total: total, timer: null };
+  startAutoCycle(id);
+
+  var viewport = track.parentElement;
+  viewport.addEventListener('mouseenter', function() { stopAutoCycle(id); });
+  viewport.addEventListener('mouseleave', function() { startAutoCycle(id); });
+}
+
+function startAutoCycle(id) {
+  stopAutoCycle(id);
+  galleryState[id].timer = setInterval(function() {
+    var state = galleryState[id];
+    var perView = getItemsPerView();
+    var maxIndex = Math.max(0, state.total - perView);
+    if (maxIndex === 0) return;
+    var next;
+    do {
+      next = Math.floor(Math.random() * (maxIndex + 1));
+    } while (next === state.index && maxIndex > 0);
+    state.index = next;
+    setTrackPosition(id);
+  }, 4000);
+}
+
+function stopAutoCycle(id) {
+  if (galleryState[id] && galleryState[id].timer) {
+    clearInterval(galleryState[id].timer);
+    galleryState[id].timer = null;
+  }
+}
+
+function setTrackPosition(id) {
+  var state = galleryState[id];
+  var track = document.getElementById(id);
+  var perView = getItemsPerView();
+  var itemWidth = 100 / perView;
+  track.style.transform = 'translateX(-' + (state.index * itemWidth) + '%)';
+}
+
+function cycleGallery(id, dir) {
+  var state = galleryState[id];
+  if (!state) return;
+  var perView = getItemsPerView();
+  var maxIndex = Math.max(0, state.total - perView);
+  state.index += dir;
+  if (state.index < 0) state.index = maxIndex;
+  if (state.index > maxIndex) state.index = 0;
+  setTrackPosition(id);
+}
+
+window.addEventListener('load', function() {
+  ['maybachGallery'].forEach(initGallery);
+});
+window.addEventListener('resize', function() {
+  Object.keys(galleryState).forEach(setTrackPosition);
+});
+
+/* LIGHTBOX */
+var lightboxState = { id: null, index: 0 };
+
+function openLightbox(id, index) {
+  var track = document.getElementById(id);
+  lightboxState.id = id;
+  lightboxState.index = index;
+  showLightboxImage();
+  document.getElementById('lightboxOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  stopAutoCycle(id);
+}
+
+function showLightboxImage() {
+  var track = document.getElementById(lightboxState.id);
+  var items = track.querySelectorAll('img');
+  var total = items.length;
+  var img = items[lightboxState.index];
+  document.getElementById('lightboxImg').src = img.src;
+  document.getElementById('lightboxImg').alt = img.alt;
+  document.getElementById('lightboxCounter').textContent = (lightboxState.index + 1) + ' / ' + total;
+}
+
+function navLightbox(dir) {
+  var track = document.getElementById(lightboxState.id);
+  var total = track.querySelectorAll('img').length;
+  lightboxState.index += dir;
+  if (lightboxState.index < 0) lightboxState.index = total - 1;
+  if (lightboxState.index >= total) lightboxState.index = 0;
+  showLightboxImage();
+}
+
+function closeLightbox() {
+  document.getElementById('lightboxOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  if (lightboxState.id) startAutoCycle(lightboxState.id);
+}
+
+document.getElementById('lightboxOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('lightboxOverlay').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') navLightbox(-1);
+  if (e.key === 'ArrowRight') navLightbox(1);
+});
 
 function openModal(vehicle) {
   var select = document.getElementById('modalVehicleInput');
