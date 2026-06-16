@@ -225,11 +225,13 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
     <button class="modal-close" onclick="closeModal()">✕</button>
     <p class="modal-eyebrow">Reserve your journey</p>
     <h2 class="modal-title">Make a reservation</h2>
-    <form action="https://formsubmit.co/kennedyexecutivetravel@gmail.com" method="POST">
+        <form action="https://formsubmit.co/kennedyexecutivetravel@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="New reservation request — Kennedy Executive Travel">
       <input type="hidden" name="_captcha" value="false">
+
+      <!-- Vehicle -->
       <div class="modal-field">
-        <label>Vehicle</label>
+        <label>Vehicle preference</label>
         <select name="vehicle" id="modalVehicleInput">
           <option value="">Not sure / any vehicle</option>
           <option value="Mercedes G63 AMG">Mercedes G63 AMG — VIP</option>
@@ -244,18 +246,83 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
           <option value="VW EOS">VW EOS — Standard</option>
         </select>
       </div>
+
+      <!-- Journey type -->
+      <div class="modal-field">
+        <label>Journey type</label>
+        <select name="journey_type" id="modalJourneyType" onchange="formLogic()">
+          <option value="">Select journey type</option>
+          <option value="Airport Transfer">Airport Transfer</option>
+          <option value="Wedding">Wedding</option>
+          <option value="Prom">Prom</option>
+          <option value="Birthday">Birthday</option>
+          <option value="Hen / Stag">Hen / Stag</option>
+          <option value="Concert / Event">Concert / Event</option>
+          <option value="Corporate">Corporate Travel</option>
+          <option value="Golf">Golf Day</option>
+          <option value="Private Tour">Private Tour</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <!-- Name / Phone -->
       <div class="modal-row">
         <div class="modal-field"><label>Your name</label><input type="text" name="name" required placeholder="Full name"></div>
         <div class="modal-field"><label>Phone number</label><input type="tel" name="phone" required placeholder="07700 000000"></div>
       </div>
+
+      <!-- Email -->
       <div class="modal-field"><label>Email address</label><input type="email" name="email" required placeholder="your@email.com"></div>
+
+      <!-- Date / Time -->
       <div class="modal-row">
         <div class="modal-field"><label>Journey date</label><input type="date" name="date" required></div>
         <div class="modal-field"><label>Pick-up time</label><input type="time" name="time"></div>
       </div>
+
+      <!-- Pick-up -->
       <div class="modal-field"><label>Pick-up location</label><input type="text" name="pickup" placeholder="Address or airport"></div>
+
+      <!-- Outbound flight (airport only) -->
+      <div class="modal-field" id="fieldOutboundFlight" style="display:none">
+        <label>Outbound flight number</label>
+        <input type="text" name="outbound_flight" placeholder="e.g. EZY123">
+      </div>
+
+      <!-- Drop-off -->
       <div class="modal-field"><label>Drop-off location</label><input type="text" name="dropoff" placeholder="Destination"></div>
+
+      <!-- Return journey -->
+      <div class="modal-field">
+        <label>Return journey?</label>
+        <select name="return_journey" id="modalReturnJourney" onchange="formLogic()">
+          <option value="">No return needed</option>
+          <option value="yes_same">Yes — return to same address as pick-up</option>
+          <option value="yes_alt">Yes — return to a different address</option>
+        </select>
+      </div>
+
+      <!-- Return date/time -->
+      <div class="modal-row" id="fieldReturnDateTime" style="display:none">
+        <div class="modal-field"><label>Return date</label><input type="date" name="return_date"></div>
+        <div class="modal-field"><label>Return time</label><input type="time" name="return_time"></div>
+      </div>
+
+      <!-- Return address -->
+      <div class="modal-field" id="fieldReturnAddress" style="display:none">
+        <label>Return pick-up address</label>
+        <input type="text" name="return_pickup" placeholder="Address for return pick-up">
+      </div>
+
+      <!-- Return flight (airport + return only) -->
+      <div class="modal-field" id="fieldReturnFlight" style="display:none">
+        <label>Return flight number</label>
+        <input type="text" name="return_flight" placeholder="e.g. EZY456">
+      </div>
+
+      <!-- Notes -->
       <div class="modal-field"><label>Additional notes</label><textarea name="notes" placeholder="Number of passengers, luggage, special requests..."></textarea></div>
+
       <button type="submit" class="modal-submit">Send reservation request</button>
       <p class="modal-note">We'll confirm availability and pricing within a few hours.</p>
     </form>
