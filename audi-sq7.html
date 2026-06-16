@@ -582,8 +582,30 @@ function openModal(vehicle) {
   } else {
     select.value = '';
   }
+  var journeyType = document.getElementById('modalJourneyType');
+  var returnJourney = document.getElementById('modalReturnJourney');
+  if (journeyType) journeyType.value = '';
+  if (returnJourney) returnJourney.value = '';
+  formLogic();
   document.getElementById('reserveModal').classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+function formLogic() {
+  var journey = document.getElementById('modalJourneyType');
+  var returnJourney = document.getElementById('modalReturnJourney');
+  if (!journey) return;
+  var isAirport = journey.value === 'Airport Transfer';
+  var hasReturn = returnJourney && (returnJourney.value === 'yes_same' || returnJourney.value === 'yes_alt');
+  var isAltReturn = returnJourney && returnJourney.value === 'yes_alt';
+  var outbound = document.getElementById('fieldOutboundFlight');
+  var retDateTime = document.getElementById('fieldReturnDateTime');
+  var retAddress = document.getElementById('fieldReturnAddress');
+  var retFlight = document.getElementById('fieldReturnFlight');
+  if (outbound) outbound.style.display = isAirport ? 'block' : 'none';
+  if (retDateTime) retDateTime.style.display = hasReturn ? 'grid' : 'none';
+  if (retAddress) retAddress.style.display = isAltReturn ? 'block' : 'none';
+  if (retFlight) retFlight.style.display = (isAirport && hasReturn) ? 'block' : 'none';
 }
 function closeModal() {
   document.getElementById('reserveModal').classList.remove('open');
