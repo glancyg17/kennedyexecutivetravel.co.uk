@@ -229,29 +229,59 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
         <div class="field"><label>Phone number</label><input type="tel" name="phone" required placeholder="07700 000000"></div>
       </div>
       <div class="field"><label>Email address</label><input type="email" name="email" required placeholder="your@email.com"></div>
-      <div class="field"><label>What's the occasion?</label>
-        <select name="occasion">
-          <option value="">Select an option</option>
-          <option>Airport Transfer</option>
-          <option>Wedding</option>
-          <option>VIP / Event</option>
-          <option>Golf</option>
-          <option>Concert / Night Out</option>
-          <option>Private Tour</option>
-          <option>Corporate Travel</option>
-          <option>Prom / Party</option>
-          <option>Self-Drive Rental</option>
-          <option>Other</option>
+      <div class="field"><label>Journey type</label>
+        <select name="journey_type" id="contactJourneyType" onchange="contactFormLogic()">
+          <option value="">Select journey type</option>
+          <option value="Airport Transfer">Airport Transfer</option>
+          <option value="Wedding">Wedding</option>
+          <option value="Prom">Prom</option>
+          <option value="Birthday">Birthday</option>
+          <option value="Hen / Stag">Hen / Stag</option>
+          <option value="Concert / Event">Concert / Event</option>
+          <option value="Corporate Travel">Corporate Travel</option>
+          <option value="Golf Day">Golf Day</option>
+          <option value="Private Tour">Private Tour</option>
+          <option value="Self-Drive Rental">Self-Drive Rental</option>
+          <option value="Other">Other</option>
         </select>
       </div>
       <div class="field-row">
         <div class="field"><label>Preferred date</label><input type="date" name="date"></div>
         <div class="field"><label>Preferred time</label><input type="time" name="time"></div>
       </div>
-      <div class="field-row">
-        <div class="field"><label>Pick-up location</label><input type="text" name="pickup" placeholder="Address or airport"></div>
-        <div class="field"><label>Drop-off location</label><input type="text" name="dropoff" placeholder="Destination"></div>
+      <div class="field"><label>Pick-up location</label><input type="text" name="pickup" placeholder="Address or airport"></div>
+
+      <div class="field" id="contactOutboundFlight" style="display:none">
+        <label>Outbound flight number</label>
+        <input type="text" name="outbound_flight" placeholder="e.g. EZY123">
       </div>
+
+      <div class="field"><label>Drop-off location</label><input type="text" name="dropoff" placeholder="Destination"></div>
+
+      <div class="field">
+        <label>Return journey?</label>
+        <select name="return_journey" id="contactReturnJourney" onchange="contactFormLogic()">
+          <option value="">No return needed</option>
+          <option value="yes_same">Yes — return to same address as pick-up</option>
+          <option value="yes_alt">Yes — return to a different address</option>
+        </select>
+      </div>
+
+      <div class="field-row" id="contactReturnDateTime" style="display:none">
+        <div class="field"><label>Return date</label><input type="date" name="return_date"></div>
+        <div class="field"><label>Return time</label><input type="time" name="return_time"></div>
+      </div>
+
+      <div class="field" id="contactReturnAddress" style="display:none">
+        <label>Return pick-up address</label>
+        <input type="text" name="return_pickup" placeholder="Address for return pick-up">
+      </div>
+
+      <div class="field" id="contactReturnFlight" style="display:none">
+        <label>Return flight number</label>
+        <input type="text" name="return_flight" placeholder="e.g. EZY456">
+      </div>
+
       <div class="field"><label>Message</label><textarea name="message" placeholder="Tell us about your journey — number of passengers, vehicle preference, special requests..."></textarea></div>
       <button type="submit" class="btn-red">Send enquiry</button>
       <p class="form-note">We'll get back to you personally — usually within a few hours.</p>
@@ -289,6 +319,20 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 function toggleMenu() {
   document.getElementById('burgerBtn').classList.toggle('open');
   document.getElementById('mobileMenu').classList.toggle('open');
+}
+</script>
+<script>
+function contactFormLogic() {
+  var journey = document.getElementById('contactJourneyType');
+  var returnJourney = document.getElementById('contactReturnJourney');
+  if (!journey) return;
+  var isAirport = journey.value === 'Airport Transfer';
+  var hasReturn = returnJourney && (returnJourney.value === 'yes_same' || returnJourney.value === 'yes_alt');
+  var isAltReturn = returnJourney && returnJourney.value === 'yes_alt';
+  document.getElementById('contactOutboundFlight').style.display = isAirport ? 'block' : 'none';
+  document.getElementById('contactReturnDateTime').style.display = hasReturn ? 'grid' : 'none';
+  document.getElementById('contactReturnAddress').style.display = isAltReturn ? 'block' : 'none';
+  document.getElementById('contactReturnFlight').style.display = (isAirport && hasReturn) ? 'block' : 'none';
 }
 </script>
 </body>
