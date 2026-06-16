@@ -239,7 +239,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
         <label>Vehicle preference</label>
         <select name="vehicle" id="modalVehicleInput">
           <option value="">Not sure / any vehicle</option>
-          <option value="Mercedes G63 AMG">Mercedes G63 AMG — VIP</option>
+          <option value="Mercedes G-Wagon">Mercedes G-Wagon — VIP</option>
           <option value="Mercedes Maybach">Mercedes Maybach — VIP</option>
           <option value="Audi SQ7">Audi SQ7 — VIP</option>
           <option value="Mercedes V-Class">Mercedes V-Class — Executive</option>
@@ -287,13 +287,6 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 
       <!-- Pick-up -->
       <div class="modal-field"><label>Pick-up location</label><input type="text" name="pickup" placeholder="Address or airport"></div>
-
-      <!-- Outbound flight (airport only) -->
-      <div class="modal-field" id="fieldOutboundFlight" style="display:none">
-        <label>Outbound flight number</label>
-        <input type="text" name="outbound_flight" placeholder="e.g. EZY123">
-      </div>
-
       <!-- Drop-off -->
       <div class="modal-field"><label>Drop-off location</label><input type="text" name="dropoff" placeholder="Destination"></div>
 
@@ -460,7 +453,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
       <div class="related-img"><img src="assets/images/g63-hero.jpg" alt="Mercedes G63 AMG"></div>
       <div class="related-body">
         <p class="related-tier">VIP</p>
-        <h3 class="related-name">Mercedes G63 AMG</h3>
+        <h3 class="related-name">Mercedes G-Wagon</h3>
         <p class="related-spec">4 passengers · 2023 · Petrol · Automatic</p>
         <p class="related-price">£149 <sub>from</sub></p>
       </div>
@@ -676,11 +669,9 @@ function formLogic() {
   var isAirport = journey.value === 'Airport Transfer';
   var hasReturn = returnJourney && (returnJourney.value === 'yes_same' || returnJourney.value === 'yes_alt');
   var isAltReturn = returnJourney && returnJourney.value === 'yes_alt';
-  var outbound = document.getElementById('fieldOutboundFlight');
   var retDateTime = document.getElementById('fieldReturnDateTime');
   var retAddress = document.getElementById('fieldReturnAddress');
   var retFlight = document.getElementById('fieldReturnFlight');
-  if (outbound) outbound.style.display = isAirport ? 'block' : 'none';
   if (retDateTime) retDateTime.style.display = hasReturn ? 'grid' : 'none';
   if (retAddress) retAddress.style.display = isAltReturn ? 'block' : 'none';
   if (retFlight) retFlight.style.display = (isAirport && hasReturn) ? 'block' : 'none';
