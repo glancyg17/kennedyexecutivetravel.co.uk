@@ -150,10 +150,18 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-
 .social-s{padding:5rem 3rem;border-top:1px solid var(--border-red);background:var(--black2);text-align:center}
 .social-caption{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-style:italic;color:var(--cream);margin-bottom:2.5rem}
 .social-caption em{color:var(--gold);font-style:italic}
-.social-links{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap}
-.social-link{display:flex;align-items:center;gap:0.7rem;border:0.5px solid var(--border-red);padding:0.9rem 1.8rem;text-decoration:none;color:var(--cream);font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;transition:all 0.25s}
-.social-link:hover{border-color:var(--red);background:rgba(158,28,28,0.06);color:var(--gold)}
-.social-link svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
+.social-links{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap}
+.social-link{display:flex;flex-direction:column;align-items:center;gap:0.7rem;text-decoration:none;transition:transform 0.2s}
+.social-link:hover{transform:translateY(-4px)}
+.social-link-circle{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:box-shadow 0.2s}
+.social-link:hover .social-link-circle{box-shadow:0 8px 24px rgba(0,0,0,0.5)}
+.social-link svg{width:28px;height:28px;fill:#fff;flex-shrink:0}
+.social-link span{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid)}
+.social-link:hover span{color:var(--cream)}
+.social-link.facebook .social-link-circle{background:#1877f2}
+.social-link.instagram .social-link-circle{background:linear-gradient(135deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888)}
+.social-link.tiktok .social-link-circle{background:#010101;border:1px solid #444}
+.social-link.x .social-link-circle{background:#000;border:1px solid #444}
 
 /* BOOK */
 .book-s{padding:8rem 3rem;border-top:1px solid var(--border-red);text-align:center;position:relative;overflow:hidden}
@@ -425,7 +433,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
       <p class="body-copy">Based in Central Scotland, we've built our reputation on one principle: every journey is an occasion. Whether it's a quiet airport run at 5am or a full VIP night out with champagne on arrival — the same care, the same attention to detail, the same standard every time.</p>
       <p class="body-copy" style="margin-top:1rem">We cover Glasgow, Edinburgh, Fife, the Lothians and all points between. Long-distance runs available on request.</p>
       <div class="about-quote-block">
-        <p class="about-quote-text">"You start as a customer but leave as a friend."</p>
+        <p class="about-quote-text">"You start as a customer but will end up a personal friend."</p>
         <p class="about-quote-attr">— Kennedy Executive Travel</p>
       </div>
     </div>
@@ -595,21 +603,21 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 <section class="social-s">
   <p class="social-caption">See more of our journeys — <em>tag us in yours.</em></p>
   <div class="social-links">
-    <a href="https://www.facebook.com/kennedykabs" class="social-link" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
-      Facebook
+    <a href="https://www.facebook.com/kennedykabs" class="social-link facebook" target="_blank" rel="noopener">
+      <div class="social-link-circle"><svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></div>
+      <span>Facebook</span>
     </a>
-    <a href="https://www.instagram.com/kennedy_executive_travel" class="social-link" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M12 2c2.717 0 3.056.01 4.122.058.487.022.978.087 1.43.183.448.095.857.243 1.27.49.41.246.762.553 1.05.94.293.388.512.825.65 1.31.144.5.21 1.02.222 1.55.05 1.07.058 1.41.058 4.13s-.01 3.06-.06 4.13c-.012.53-.078 1.05-.222 1.55-.138.485-.357.922-.65 1.31-.288.387-.64.694-1.05.94-.413.247-.822.395-1.27.49-.452.096-.943.16-1.43.183C15.056 21.99 14.717 22 12 22s-3.056-.01-4.122-.058a8.987 8.987 0 0 1-1.43-.183 3.748 3.748 0 0 1-1.27-.49 3.91 3.91 0 0 1-1.05-.94 3.86 3.86 0 0 1-.65-1.31 6.49 6.49 0 0 1-.222-1.55C2.21 16.94 2.2 16.6 2.2 13.88V10.12c0-2.72.01-3.06.058-4.13.012-.53.078-1.05.222-1.55.138-.485.357-.922.65-1.31.288-.387.64-.694 1.05-.94.413-.247.822-.395 1.27-.49.452-.096.943-.16 1.43-.183C8.944 2.01 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.4-9.65a1.05 1.05 0 1 1-2.1 0 1.05 1.05 0 0 1 2.1 0z"/></svg>
-      Instagram
+    <a href="https://www.instagram.com/kennedy_executive_travel" class="social-link instagram" target="_blank" rel="noopener">
+      <div class="social-link-circle"><svg viewBox="0 0 24 24"><path d="M12 2c2.717 0 3.056.01 4.122.058.487.022.978.087 1.43.183.448.095.857.243 1.27.49.41.246.762.553 1.05.94.293.388.512.825.65 1.31.144.5.21 1.02.222 1.55.05 1.07.058 1.41.058 4.13s-.01 3.06-.06 4.13c-.012.53-.078 1.05-.222 1.55-.138.485-.357.922-.65 1.31-.288.387-.64.694-1.05.94-.413.247-.822.395-1.27.49-.452.096-.943.16-1.43.183C15.056 21.99 14.717 22 12 22s-3.056-.01-4.122-.058a8.987 8.987 0 0 1-1.43-.183 3.748 3.748 0 0 1-1.27-.49 3.91 3.91 0 0 1-1.05-.94 3.86 3.86 0 0 1-.65-1.31 6.49 6.49 0 0 1-.222-1.55C2.21 16.94 2.2 16.6 2.2 13.88V10.12c0-2.72.01-3.06.058-4.13.012-.53.078-1.05.222-1.55.138-.485.357-.922.65-1.31.288-.387.64-.694 1.05-.94.413-.247.822-.395 1.27-.49.452-.096.943-.16 1.43-.183C8.944 2.01 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.4-9.65a1.05 1.05 0 1 1-2.1 0 1.05 1.05 0 0 1 2.1 0z"/></svg></div>
+      <span>Instagram</span>
     </a>
-    <a href="https://www.tiktok.com/@kennedy.executive" class="social-link" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M16.6 5.82c-.95-.83-1.6-2-1.6-3.32h-3.4v13.5c0 1.62-1.3 2.94-2.93 2.94a2.93 2.93 0 0 1-2.93-2.94 2.93 2.93 0 0 1 2.93-2.93c.3 0 .58.04.85.13V9.7a6.34 6.34 0 0 0-.85-.06A6.34 6.34 0 0 0 2.34 16a6.34 6.34 0 0 0 6.33 6.33A6.34 6.34 0 0 0 15 16V9.01a8.16 8.16 0 0 0 4.77 1.53V7.13a4.85 4.85 0 0 1-3.17-1.31z"/></svg>
-      TikTok
+    <a href="https://www.tiktok.com/@kennedy.executive" class="social-link tiktok" target="_blank" rel="noopener">
+      <div class="social-link-circle"><svg viewBox="0 0 24 24"><path d="M16.6 5.82c-.95-.83-1.6-2-1.6-3.32h-3.4v13.5c0 1.62-1.3 2.94-2.93 2.94a2.93 2.93 0 0 1-2.93-2.94 2.93 2.93 0 0 1 2.93-2.93c.3 0 .58.04.85.13V9.7a6.34 6.34 0 0 0-.85-.06A6.34 6.34 0 0 0 2.34 16a6.34 6.34 0 0 0 6.33 6.33A6.34 6.34 0 0 0 15 16V9.01a8.16 8.16 0 0 0 4.77 1.53V7.13a4.85 4.85 0 0 1-3.17-1.31z"/></svg></div>
+      <span>TikTok</span>
     </a>
-    <a href="https://x.com/kennedy_travel" class="social-link" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.19 8.21L23 22h-7.04l-5.5-7.2L4 22H1l7.7-8.8L1 2h7.2l4.97 6.56L18.9 2zm-2.47 18h1.94L7.66 4H5.6l10.83 16z"/></svg>
-      X
+    <a href="https://x.com/kennedy_travel" class="social-link x" target="_blank" rel="noopener">
+      <div class="social-link-circle"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.19 8.21L23 22h-7.04l-5.5-7.2L4 22H1l7.7-8.8L1 2h7.2l4.97 6.56L18.9 2zm-2.47 18h1.94L7.66 4H5.6l10.83 16z"/></svg></div>
+      <span>X / Twitter</span>
     </a>
   </div>
 </section>
