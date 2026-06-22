@@ -80,6 +80,13 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-
 .form-sub{font-size:0.82rem;color:var(--mid);margin-bottom:2rem;line-height:1.8}
 .field{margin-bottom:1.3rem}
 .field label{display:block;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:0.6rem}
+.check-group{display:flex;flex-direction:column;gap:0.7rem;margin-bottom:1.3rem}
+.check-item{display:flex;align-items:flex-start;gap:0.8rem;cursor:pointer;font-size:0.85rem;color:var(--mid);line-height:1.5}
+.check-item input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:18px;height:18px;border:1px solid var(--border-red);background:var(--black);flex-shrink:0;margin-top:2px;cursor:pointer;transition:all 0.2s}
+.check-item input[type="checkbox"]:checked{background:var(--red);border-color:var(--red)}
+.check-item input[type="checkbox"]:checked::after{content:'✓';display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.7rem;width:100%;height:100%}
+.check-label strong{color:var(--cream);font-weight:400;display:block}
+.check-label span{font-size:0.78rem}
 .field input,.field textarea,.field select{width:100%;background:var(--black);border:0.5px solid var(--border-red);color:var(--cream);padding:0.85rem 1rem;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;transition:border-color 0.2s}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--red)}
 .field select option{background:var(--black2)}
@@ -220,17 +227,22 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 
   <div class="form-box">
     <h2 class="form-title">Send an enquiry</h2>
-    <p class="form-sub">Fill in as much as you can — the more detail we have, the faster we can confirm availability and pricing.</p>
+    <p class="form-sub">Start with the basics — we'll ask for more depending on your journey type.</p>
     <form action="https://formsubmit.co/kennedyexecutivetravel@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="New enquiry — Kennedy Executive Travel website">
       <input type="hidden" name="_captcha" value="false">
+
+      <!-- Always: Name / Phone / Email -->
       <div class="field-row">
         <div class="field"><label>Your name</label><input type="text" name="name" required placeholder="Full name"></div>
         <div class="field"><label>Phone number</label><input type="tel" name="phone" required placeholder="07700 000000"></div>
       </div>
       <div class="field"><label>Email address</label><input type="email" name="email" required placeholder="your@email.com"></div>
-      <div class="field"><label>Journey type</label>
-        <select name="journey_type" id="contactJourneyType" onchange="contactFormLogic()">
+
+      <!-- Always: Journey type -->
+      <div class="field">
+        <label>Journey type</label>
+        <select name="journey_type" id="cJourneyType" onchange="cLogic()">
           <option value="">Select journey type</option>
           <option value="Airport Transfer">Airport Transfer</option>
           <option value="Wedding">Wedding</option>
@@ -241,42 +253,144 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
           <option value="Corporate Travel">Corporate Travel</option>
           <option value="Golf Day">Golf Day</option>
           <option value="Private Tour">Private Tour</option>
+          <option value="Santa Visit">Santa VIP Visit</option>
           <option value="Self-Drive Rental">Self-Drive Rental</option>
           <option value="Other">Other</option>
         </select>
       </div>
-      <div class="field-row">
-        <div class="field"><label>Preferred date</label><input type="date" name="date"></div>
-        <div class="field"><label>Preferred time</label><input type="time" name="time"></div>
-      </div>
-      <div class="field"><label>Pick-up location</label><input type="text" name="pickup" placeholder="Address or airport"></div>
-      <div class="field"><label>Drop-off location</label><input type="text" name="dropoff" placeholder="Destination"></div>
 
-      <div class="field">
-        <label>Return journey?</label>
-        <select name="return_journey" id="contactReturnJourney" onchange="contactFormLogic()">
-          <option value="">No return needed</option>
-          <option value="yes_same">Yes — return to same address as pick-up</option>
-          <option value="yes_alt">Yes — return to a different address</option>
-        </select>
-      </div>
+      <!-- Expands: core journey fields (shown once journey type selected) -->
+      <div id="cCoreFields" style="display:none">
 
-      <div class="field-row" id="contactReturnDateTime" style="display:none">
-        <div class="field"><label>Return date</label><input type="date" name="return_date"></div>
-        <div class="field"><label>Return time</label><input type="time" name="return_time"></div>
-      </div>
+        <!-- Vehicle preference -->
+        <div class="field">
+          <label>Vehicle preference</label>
+          <select name="vehicle">
+            <option value="">Not sure / any vehicle</option>
+            <option value="Mercedes G-Wagon">Mercedes G-Wagon — VIP</option>
+            <option value="Mercedes Maybach">Mercedes Maybach — VIP</option>
+            <option value="Audi SQ7">Audi SQ7 — VIP</option>
+            <option value="Mercedes V-Class">Mercedes V-Class — Executive</option>
+            <option value="Mercedes C-Class">Mercedes C-Class — Executive</option>
+            <option value="Porsche Cayenne S">Porsche Cayenne S — Executive</option>
+            <option value="Standard Taxi">Standard Taxi — 1-4 Passengers</option>
+            <option value="People Carrier 5-8">People Carrier — 5-8 Passengers</option>
+            <option value="Mini Bus 9-11 Seater">Mini Bus — 9-11 Passengers</option>
+            <option value="Mini Bus 12-14 Seater">Mini Bus — 12-14 Passengers</option>
+            <option value="Mini Bus 15-16 Seater">Mini Bus — 15-16 Passengers</option>
+            <option value="BMW 3 Series M-Sport">BMW 3 Series M-Sport</option>
+            <option value="VW EOS">VW EOS</option>
+          </select>
+        </div>
 
-      <div class="field" id="contactReturnAddress" style="display:none">
-        <label>Return pick-up address</label>
-        <input type="text" name="return_pickup" placeholder="Address for return pick-up">
-      </div>
+        <!-- Passengers -->
+        <div class="field">
+          <label>Number of passengers</label>
+          <select name="passengers">
+            <option value="">Select</option>
+            <option>1</option><option>2</option><option>3</option><option>4</option>
+            <option>5</option><option>6</option><option>7</option><option>8</option>
+            <option>9–11</option><option>12–14</option><option>15–16</option>
+          </select>
+        </div>
 
-      <div class="field" id="contactReturnFlight" style="display:none">
-        <label>Return flight number</label>
-        <input type="text" name="return_flight" placeholder="e.g. EZY456">
-      </div>
+        <!-- Date / Time -->
+        <div class="field-row">
+          <div class="field"><label>Preferred date</label><input type="date" name="date"></div>
+          <div class="field"><label>Preferred time</label><input type="time" name="time"></div>
+        </div>
 
-      <div class="field"><label>Message</label><textarea name="message" placeholder="Tell us about your journey — number of passengers, vehicle preference, special requests..."></textarea></div>
+        <!-- Extras -->
+        <div class="check-group">
+          <label class="check-item">
+            <input type="checkbox" name="car_seat" value="yes">
+            <span class="check-label"><strong>Child car seat required</strong><span>Let us know the child's age and we'll arrange the appropriate seat</span></span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="trailer" value="yes">
+            <span class="check-label"><strong>Trailer required — £49 charge</strong><span>Extra luggage space via trailer, charged at a flat fee of £49</span></span>
+          </label>
+        </div>
+
+        <!-- Pick-up / Drop-off (hidden for Santa) -->
+        <div id="cPickupFields">
+          <div class="field"><label>Pick-up location</label><input type="text" name="pickup" placeholder="Address or airport"></div>
+          <div class="field"><label>Drop-off location</label><input type="text" name="dropoff" placeholder="Destination"></div>
+        </div>
+
+        <!-- AIRPORT: flight number -->
+        <div class="field" id="cFlightOut" style="display:none">
+          <label>Outbound flight number</label>
+          <input type="text" name="outbound_flight" placeholder="e.g. EZY123">
+        </div>
+
+        <!-- WEDDING: venue + number of vehicles -->
+        <div id="cWeddingFields" style="display:none">
+          <div class="field"><label>Wedding venue</label><input type="text" name="wedding_venue" placeholder="Venue name and location"></div>
+          <div class="field"><label>Number of vehicles needed</label>
+            <select name="wedding_vehicles">
+              <option value="">Select</option>
+              <option>1</option><option>2</option><option>3</option><option>4+</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- SANTA: children details -->
+        <div id="cSantaFields" style="display:none">
+          <div class="field-row">
+            <div class="field"><label>Number of children</label>
+              <select name="num_children">
+                <option value="">Select</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+              </select>
+            </div>
+            <div class="field"><label>Children's ages</label><input type="text" name="children_ages" placeholder="e.g. 3, 5, 7"></div>
+          </div>
+          <div class="field">
+            <label>Include the Grinch chase?</label>
+            <select name="grinch">
+              <option value="">Not sure yet</option>
+              <option value="yes">Yes please!</option>
+              <option value="no">No thank you</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- SELF-DRIVE: licence -->
+        <div class="field" id="cRentalFields" style="display:none">
+          <label>Driving licence number</label>
+          <input type="text" name="licence" placeholder="For rental verification purposes">
+        </div>
+
+        <!-- Return journey (not for Santa or rental) -->
+        <div id="cReturnBlock" style="display:none">
+          <div class="field">
+            <label>Return journey?</label>
+            <select name="return_journey" id="cReturnJourney" onchange="cLogic()">
+              <option value="">No return needed</option>
+              <option value="yes_same">Yes — return to same address as pick-up</option>
+              <option value="yes_alt">Yes — return to a different address</option>
+            </select>
+          </div>
+          <div class="field-row" id="cReturnDateTime" style="display:none">
+            <div class="field"><label>Return date</label><input type="date" name="return_date"></div>
+            <div class="field"><label>Return time</label><input type="time" name="return_time"></div>
+          </div>
+          <div class="field" id="cReturnAddress" style="display:none">
+            <label>Return pick-up address</label>
+            <input type="text" name="return_pickup" placeholder="Address for return pick-up">
+          </div>
+          <div class="field" id="cReturnFlight" style="display:none">
+            <label>Return flight number</label>
+            <input type="text" name="return_flight" placeholder="e.g. EZY456">
+          </div>
+        </div>
+
+        <!-- Always: notes -->
+        <div class="field"><label>Anything else we should know?</label><textarea name="message" placeholder="Special requests, accessibility needs, extra stops, luggage..."></textarea></div>
+
+      </div><!-- end cCoreFields -->
+
       <button type="submit" class="btn-red">Send enquiry</button>
       <p class="form-note">We'll get back to you personally — usually within a few hours.</p>
     </form>
@@ -316,16 +430,43 @@ function toggleMenu() {
 }
 </script>
 <script>
-function contactFormLogic() {
-  var journey = document.getElementById('contactJourneyType');
-  var returnJourney = document.getElementById('contactReturnJourney');
-  if (!journey) return;
-  var isAirport = journey.value === 'Airport Transfer';
-  var hasReturn = returnJourney && (returnJourney.value === 'yes_same' || returnJourney.value === 'yes_alt');
-  var isAltReturn = returnJourney && returnJourney.value === 'yes_alt';
-  document.getElementById('contactReturnDateTime').style.display = hasReturn ? 'grid' : 'none';
-  document.getElementById('contactReturnAddress').style.display = isAltReturn ? 'block' : 'none';
-  document.getElementById('contactReturnFlight').style.display = (isAirport && hasReturn) ? 'block' : 'none';
+function show(id, val) {
+  var el = document.getElementById(id);
+  if (el) el.style.display = val;
+}
+
+function cLogic() {
+  var j = document.getElementById('cJourneyType').value;
+  var ret = document.getElementById('cReturnJourney');
+  var retVal = ret ? ret.value : '';
+
+  var isAirport  = j === 'Airport Transfer';
+  var isWedding  = j === 'Wedding';
+  var isSanta    = j === 'Santa Visit';
+  var isRental   = j === 'Self-Drive Rental';
+  var hasJourney = j !== '';
+  var hasReturn  = retVal === 'yes_same' || retVal === 'yes_alt';
+  var isAltRet   = retVal === 'yes_alt';
+
+  // Show core fields as soon as journey type is picked
+  show('cCoreFields',    hasJourney ? 'block' : 'none');
+
+  // Pick-up/drop-off hidden for Santa (they come to you)
+  show('cPickupFields',  !isSanta ? 'block' : 'none');
+
+  // Type-specific fields
+  show('cFlightOut',     isAirport ? 'block' : 'none');
+  show('cWeddingFields', isWedding ? 'block' : 'none');
+  show('cSantaFields',   isSanta   ? 'block' : 'none');
+  show('cRentalFields',  isRental  ? 'block' : 'none');
+
+  // Return journey block — hide for Santa and rental
+  show('cReturnBlock',   (!isSanta && !isRental && hasJourney) ? 'block' : 'none');
+
+  // Return sub-fields
+  show('cReturnDateTime', hasReturn ? 'grid' : 'none');
+  show('cReturnAddress',  isAltRet  ? 'block' : 'none');
+  show('cReturnFlight',   (isAirport && hasReturn) ? 'block' : 'none');
 }
 </script>
 </body>
