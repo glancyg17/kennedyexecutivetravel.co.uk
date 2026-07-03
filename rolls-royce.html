@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mercedes G-Wagon | Kennedy Executive Travel</title>
-<meta name="description" content="Reserve our Mercedes G-Wagon — VIP chauffeur service across Glasgow, Edinburgh & Central Scotland. From £149.">
-<link rel="canonical" href="https://kennedyexecutivetravel.co.uk/mercedes-g63.html">
+<title>Rolls-Royce Ghost | Kennedy Executive Travel</title>
+<meta name="description" content="Reserve our Rolls-Royce Ghost — our newest and most prestigious VIP chauffeur vehicle, across Glasgow, Edinburgh & Central Scotland. From £349.">
+<link rel="canonical" href="https://kennedyexecutivetravel.co.uk/rolls-royce.html">
 <meta property="og:image" content="https://kennedyexecutivetravel.co.uk/assets/images/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://kennedyexecutivetravel.co.uk/assets/images/og-image.jpg">
@@ -128,7 +128,7 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-
 
 /* OTHER VIP */
 .related{padding:5rem 3rem;border-top:1px solid var(--border-red);background:var(--black2)}
-.related-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border-red);margin-top:3rem}
+.related-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--border-red);margin-top:3rem}
 .related-card{display:flex;flex-direction:column;border-right:1px solid var(--border-red);text-decoration:none;color:inherit;transition:background 0.3s}
 .related-card:last-child{border-right:none}
 .related-card:hover{background:rgba(158,28,28,0.05)}
@@ -365,7 +365,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
   </ul>
   <div class="nav-right">
     <a href="tel:07961834904" class="nav-phone">07961 834 904</a>
-    <button class="nav-book" onclick="openModal('Mercedes G-Wagon')">Reserve now</button>
+    <button class="nav-book" onclick="openModal('Rolls-Royce Ghost')">Reserve now</button>
   <button class="burger" id="burgerBtn" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -377,52 +377,59 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 </div>
 
 <!-- BREADCRUMB -->
-<p class="breadcrumb"><a href="index.html">Home</a> / <a href="fleet.html">Fleet</a> / <span>Mercedes G-Wagon</span></p>
+<p class="breadcrumb"><a href="index.html">Home</a> / <a href="fleet.html">Fleet</a> / <span>Rolls-Royce Ghost</span></p>
 
 <!-- VEHICLE HEADER -->
 <div class="v-header">
   <div>
-    <p class="v-tier">VIP Range</p>
-    <h1 class="v-title">Mercedes <em>G-Wagon</em></h1>
+    <p class="v-tier">VIP Range · New Addition</p>
+    <h1 class="v-title">Rolls-Royce <em>Ghost</em></h1>
   </div>
   <div class="v-price-box">
-    <div class="v-price">£199 <sub>from</sub></div>
-    <p class="v-price-note">4 passengers · per journey</p>
+    <div class="v-price">£349 <sub>from</sub></div>
+    <p class="v-price-note">Up to 4 passengers · per journey</p>
   </div>
 </div>
 
 <!-- GALLERY -->
 <div class="gallery">
-  <div class="gallery-hero"><img src="assets/images/g63-hero.jpg" alt="Mercedes G63 AMG"></div>
-  <div class="gallery-item"><img src="assets/images/g63-2.jpg" alt="Mercedes G63 AMG interior"></div>
-  <div class="gallery-item"><img src="assets/images/g63-3.jpg" alt="Mercedes G63 AMG detail"></div>
-  <div class="gallery-item"><img src="assets/images/g63-4.jpg" alt="Mercedes G63 AMG"></div>
-  <div class="gallery-item"><img src="assets/images/g63-5.jpg" alt="Mercedes G63 AMG"></div>
+  <div class="gallery-hero"><img src="assets/images/RR-hero.jpg" alt="Rolls-Royce Ghost"></div>
+  <div class="gallery-item"><img src="assets/images/RR-01.jpg" alt="Rolls-Royce Ghost interior"></div>
+  <div class="gallery-item"><img src="assets/images/RR-02.jpg" alt="Rolls-Royce Ghost detail"></div>
+  <div class="gallery-item"><img src="assets/images/RR-03.jpg" alt="Rolls-Royce Ghost"></div>
+  <div class="gallery-item"><img src="assets/images/RR-04.jpg" alt="Rolls-Royce Ghost"></div>
 </div>
 
 <!-- CYCLING GALLERY -->
 <section class="cycle-gallery-s">
   <div class="cycle-gallery-header">
-    <p class="cycle-gallery-title">More of the <em>G-Wagon.</em></p>
+    <p class="cycle-gallery-title">More of the <em>Ghost.</em></p>
     <div class="cycle-gallery-controls">
-      <button class="cycle-arrow" onclick="cycleGallery('g63Gallery',-1)" aria-label="Previous images">‹</button>
-      <button class="cycle-arrow" onclick="cycleGallery('g63Gallery',1)" aria-label="Next images">›</button>
+      <button class="cycle-arrow" onclick="cycleGallery('rrGallery',-1)" aria-label="Previous images">‹</button>
+      <button class="cycle-arrow" onclick="cycleGallery('rrGallery',1)" aria-label="Next images">›</button>
     </div>
   </div>
   <div class="cycle-gallery-viewport">
-    <div class="cycle-gallery-track" id="g63Gallery">
-      <div class="cycle-gallery-item" onclick="openLightbox('g63Gallery',0)"><img src="assets/images/gallery-g63-1.jpg" alt="Mercedes G63 AMG"></div>
-      <div class="cycle-gallery-item" onclick="openLightbox('g63Gallery',1)"><img src="assets/images/gallery-g63-2.jpg" alt="Mercedes G63 AMG"></div>
-      <div class="cycle-gallery-item" onclick="openLightbox('g63Gallery',2)"><img src="assets/images/gallery-g63-3.jpg" alt="Mercedes G63 AMG"></div>
-      <div class="cycle-gallery-item" onclick="openLightbox('g63Gallery',3)"><img src="assets/images/gallery-g63-4.jpg" alt="Mercedes G63 AMG"></div>
-      <div class="cycle-gallery-item" onclick="openLightbox('g63Gallery',4)"><img src="assets/images/gallery-g63-5.jpg" alt="Mercedes G63 AMG"></div>
-      <div class="cycle-gallery-item" onclick="openLightbox('g63Gallery',5)"><img src="assets/images/gallery-g63-6.jpg" alt="Mercedes G63 AMG"></div>
-      <div class="cycle-gallery-item" onclick="openLightbox('g63Gallery',6)"><img src="assets/images/gallery-g63-7.jpg" alt="Mercedes G63 AMG"></div>
-      <div class="cycle-gallery-item" onclick="openLightbox('g63Gallery',7)"><img src="assets/images/gallery-g63-8.jpg" alt="Mercedes G63 AMG"></div>
-      <div class="cycle-gallery-item" onclick="openLightbox('g63Gallery',8)"><img src="assets/images/gallery-g63-9.jpg" alt="Mercedes G63 AMG"></div>
-      <div class="cycle-gallery-item" onclick="openLightbox('g63Gallery',9)"><img src="assets/images/gallery-g63-10.jpg" alt="Mercedes G63 AMG"></div>
-      <div class="cycle-gallery-item" onclick="openLightbox('g63Gallery',10)"><img src="assets/images/gallery-g63-11.jpg" alt="Mercedes G63 AMG"></div>
-      <div class="cycle-gallery-item" onclick="openLightbox('g63Gallery',11)"><img src="assets/images/gallery-g63-12.jpg" alt="Mercedes G63 AMG"></div>
+    <div class="cycle-gallery-track" id="rrGallery">
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',0)"><img src="assets/images/RR-05.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',1)"><img src="assets/images/RR-06.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',2)"><img src="assets/images/RR-07.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',3)"><img src="assets/images/RR-08.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',4)"><img src="assets/images/RR-09.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',5)"><img src="assets/images/RR-10.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',6)"><img src="assets/images/RR-11.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',7)"><img src="assets/images/RR-12.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',8)"><img src="assets/images/RR-13.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',9)"><img src="assets/images/RR-14.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',10)"><img src="assets/images/RR-15.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',11)"><img src="assets/images/RR-16.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',12)"><img src="assets/images/RR-17.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',13)"><img src="assets/images/RR-18.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',14)"><img src="assets/images/RR-19.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',15)"><img src="assets/images/RR-20.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',16)"><img src="assets/images/RR-21.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',17)"><img src="assets/images/RR-22.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox('rrGallery',18)"><img src="assets/images/RR-23.jpg" alt="Rolls-Royce Ghost"></div>
     </div>
   </div>
 </section>
@@ -431,29 +438,28 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 <div class="v-content">
   <div>
     <p class="eyebrow">The vehicle</p>
-    <h2 class="h2">The statement <em>arrival.</em></h2>
-    <p class="body-copy">There's no mistaking a G63 AMG pulling up. Bold, commanding and unmistakably premium, this is the vehicle for clients who want their arrival to make an impression — whether that's a red carpet event, a high-profile meeting, or a night out that needs to start on the right note.</p>
-    <p class="body-copy" style="margin-top:1.2rem">Inside, the cabin is finished to the same standard as the exterior promises: <strong>premium leather, climate control, and a smooth automatic drive</strong> that makes every journey feel effortless. Immaculately maintained.</p>
+    <h2 class="h2">Our newest <em>arrival.</em></h2>
+    <p class="body-copy">Some cars are driven; the Ghost is experienced. It's the newest addition to our fleet and, quite simply, the most prestigious vehicle we offer — a hand-finished cabin paired with a 6.6-litre V12 that delivers power with almost no sound at all. The famous Spirit of Ecstasy leads the way; everything behind it is calm.</p>
+    <p class="body-copy" style="margin-top:1.2rem">Rear passengers get <strong>individual climate control, the finest leather finishes, and a whisper-quiet cabin</strong> built for reflection as much as arrival. This is the vehicle we reserve for moments that call for something beyond VIP.</p>
 
     <div class="ideal-list">
-      <div class="ideal-item"><span>✦</span> VIP transportation &amp; high-profile arrivals</div>
-      <div class="ideal-item"><span>✦</span> Corporate events &amp; gala dinners</div>
-      <div class="ideal-item"><span>✦</span> Airport transfers with maximum presence</div>
-      <div class="ideal-item"><span>✦</span> Special occasions — birthdays, anniversaries, proposals</div>
+      <div class="ideal-item"><span>✦</span> Red-carpet &amp; high-profile arrivals</div>
+      <div class="ideal-item"><span>✦</span> Weddings that call for something extraordinary</div>
+      <div class="ideal-item"><span>✦</span> Milestone celebrations &amp; anniversaries</div>
+      <div class="ideal-item"><span>✦</span> Executives and guests who expect the very best</div>
     </div>
   </div>
 
   <div class="spec-box">
     <p class="spec-title">Specifications</p>
-    <div class="spec-row"><span class="spec-label">Make &amp; Model</span><span class="spec-value">Mercedes G-Wagon (G63 AMG)</span></div>
-    <div class="spec-row"><span class="spec-label">Passengers</span><span class="spec-value">4</span></div>
-    <div class="spec-row"><span class="spec-label">Fuel type</span><span class="spec-value">Petrol</span></div>
+    <div class="spec-row"><span class="spec-label">Make &amp; Model</span><span class="spec-value">Rolls-Royce Ghost</span></div>
+    <div class="spec-row"><span class="spec-label">Passengers</span><span class="spec-value">Up to 4</span></div>
+    <div class="spec-row"><span class="spec-label">Engine</span><span class="spec-value">6.6L V12 Petrol</span></div>
     <div class="spec-row"><span class="spec-label">Transmission</span><span class="spec-value">Automatic</span></div>
-    <div class="spec-row"><span class="spec-label">Drive</span><span class="spec-value">4x4</span></div>
     <div class="spec-row"><span class="spec-label">Based in</span><span class="spec-value">Glasgow</span></div>
-    <div class="spec-row"><span class="spec-label">Price</span><span class="spec-value">From £199</span></div>
+    <div class="spec-row"><span class="spec-label">Price</span><span class="spec-value">From £349</span></div>
     <div class="spec-cta">
-      <button class="btn-red" onclick="openModal('Mercedes G-Wagon')">Reserve this vehicle</button>
+      <button class="btn-red" onclick="openModal('Rolls-Royce Ghost')">Reserve this vehicle</button>
       <a href="https://wa.me/447961834904" class="btn-outline-gold">WhatsApp an enquiry</a>
     </div>
   </div>
@@ -463,14 +469,14 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 <section class="related">
   <p class="eyebrow">Also in the VIP range</p>
   <h2 class="h2" style="margin-bottom:0">Three more vehicles<br><em>for the occasion.</em></h2>
-  <div class="related-grid">
-    <a href="rolls-royce.html" class="related-card">
-      <div class="related-img"><img src="assets/images/RR-hero.jpg" alt="Rolls-Royce Ghost"></div>
+  <div class="related-grid" style="grid-template-columns:repeat(3,1fr)">
+    <a href="mercedes-g63.html" class="related-card">
+      <div class="related-img"><img src="assets/images/g63-hero.jpg" alt="Mercedes G63 AMG"></div>
       <div class="related-body">
-        <p class="related-tier">VIP · New Addition</p>
-        <h3 class="related-name">Rolls-Royce Ghost</h3>
-        <p class="related-spec">Up to 4 passengers · 6.6L V12 · Automatic</p>
-        <p class="related-price">£349 <sub>from</sub></p>
+        <p class="related-tier">VIP</p>
+        <h3 class="related-name">Mercedes G-Wagon</h3>
+        <p class="related-spec">4 passengers · 2023 · Petrol · Automatic</p>
+        <p class="related-price">£199 <sub>from</sub></p>
       </div>
     </a>
     <a href="mercedes-maybach.html" class="related-card">
@@ -496,12 +502,12 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 
 <!-- BOOK -->
 <section class="book-s">
-  <div class="book-bg-script">G-Wagon</div>
+  <div class="book-bg-script">Ghost</div>
   <p class="eyebrow">Make a booking</p>
-  <h2 class="h2" style="max-width:none;font-size:clamp(2rem,4.5vw,3.5rem);margin-bottom:1rem">Reserve the <em>G-Wagon.</em></h2>
+  <h2 class="h2" style="max-width:none;font-size:clamp(2rem,4.5vw,3.5rem);margin-bottom:1rem">Reserve the <em>Ghost.</em></h2>
   <p class="book-sub">Call us, send a message, or fill in a quick enquiry — we'll confirm availability personally.</p>
   <div class="book-actions">
-    <button class="btn-red" style="width:auto" onclick="openModal('Mercedes G-Wagon')">Reserve a journey</button>
+    <button class="btn-red" style="width:auto" onclick="openModal('Rolls-Royce Ghost')">Reserve a journey</button>
     <span class="book-or">or</span>
     <a href="tel:07961834904" class="btn-outline-gold">Call 07961 834 904</a>
     <span class="book-or">or</span>
@@ -616,7 +622,7 @@ function cycleGallery(id, dir) {
 }
 
 window.addEventListener('load', function() {
-  ['g63Gallery'].forEach(initGallery);
+  ['rrGallery'].forEach(initGallery);
 });
 window.addEventListener('resize', function() {
   Object.keys(galleryState).forEach(setTrackPosition);

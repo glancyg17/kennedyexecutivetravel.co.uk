@@ -128,7 +128,7 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-
 
 /* OTHER VIP */
 .related{padding:5rem 3rem;border-top:1px solid var(--border-red);background:var(--black2)}
-.related-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--border-red);margin-top:3rem}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border-red);margin-top:3rem}
 .related-card{display:flex;flex-direction:column;border-right:1px solid var(--border-red);text-decoration:none;color:inherit;transition:background 0.3s}
 .related-card:last-child{border-right:none}
 .related-card:hover{background:rgba(158,28,28,0.05)}
@@ -248,6 +248,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
         <label>Vehicle preference</label>
         <select name="vehicle" id="modalVehicleInput">
           <option value="">Not sure / any vehicle</option>
+          <option value="Rolls-Royce Ghost">Rolls-Royce Ghost — VIP</option>
           <option value="Mercedes G-Wagon">Mercedes G-Wagon — VIP</option>
           <option value="Mercedes Maybach">Mercedes Maybach — VIP</option>
           <option value="Audi SQ7">Audi SQ7 — VIP</option>
@@ -460,8 +461,17 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 <!-- OTHER VIP VEHICLES -->
 <section class="related">
   <p class="eyebrow">Also in the VIP range</p>
-  <h2 class="h2" style="margin-bottom:0">Two more vehicles<br><em>for the occasion.</em></h2>
+  <h2 class="h2" style="margin-bottom:0">Three more vehicles<br><em>for the occasion.</em></h2>
   <div class="related-grid">
+    <a href="rolls-royce.html" class="related-card">
+      <div class="related-img"><img src="assets/images/RR-hero.jpg" alt="Rolls-Royce Ghost"></div>
+      <div class="related-body">
+        <p class="related-tier">VIP · New Addition</p>
+        <h3 class="related-name">Rolls-Royce Ghost</h3>
+        <p class="related-spec">Up to 4 passengers · 6.6L V12 · Automatic</p>
+        <p class="related-price">£349 <sub>from</sub></p>
+      </div>
+    </a>
     <a href="mercedes-g63.html" class="related-card">
       <div class="related-img"><img src="assets/images/g63-hero.jpg" alt="Mercedes G63 AMG"></div>
       <div class="related-body">
