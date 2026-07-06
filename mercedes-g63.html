@@ -700,7 +700,77 @@ function formLogic() {
   if (retAddress) retAddress.style.display = isAltReturn ? 'block' : 'none';
   if (retFlight) retFlight.style.display = (isAirport && hasReturn) ? 'block' : 'none';
 }
+
+/* ── AUTO-CAPTURE TO DISPATCH APP ──
+   Fires alongside the normal FormSubmit email — does not replace it.
+   Uses fetch's keepalive flag so the request completes even though
+   the browser is navigating away to FormSubmit's redirect at the same time. */
+var SUPA_URL = 'https://mpdrshyxefrptitbqnbi.supabase.co';
+var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wZHJzaHl4ZWZycHRpdGJxbmJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5NzcyNzIsImV4cCI6MjA5ODU1MzI3Mn0.5bkceScowY-26qnG0FkMXaqTZstLQe3GvbO8eooesFs';
+
+function captureReserveToDispatch(form) {
+  try {
+    var fd = new FormData(form);
+    var g = function (key) { return (fd.get(key) || '').toString().trim(); };
+
+    var returnVal = g('return_journey'); // '', 'yes_same', 'yes_alt'
+    var hasReturn = returnVal === 'yes_same' || returnVal === 'yes_alt';
+
+    var payload = {
+      name: g('name'),
+      phone: g('phone'),
+      email: g('email'),
+      channel: 'Website reserve modal',
+      occasion: g('journey_type'),
+      vehicle: g('vehicle'),
+      pickup: g('pickup'),
+      dropoff: g('dropoff'),
+      job_date: g('date') || null,
+      job_time: g('time') || null,
+      return_journey: hasReturn ? 'yes' : '',
+      return_date: hasReturn ? (g('return_date') || null) : null,
+      return_time: hasReturn ? (g('return_time') || null) : null,
+      return_dropoff: returnVal === 'yes_alt' ? g('return_pickup') : '',
+      return_flight: g('return_flight'),
+      car_seat: fd.get('car_seat') === 'yes',
+      trailer: fd.get('trailer') === 'yes',
+      status: 'new',
+      notes: g('notes')
+    };
+
+    fetch(SUPA_URL + '/rest/v1/jobs', {
+      method: 'POST',
+      keepalive: true,
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    }).catch(function (err) {
+      console.error('Dispatch capture failed (email still sent):', err);
+    });
+  } catch (err) {
+    console.error('Dispatch capture error:', err);
+  }
+}
+
+(function () {
+  var modal = document.getElementById('reserveModal');
+  var form = modal ? modal.querySelector('form') : null;
+  if (form) {
+    form.addEventListener('submit', function () {
+      // Intentionally NOT calling preventDefault — the browser still
+      // submits normally to FormSubmit. This just also fires the
+      // Supabase insert in parallel before the page navigates away.
+      captureReserveToDispatch(form);
+    });
+  }
+})();
+
 function closeModal() {
+
   document.getElementById('reserveModal').classList.remove('open');
   document.body.style.overflow = '';
 }
