@@ -6,8 +6,8 @@
 <title>Get a Quote | Kennedy Executive Travel</title>
 <meta name="description" content="Tell us about your journey and we'll come back to you with availability and pricing — Kennedy Executive Travel.">
 <meta name="robots" content="noindex">
-<link rel="canonical" href="https://kennedyexecutivetravel.co.uk/quote/">
-<link rel="icon" type="image/png" href="/assets/icons/favicon.png">
+<link rel="canonical" href="https://kennedyexecutivetravel.co.uk/quote.html">
+<link rel="icon" type="image/png" href="assets/icons/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -76,7 +76,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 
 <!-- MINIMAL HEADER -->
 <div class="quote-header">
-  <img src="/assets/images/logo.png" alt="Kennedy Executive Travel" class="quote-logo">
+  <img src="assets/images/logo.png" alt="Kennedy Executive Travel" class="quote-logo">
 </div>
 
 <!-- PERSONAL GREETING -->
@@ -317,12 +317,6 @@ function captureQuoteToDispatch(form) {
     var hasReturn = returnVal === 'yes_same' || returnVal === 'yes_alt';
 
     var extraNotes = [];
-    if (g('wedding_venue')) extraNotes.push('Wedding venue: ' + g('wedding_venue'));
-    if (g('wedding_vehicles')) extraNotes.push('Vehicles needed: ' + g('wedding_vehicles'));
-    if (g('num_children')) extraNotes.push('Number of children: ' + g('num_children'));
-    if (g('children_ages')) extraNotes.push('Children ages: ' + g('children_ages'));
-    if (g('grinch')) extraNotes.push('Grinch chase: ' + g('grinch'));
-    if (g('licence')) extraNotes.push('Driving licence: ' + g('licence'));
     if (g('message')) extraNotes.push(g('message'));
 
     var payload = {
@@ -345,6 +339,12 @@ function captureQuoteToDispatch(form) {
       return_flight: g('return_flight'),
       car_seat: fd.get('car_seat') === 'yes',
       trailer: fd.get('trailer') === 'yes',
+      wedding_venue: g('wedding_venue'),
+      wedding_vehicles: g('wedding_vehicles'),
+      num_children: g('num_children'),
+      children_ages: g('children_ages'),
+      grinch: g('grinch'),
+      licence: g('licence'),
       status: 'new',
       notes: extraNotes.join('\n')
     };
