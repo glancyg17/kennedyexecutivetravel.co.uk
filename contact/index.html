@@ -451,11 +451,7 @@ function captureLeadToDispatch(form) {
     var returnVal = g('return_journey'); // '', 'yes_same', 'yes_alt'
     var hasReturn = returnVal === 'yes_same' || returnVal === 'yes_alt';
 
-    // children_ages has no confirmed dedicated column yet — kept in notes
-    // for now until that's checked; everything else below has a real column
-    // in the jobs table that the dispatch app already displays.
     var extraNotes = [];
-    if (g('children_ages')) extraNotes.push('Children ages: ' + g('children_ages'));
     if (g('message')) extraNotes.push(g('message'));
 
     var payload = {
@@ -481,6 +477,7 @@ function captureLeadToDispatch(form) {
       wedding_venue: g('wedding_venue'),
       wedding_vehicles: g('wedding_vehicles'),
       num_children: g('num_children'),
+      children_ages: g('children_ages'),
       grinch: g('grinch'),
       licence: g('licence'),
       status: 'new',
