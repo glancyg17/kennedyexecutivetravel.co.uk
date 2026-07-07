@@ -237,6 +237,19 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
         <div class="field"><label>Your name</label><input type="text" name="name" required placeholder="Full name"></div>
         <div class="field"><label>Phone number</label><input type="tel" name="phone" required placeholder="07700 000000"></div>
       </div>
+
+      <!-- WhatsApp -->
+      <div class="field" style="margin-bottom:0.7rem">
+        <label class="check-item">
+          <input type="checkbox" id="cWaSame" checked onchange="cToggleWa()">
+          <span class="check-label"><strong>WhatsApp is the same as my phone number</strong></span>
+        </label>
+      </div>
+      <div class="field" id="cFieldWaAlt" style="display:none">
+        <label>WhatsApp number</label>
+        <input type="tel" name="whatsapp" id="cWaInput" placeholder="07700 000000">
+      </div>
+
       <div class="field"><label>Email address</label><input type="email" name="email" required placeholder="your@email.com"></div>
 
       <!-- Always: Journey type -->
@@ -513,6 +526,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+function cToggleWa() {
+  var same = document.getElementById('cWaSame');
+  var f = document.getElementById('cFieldWaAlt');
+  if (!same || !f) return;
+  f.style.display = same.checked ? 'none' : 'block';
+  if (same.checked) {
+    var inp = document.getElementById('cWaInput');
+    if (inp) inp.value = '';
+  }
+}
 
 function cLogic() {
   var j = document.getElementById('cJourneyType').value;

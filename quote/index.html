@@ -98,6 +98,19 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
         <div class="field"><label>Your name</label><input type="text" name="name" required placeholder="Full name"></div>
         <div class="field"><label>Phone number</label><input type="tel" name="phone" required placeholder="07700 000000"></div>
       </div>
+
+      <!-- WhatsApp -->
+      <div class="field" style="margin-bottom:0.7rem">
+        <label class="check-item">
+          <input type="checkbox" id="qWaSame" checked onchange="qToggleWa()">
+          <span class="check-label"><strong>WhatsApp is the same as my phone number</strong></span>
+        </label>
+      </div>
+      <div class="field" id="qFieldWaAlt" style="display:none">
+        <label>WhatsApp number</label>
+        <input type="tel" name="whatsapp" id="qWaInput" placeholder="07700 000000">
+      </div>
+
       <div class="field"><label>Email address</label><input type="email" name="email" required placeholder="your@email.com"></div>
 
       <!-- Always: Journey type -->
@@ -274,6 +287,17 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 function show(id, val) {
   var el = document.getElementById(id);
   if (el) el.style.display = val;
+}
+
+function qToggleWa() {
+  var same = document.getElementById('qWaSame');
+  var f = document.getElementById('qFieldWaAlt');
+  if (!same || !f) return;
+  f.style.display = same.checked ? 'none' : 'block';
+  if (same.checked) {
+    var inp = document.getElementById('qWaInput');
+    if (inp) inp.value = '';
+  }
 }
 
 function qLogic() {

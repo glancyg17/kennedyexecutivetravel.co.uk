@@ -289,6 +289,18 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
         <div class="modal-field"><label>Phone number</label><input type="tel" name="phone" required placeholder="07700 000000"></div>
       </div>
 
+      <!-- WhatsApp -->
+      <div class="modal-field" style="margin-bottom:0.7rem">
+        <label class="check-item">
+          <input type="checkbox" id="modalWaSame" checked onchange="toggleWaField()">
+          <span class="check-label"><strong>WhatsApp is the same as my phone number</strong></span>
+        </label>
+      </div>
+      <div class="modal-field" id="fieldWaAlt" style="display:none">
+        <label>WhatsApp number</label>
+        <input type="tel" name="whatsapp" id="modalWaInput" placeholder="07700 000000">
+      </div>
+
       <!-- Email -->
       <div class="modal-field"><label>Email address</label><input type="email" name="email" required placeholder="your@email.com"></div>
 
@@ -707,6 +719,17 @@ function formLogic() {
   if (retFlight) retFlight.style.display = (isAirport && hasReturn) ? 'block' : 'none';
 }
 
+function toggleWaField() {
+  var same = document.getElementById('modalWaSame');
+  var f = document.getElementById('fieldWaAlt');
+  if (!same || !f) return;
+  f.style.display = same.checked ? 'none' : 'block';
+  if (same.checked) {
+    var inp = document.getElementById('modalWaInput');
+    if (inp) inp.value = '';
+  }
+}
+
 /* ── AUTO-CAPTURE TO DISPATCH APP ──
    Fires alongside the normal FormSubmit email — does not replace it.
    Uses fetch's keepalive flag so the request completes even though
@@ -725,6 +748,7 @@ function captureReserveToDispatch(form) {
     var payload = {
       name: g('name'),
       phone: g('phone'),
+      wa_phone: g('whatsapp'),
       email: g('email'),
       channel: 'Website reserve modal',
       occasion: g('journey_type'),
