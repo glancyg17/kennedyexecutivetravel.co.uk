@@ -32,7 +32,7 @@ Glasgow, Edinburgh, Central Scotland, Fife, the Lothians, and all UK airports. L
 
 ## Pages
 - Home: https://kennedyexecutivetravel.co.uk/
-- Fleet: https://kennedyexecutivetravel.co.uk/fleet.html
-- Services: https://kennedyexecutivetravel.co.uk/services.html
-- Reviews: https://kennedyexecutivetravel.co.uk/reviews.html
-- Contact: https://kennedyexecutivetravel.co.uk/contact.html
+- Fleet: https://kennedyexecutivetravel.co.uk/fleet/
+- Services: https://kennedyexecutivetravel.co.uk/services/
+- Reviews: https://kennedyexecutivetravel.co.uk/reviews/
+- Contact: https://kennedyexecutivetravel.co.uk/contact/
