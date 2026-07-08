@@ -128,7 +128,6 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
           <option value="Golf Day">Golf Day</option>
           <option value="Private Tour">Private Tour</option>
           <option value="Santa Visit">Santa VIP Visit</option>
-          <option value="Self-Drive Rental">Self-Drive Rental</option>
           <option value="Other">Other</option>
         </select>
       </div>
@@ -154,8 +153,6 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
             <option value="Mini Bus 9-11 Seater">Mini Bus — 9-11 Passengers</option>
             <option value="Mini Bus 12-14 Seater">Mini Bus — 12-14 Passengers</option>
             <option value="Mini Bus 15-16 Seater">Mini Bus — 15-16 Passengers</option>
-            <option value="BMW 3 Series M-Sport">BMW 3 Series M-Sport</option>
-            <option value="VW EOS">VW EOS</option>
           </select>
         </div>
 
@@ -232,13 +229,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
           </div>
         </div>
 
-        <!-- SELF-DRIVE: licence -->
-        <div class="field" id="qRentalFields" style="display:none">
-          <label>Driving licence number</label>
-          <input type="text" name="licence" placeholder="For rental verification purposes">
-        </div>
-
-        <!-- Return journey (not for Santa or rental) -->
+        <!-- Return journey (not for Santa) -->
         <div id="qReturnBlock" style="display:none">
           <div class="field">
             <label>Return journey?</label>
@@ -309,7 +300,6 @@ function qLogic() {
   var isAirport  = j === 'Airport Transfer';
   var isWedding  = j === 'Wedding';
   var isSanta    = j === 'Santa Visit';
-  var isRental   = j === 'Self-Drive Rental';
   var hasJourney = j !== '';
   var hasReturn  = retVal === 'yes_same' || retVal === 'yes_alt';
   var isAltRet   = retVal === 'yes_alt';
@@ -319,8 +309,7 @@ function qLogic() {
   show('qFlightOut',     isAirport ? 'block' : 'none');
   show('qWeddingFields', isWedding ? 'block' : 'none');
   show('qSantaFields',   isSanta   ? 'block' : 'none');
-  show('qRentalFields',  isRental  ? 'block' : 'none');
-  show('qReturnBlock',   (!isSanta && !isRental && hasJourney) ? 'block' : 'none');
+  show('qReturnBlock',   (!isSanta && hasJourney) ? 'block' : 'none');
   show('qReturnDateTime', hasReturn ? 'grid' : 'none');
   show('qReturnAddress',  isAltRet  ? 'block' : 'none');
   show('qReturnFlight',   (isAirport && hasReturn) ? 'block' : 'none');

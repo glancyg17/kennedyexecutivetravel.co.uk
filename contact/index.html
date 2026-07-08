@@ -267,7 +267,6 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
           <option value="Golf Day">Golf Day</option>
           <option value="Private Tour">Private Tour</option>
           <option value="Santa Visit">Santa VIP Visit</option>
-          <option value="Self-Drive Rental">Self-Drive Rental</option>
           <option value="Other">Other</option>
         </select>
       </div>
@@ -293,8 +292,6 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
             <option value="Mini Bus 9-11 Seater">Mini Bus — 9-11 Passengers</option>
             <option value="Mini Bus 12-14 Seater">Mini Bus — 12-14 Passengers</option>
             <option value="Mini Bus 15-16 Seater">Mini Bus — 15-16 Passengers</option>
-            <option value="BMW 3 Series M-Sport">BMW 3 Series M-Sport</option>
-            <option value="VW EOS">VW EOS</option>
           </select>
         </div>
 
@@ -371,13 +368,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
           </div>
         </div>
 
-        <!-- SELF-DRIVE: licence -->
-        <div class="field" id="cRentalFields" style="display:none">
-          <label>Driving licence number</label>
-          <input type="text" name="licence" placeholder="For rental verification purposes">
-        </div>
-
-        <!-- Return journey (not for Santa or rental) -->
+        <!-- Return journey (not for Santa) -->
         <div id="cReturnBlock" style="display:none">
           <div class="field">
             <label>Return journey?</label>
@@ -547,7 +538,6 @@ function cLogic() {
   var isAirport  = j === 'Airport Transfer';
   var isWedding  = j === 'Wedding';
   var isSanta    = j === 'Santa Visit';
-  var isRental   = j === 'Self-Drive Rental';
   var hasJourney = j !== '';
   var hasReturn  = retVal === 'yes_same' || retVal === 'yes_alt';
   var isAltRet   = retVal === 'yes_alt';
@@ -562,10 +552,9 @@ function cLogic() {
   show('cFlightOut',     isAirport ? 'block' : 'none');
   show('cWeddingFields', isWedding ? 'block' : 'none');
   show('cSantaFields',   isSanta   ? 'block' : 'none');
-  show('cRentalFields',  isRental  ? 'block' : 'none');
 
-  // Return journey block — hide for Santa and rental
-  show('cReturnBlock',   (!isSanta && !isRental && hasJourney) ? 'block' : 'none');
+  // Return journey block — hide for Santa
+  show('cReturnBlock',   (!isSanta && hasJourney) ? 'block' : 'none');
 
   // Return sub-fields
   show('cReturnDateTime', hasReturn ? 'grid' : 'none');
