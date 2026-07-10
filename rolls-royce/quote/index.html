@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get a Quote | Kennedy Executive Travel</title>
+<meta name="description" content="Tell us about your journey and we'll come back to you with availability and pricing — Kennedy Executive Travel.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://kennedyexecutivetravel.co.uk/quote.html">
+<link rel="icon" type="image/png" href="/assets/icons/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0c0b0b;
+  --black2:#131111;
+  --red:#9e1c1c;
+  --red-lt:#c42222;
+  --gold:#c8a45a;
+  --gold-lt:#dfc07a;
+  --cream:#f0ebe0;
+  --mid:#7a6f6f;
+  --border-red:rgba(158,28,28,0.25);
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;display:flex;flex-direction:column}
+
+/* MINIMAL HEADER — logo only, no nav, no exit links */
+.quote-header{padding:2rem 1.5rem 1rem;display:flex;justify-content:center}
+.quote-logo{height:36px;width:auto;display:block}
+
+/* HERO GREETING — quiet personal touch, not a full hero section */
+.quote-hero{padding:1.5rem 1.5rem 0;text-align:center}
+.quote-script{font-family:'Dancing Script',cursive;font-weight:600;font-size:clamp(2.2rem,7vw,3rem);color:var(--gold);line-height:1.1;margin-bottom:0.6rem}
+.quote-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,4.5vw,2.3rem);font-weight:300;color:var(--cream);line-height:1.25;margin-bottom:0.9rem}
+.quote-intro{font-size:0.85rem;color:var(--mid);line-height:1.85;max-width:440px;margin:0 auto}
+
+/* FORM WRAPPER — centered single column, no sidebar */
+.quote-wrap{flex:1;display:flex;justify-content:center;padding:2.5rem 1.5rem 1rem}
+.form-box{width:100%;max-width:520px;border:1px solid var(--border-red);padding:2.2rem}
+.field{margin-bottom:1.3rem}
+.field label{display:block;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:0.6rem}
+.check-group{display:flex;flex-direction:column;gap:0.7rem;margin-bottom:1.3rem}
+.check-item{display:flex;align-items:flex-start;gap:0.8rem;cursor:pointer;font-size:0.85rem;color:var(--mid);line-height:1.5}
+.check-item input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:18px;height:18px;border:1px solid var(--border-red);background:var(--black);flex-shrink:0;margin-top:2px;cursor:pointer;transition:all 0.2s}
+.check-item input[type="checkbox"]:checked{background:var(--red);border-color:var(--red)}
+.check-item input[type="checkbox"]:checked::after{content:'✓';display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.7rem;width:100%;height:100%}
+.check-label strong{color:var(--cream);font-weight:400;display:block}
+.check-label span{font-size:0.78rem}
+.field input,.field textarea,.field select{width:100%;background:var(--black);border:0.5px solid var(--border-red);color:var(--cream);padding:0.85rem 1rem;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;transition:border-color 0.2s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--red)}
+.field select option{background:var(--black2)}
+.field textarea{resize:vertical;min-height:110px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem}
+.btn-red{font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;background:var(--red);color:var(--cream);padding:1rem 2.5rem;text-decoration:none;display:inline-block;transition:background 0.2s;cursor:pointer;border:none;width:100%}
+.btn-red:hover{background:var(--red-lt)}
+.form-note{font-size:0.7rem;color:var(--mid);text-align:center;margin-top:1.2rem;line-height:1.6}
+
+/* QUIET FALLBACK — call/WhatsApp for anyone who'd rather not fill the form */
+.quote-fallback{text-align:center;padding:0 1.5rem 2rem;font-size:0.78rem;color:var(--mid);line-height:1.9}
+.quote-fallback a{color:var(--gold);text-decoration:none}
+.quote-fallback a:hover{color:var(--gold-lt)}
+
+/* MINIMAL FOOTER — copyright only, no nav, no socials */
+.quote-footer{text-align:center;padding:1.5rem;border-top:1px solid var(--border-red)}
+.quote-copy{font-size:0.62rem;letter-spacing:0.06em;color:rgba(122,111,111,0.5)}
+
+@media(max-width:480px){
+  .field-row{grid-template-columns:1fr}
+  .form-box{padding:1.6rem}
+}
+</style>
+</head>
+<body>
+
+<!-- MINIMAL HEADER -->
+<div class="quote-header">
+  <img src="/assets/images/logo.png" alt="Kennedy Executive Travel" class="quote-logo">
+</div>
+
+<!-- PERSONAL GREETING -->
+<div class="quote-hero">
+  <p class="quote-script">Let's get you booked in.</p>
+  <h1 class="quote-title">A few details, and we'll come<br>back with pricing and availability.</h1>
+  <p class="quote-intro">Fill this in whenever suits — we'll ask for more depending on your journey type, and we usually reply within a few hours.</p>
+</div>
+
+<!-- FORM -->
+<div class="quote-wrap">
+  <div class="form-box">
+    <form action="https://formsubmit.co/kennedyexecutivetravel@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New enquiry — Kennedy Executive Travel (WhatsApp link)">
+      <input type="hidden" name="_captcha" value="false">
+
+      <!-- Always: Name / Phone / Email -->
+      <div class="field-row">
+        <div class="field"><label>Your name</label><input type="text" name="name" required placeholder="Full name"></div>
+        <div class="field"><label>Phone number</label><input type="tel" name="phone" required placeholder="07700 000000"></div>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="field" style="margin-bottom:0.7rem">
+        <label class="check-item">
+          <input type="checkbox" id="qWaSame" checked onchange="qToggleWa()">
+          <span class="check-label"><strong>WhatsApp is the same as my phone number</strong></span>
+        </label>
+      </div>
+      <div class="field" id="qFieldWaAlt" style="display:none">
+        <label>WhatsApp number</label>
+        <input type="tel" name="whatsapp" id="qWaInput" placeholder="07700 000000">
+      </div>
+
+      <div class="field"><label>Email address</label><input type="email" name="email" required placeholder="your@email.com"></div>
+
+      <!-- Always: Journey type -->
+      <div class="field">
+        <label>Journey type</label>
+        <select name="journey_type" id="qJourneyType" onchange="qLogic()">
+          <option value="">Select journey type</option>
+          <option value="Airport Transfer">Airport Transfer</option>
+          <option value="Wedding">Wedding</option>
+          <option value="Prom">Prom</option>
+          <option value="Birthday">Birthday</option>
+          <option value="Hen / Stag">Hen / Stag</option>
+          <option value="Concert / Event">Concert / Event</option>
+          <option value="Corporate Travel">Corporate Travel</option>
+          <option value="Golf Day">Golf Day</option>
+          <option value="Private Tour">Private Tour</option>
+          <option value="Santa Visit">Santa VIP Visit</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <!-- Expands: core journey fields (shown once journey type selected) -->
+      <div id="qCoreFields" style="display:none">
+
+        <!-- Vehicle preference -->
+        <div class="field">
+          <label>Vehicle preference</label>
+          <select name="vehicle">
+            <option value="">Not sure / any vehicle</option>
+            <option value="Rolls-Royce Ghost">Rolls-Royce Ghost — VIP</option>
+            <option value="Mercedes G-Wagon">Mercedes G-Wagon — VIP</option>
+            <option value="Mercedes Maybach">Mercedes Maybach — VIP</option>
+            <option value="Audi SQ7">Audi SQ7 — VIP</option>
+            <option value="Mercedes V-Class">Mercedes V-Class — Executive</option>
+            <option value="Mercedes C-Class">Mercedes C-Class — Executive</option>
+            <option value="Porsche Cayenne S">Porsche Cayenne S — Executive</option>
+            <option value="Standard Taxi">Standard Taxi — 1-4 Passengers</option>
+            <option value="People Carrier 5-8">People Carrier — 5-8 Passengers</option>
+            <option value="People Carrier XXL">People Carrier XXL — 5-8 Passengers (Extra Luggage)</option>
+            <option value="Mini Bus 9-11 Seater">Mini Bus — 9-11 Passengers</option>
+            <option value="Mini Bus 12-14 Seater">Mini Bus — 12-14 Passengers</option>
+            <option value="Mini Bus 15-16 Seater">Mini Bus — 15-16 Passengers</option>
+          </select>
+        </div>
+
+        <!-- Passengers -->
+        <div class="field">
+          <label>Number of passengers</label>
+          <select name="passengers">
+            <option value="">Select</option>
+            <option>1</option><option>2</option><option>3</option><option>4</option>
+            <option>5</option><option>6</option><option>7</option><option>8</option>
+            <option>9–11</option><option>12–14</option><option>15–16</option>
+          </select>
+        </div>
+
+        <!-- Date / Time -->
+        <div class="field-row">
+          <div class="field"><label>Preferred date</label><input type="date" name="date"></div>
+          <div class="field"><label>Preferred time</label><input type="time" name="time"></div>
+        </div>
+
+        <!-- Extras -->
+        <div class="check-group">
+          <label class="check-item">
+            <input type="checkbox" name="car_seat" value="yes">
+            <span class="check-label"><strong>Child car seat required</strong><span>Let us know the child's age and we'll arrange the appropriate seat</span></span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="trailer" value="yes">
+            <span class="check-label"><strong>Trailer required — £49 charge</strong><span>Extra luggage space via trailer, charged at a flat fee of £49</span></span>
+          </label>
+        </div>
+
+        <!-- Pick-up / Drop-off (hidden for Santa) -->
+        <div id="qPickupFields">
+          <div class="field"><label>Pick-up location</label><input type="text" name="pickup" placeholder="Address or airport"></div>
+          <div class="field"><label>Drop-off location</label><input type="text" name="dropoff" placeholder="Destination"></div>
+        </div>
+
+        <!-- AIRPORT: flight number -->
+        <div class="field" id="qFlightOut" style="display:none">
+          <label>Outbound flight number</label>
+          <input type="text" name="outbound_flight" placeholder="e.g. EZY123">
+        </div>
+
+        <!-- WEDDING: venue + number of vehicles -->
+        <div id="qWeddingFields" style="display:none">
+          <div class="field"><label>Wedding venue</label><input type="text" name="wedding_venue" placeholder="Venue name and location"></div>
+          <div class="field"><label>Number of vehicles needed</label>
+            <select name="wedding_vehicles">
+              <option value="">Select</option>
+              <option>1</option><option>2</option><option>3</option><option>4+</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- SANTA: children details -->
+        <div id="qSantaFields" style="display:none">
+          <div class="field-row">
+            <div class="field"><label>Number of children</label>
+              <select name="num_children">
+                <option value="">Select</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+              </select>
+            </div>
+            <div class="field"><label>Children's ages</label><input type="text" name="children_ages" placeholder="e.g. 3, 5, 7"></div>
+          </div>
+          <div class="field">
+            <label>Include the Grinch chase?</label>
+            <select name="grinch">
+              <option value="">Not sure yet</option>
+              <option value="yes">Yes please!</option>
+              <option value="no">No thank you</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Return journey (not for Santa) -->
+        <div id="qReturnBlock" style="display:none">
+          <div class="field">
+            <label>Return journey?</label>
+            <select name="return_journey" id="qReturnJourney" onchange="qLogic()">
+              <option value="">No return needed</option>
+              <option value="yes_same">Yes — return to same address as pick-up</option>
+              <option value="yes_alt">Yes — return to a different address</option>
+            </select>
+          </div>
+          <div class="field-row" id="qReturnDateTime" style="display:none">
+            <div class="field"><label>Return date</label><input type="date" name="return_date"></div>
+            <div class="field"><label>Return time</label><input type="time" name="return_time"></div>
+          </div>
+          <div class="field" id="qReturnAddress" style="display:none">
+            <label>Return pick-up address</label>
+            <input type="text" name="return_pickup" placeholder="Address for return pick-up">
+          </div>
+          <div class="field" id="qReturnFlight" style="display:none">
+            <label>Return flight number</label>
+            <input type="text" name="return_flight" id="qReturnFlightInput" placeholder="e.g. EZY456">
+          </div>
+          <div class="field" id="qReturnAirport" style="display:none">
+            <label>Return airport <span style="font-weight:400;color:var(--mid)">(if different)</span></label>
+            <input type="text" name="return_airport" placeholder="Leave blank if same as outgoing airport">
+          </div>
+        </div>
+
+        <!-- Always: notes -->
+        <div class="field"><label>Anything else we should know?</label><textarea name="message" placeholder="Special requests, accessibility needs, extra stops, luggage..."></textarea></div>
+
+      </div><!-- end qCoreFields -->
+
+      <button type="submit" class="btn-red">Send enquiry</button>
+      <p class="form-note">We'll get back to you personally — usually within a few hours.</p>
+    </form>
+  </div>
+</div>
+
+<!-- QUIET FALLBACK -->
+<p class="quote-fallback">
+  Prefer to talk it through? Call <a href="tel:07961834904">07961 834 904</a>
+  or <a href="https://wa.me/447961834904">message us on WhatsApp</a>.
+</p>
+
+<!-- MINIMAL FOOTER -->
+<footer class="quote-footer">
+  <p class="quote-copy">© 2026 Kennedy Executive Travel · Central Scotland</p>
+</footer>
+
+<script>
+function show(id, val) {
+  var el = document.getElementById(id);
+  if (el) el.style.display = val;
+}
+
+function qToggleWa() {
+  var same = document.getElementById('qWaSame');
+  var f = document.getElementById('qFieldWaAlt');
+  if (!same || !f) return;
+  f.style.display = same.checked ? 'none' : 'block';
+  if (same.checked) {
+    var inp = document.getElementById('qWaInput');
+    if (inp) inp.value = '';
+  }
+}
+
+function qLogic() {
+  var j = document.getElementById('qJourneyType').value;
+  var ret = document.getElementById('qReturnJourney');
+  var retVal = ret ? ret.value : '';
+
+  var isAirport  = j === 'Airport Transfer';
+  var isWedding  = j === 'Wedding';
+  var isSanta    = j === 'Santa Visit';
+  var hasJourney = j !== '';
+  var hasReturn  = retVal === 'yes_same' || retVal === 'yes_alt';
+  var isAltRet   = retVal === 'yes_alt';
+
+  show('qCoreFields',    hasJourney ? 'block' : 'none');
+  show('qPickupFields',  !isSanta ? 'block' : 'none');
+  show('qFlightOut',     isAirport ? 'block' : 'none');
+  show('qWeddingFields', isWedding ? 'block' : 'none');
+  show('qSantaFields',   isSanta   ? 'block' : 'none');
+  show('qReturnBlock',   (!isSanta && hasJourney) ? 'block' : 'none');
+  show('qReturnDateTime', hasReturn ? 'grid' : 'none');
+  show('qReturnAddress',  isAltRet  ? 'block' : 'none');
+  var showRetFlight = isAirport && hasReturn;
+  show('qReturnFlight',   showRetFlight ? 'block' : 'none');
+  show('qReturnAirport',  showRetFlight ? 'block' : 'none');
+  var retFlightInput = document.getElementById('qReturnFlightInput');
+  if (retFlightInput) {
+    if (showRetFlight) { retFlightInput.setAttribute('required', 'required'); }
+    else { retFlightInput.removeAttribute('required'); }
+  }
+}
+
+/* ── AUTO-CAPTURE TO DISPATCH APP ──
+   Fires alongside the normal FormSubmit email — does not replace it.
+   Uses fetch's keepalive flag so the request completes even though
+   the browser is navigating away to FormSubmit's redirect at the same time. */
+var SUPA_URL = 'https://mpdrshyxefrptitbqnbi.supabase.co';
+var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wZHJzaHl4ZWZycHRpdGJxbmJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5NzcyNzIsImV4cCI6MjA5ODU1MzI3Mn0.5bkceScowY-26qnG0FkMXaqTZstLQe3GvbO8eooesFs';
+
+function captureQuoteToDispatch(form) {
+  try {
+    var fd = new FormData(form);
+    var g = function (key) { return (fd.get(key) || '').toString().trim(); };
+
+    var returnVal = g('return_journey'); // '', 'yes_same', 'yes_alt'
+    var hasReturn = returnVal === 'yes_same' || returnVal === 'yes_alt';
+
+    var extraNotes = [];
+    if (g('message')) extraNotes.push(g('message'));
+
+    var payload = {
+      name: g('name'),
+      phone: g('phone'),
+      email: g('email'),
+      channel: 'WhatsApp link',
+      occasion: g('journey_type'),
+      vehicle: g('vehicle'),
+      pax: g('passengers'),
+      pickup: g('pickup'),
+      dropoff: g('dropoff'),
+      job_date: g('date') || null,
+      job_time: g('time') || null,
+      flight: g('outbound_flight'),
+      return_journey: hasReturn ? 'yes' : '',
+      return_date: hasReturn ? (g('return_date') || null) : null,
+      return_time: hasReturn ? (g('return_time') || null) : null,
+      return_dropoff: returnVal === 'yes_alt' ? g('return_pickup') : '',
+      return_flight: g('return_flight'),
+      return_airport: g('return_airport'),
+      car_seat: fd.get('car_seat') === 'yes',
+      trailer: fd.get('trailer') === 'yes',
+      wedding_venue: g('wedding_venue'),
+      wedding_vehicles: g('wedding_vehicles'),
+      num_children: g('num_children'),
+      children_ages: g('children_ages'),
+      grinch: g('grinch'),
+      licence: g('licence'),
+      status: 'new',
+      notes: extraNotes.join('\n')
+    };
+
+    fetch(SUPA_URL + '/rest/v1/jobs', {
+      method: 'POST',
+      keepalive: true,
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    }).catch(function (err) {
+      console.error('Dispatch capture failed (email still sent):', err);
+    });
+  } catch (err) {
+    console.error('Dispatch capture error:', err);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  var form = document.querySelector('.form-box form');
+  if (form) {
+    form.addEventListener('submit', function () {
+      // Intentionally NOT calling preventDefault — the browser still
+      // submits normally to FormSubmit. This just also fires the
+      // Supabase insert in parallel before the page navigates away.
+      captureQuoteToDispatch(form);
+    });
+  }
+});
+</script>
+</body>
+</html>

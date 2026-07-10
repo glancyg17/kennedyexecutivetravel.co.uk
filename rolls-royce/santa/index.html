@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP Meet & Greet with Santa | Kennedy Executive Travel</title>
+<meta name="description" content="VIP Home Meet & Greet with Santa, his Elves & the Grinch — straight to your door across Central Scotland. From £49 per household. Book now.">
+<link rel="canonical" href="https://kennedyexecutivetravel.co.uk/santa/">
+<link rel="icon" type="image/png" href="/assets/icons/favicon.png">
+<meta property="og:image" content="https://kennedyexecutivetravel.co.uk/assets/images/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kennedyexecutivetravel.co.uk/assets/images/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0a0908;
+  --black2:#121010;
+  --red:#9e1c1c;
+  --red-lt:#c42222;
+  --xmas-red:#c0281e;
+  --gold:#c8a45a;
+  --gold-lt:#dfc07a;
+  --cream:#f0ebe0;
+  --mid:#7a6f6f;
+  --border-red:rgba(158,28,28,0.25);
+  --green:#1a4a1e;
+  --green-lt:#2d6e33;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden}
+
+/* NAV */
+nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:64px;background:rgba(10,9,8,0.97);border-bottom:1px solid var(--border-red)}
+.nav-logo-link{display:flex;align-items:center;height:100%}
+.nav-logo-img{height:40px;width:auto;display:block}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--cream)}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-phone{font-size:0.78rem;letter-spacing:0.06em;color:var(--gold);text-decoration:none}
+.nav-book{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;background:var(--xmas-red);color:var(--cream);padding:0.5rem 1.4rem;text-decoration:none;transition:background 0.2s;cursor:pointer;border:none}
+.nav-book:hover{background:var(--red-lt)}
+.burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:28px;height:28px;background:none;border:none;cursor:pointer;padding:0}
+.burger span{display:block;width:100%;height:1px;background:var(--cream);transition:all 0.25s}
+.burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--black2);border-bottom:1px solid var(--border-red);z-index:199;flex-direction:column;padding:1rem 0}
+.mobile-menu.open{display:flex}
+.mobile-menu a{padding:1rem 1.5rem;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);text-decoration:none;border-bottom:0.5px solid var(--border-red)}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--gold)}
+
+/* HERO */
+.hero{padding-top:64px;min-height:90vh;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0d1a0e 0%,#0a0908 50%,#1a0a0a 100%)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,8,0.98) 0%,rgba(10,9,8,0.4) 60%,rgba(10,9,8,0.2) 100%)}
+.hero-bg-img{position:absolute;inset:0;background:center/cover no-repeat;background-image:url('/assets/images/santa-hero.jpg')}
+.hero-content{position:relative;z-index:2;padding:5rem 3rem 6rem;max-width:820px}
+/* Mobile stacked hero image */
+.hero-mobile-img{display:none;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center top}
+.hero-xmas{font-size:1.8rem;line-height:1;margin-bottom:1.5rem}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:300;color:var(--cream);line-height:1.08;margin-bottom:1.5rem}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-title .red{color:#e84040}
+.hero-sub{font-size:0.95rem;color:var(--cream);opacity:0.75;line-height:1.9;max-width:520px;margin-bottom:2.5rem}
+.hero-price-strip{display:inline-flex;align-items:baseline;gap:0.8rem;background:rgba(192,40,30,0.15);border:1px solid rgba(192,40,30,0.35);padding:1rem 1.8rem;margin-bottom:2.5rem}
+.hero-price-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--gold);line-height:1}
+.hero-price-label{font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid)}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-xmas{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;background:var(--xmas-red);color:var(--cream);padding:0.95rem 2.5rem;text-decoration:none;display:inline-block;transition:background 0.2s;cursor:pointer;border:none}
+.btn-xmas:hover{background:var(--red-lt)}
+.btn-outline-gold{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;border:0.5px solid var(--gold);color:var(--gold);padding:0.95rem 2.5rem;text-decoration:none;display:inline-block;transition:all 0.2s}
+.btn-outline-gold:hover{background:rgba(200,164,90,0.07)}
+
+/* SNOWFLAKE DIVIDER */
+.divider{text-align:center;padding:2rem 0;border-top:1px solid var(--border-red);border-bottom:1px solid var(--border-red);background:var(--black2);font-size:1.2rem;letter-spacing:1rem;color:rgba(200,164,90,0.4)}
+
+/* WHAT HAPPENS SECTION */
+.section{padding:6rem 3rem;border-top:1px solid var(--border-red)}
+.section:nth-child(even){background:var(--black2)}
+.eyebrow{font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--red-lt);margin-bottom:1rem}
+.h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;color:var(--cream);line-height:1.15;margin-bottom:0}
+.h2 em{font-style:italic;color:var(--gold)}
+
+/* EXPERIENCE STEPS */
+.steps-intro{font-size:0.92rem;color:var(--mid);line-height:1.9;max-width:600px;margin-bottom:3.5rem}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-red);border:1px solid var(--border-red)}
+.step{background:var(--black);padding:0;transition:background 0.25s;overflow:hidden}
+.step:hover{background:rgba(192,40,30,0.05)}
+.step-img{width:100%;aspect-ratio:4/3;overflow:hidden;background:#1a1010}
+.step-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s}
+.step:hover .step-img img{transform:scale(1.04)}
+.step-title{font-size:0.85rem;letter-spacing:0.04em;color:var(--cream);padding:1rem 1.2rem 0.3rem}
+.step-desc{font-size:0.75rem;color:var(--mid);line-height:1.65;padding:0 1.2rem 1.2rem}
+
+/* PRICING SECTION */
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border-red);border:1px solid var(--border-red);margin-top:3rem}
+.pricing-card{background:var(--black2);padding:2.5rem 2rem}
+.pricing-card.highlight{background:rgba(192,40,30,0.08)}
+.pricing-label{font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.pricing-main{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--cream);line-height:1;margin-bottom:0.4rem}
+.pricing-main sub{font-size:0.9rem;font-family:'Jost',sans-serif;font-weight:300;color:var(--mid)}
+.pricing-detail{font-size:0.82rem;color:var(--mid);line-height:1.8;margin-top:0.8rem}
+.pricing-detail strong{color:var(--cream);font-weight:400}
+
+/* IMPORTANT NOTES */
+.notes-list{margin-top:3rem;display:flex;flex-direction:column;gap:0.8rem}
+.note-item{display:flex;gap:1rem;align-items:flex-start;font-size:0.85rem;color:var(--mid);line-height:1.7;padding:1rem 1.2rem;border:0.5px solid var(--border-red)}
+.note-icon{flex-shrink:0;font-size:1rem}
+.note-item strong{color:var(--cream);font-weight:400}
+
+/* GALLERY CAROUSEL */
+.gallery-s{padding:5rem 3rem;border-top:1px solid var(--border-red);background:var(--black2)}
+.gallery-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem}
+.cycle-gallery-viewport{overflow:hidden;border:1px solid var(--border-red)}
+.cycle-gallery-track{display:flex;transition:transform 0.5s ease}
+.cycle-gallery-item{flex:0 0 25%;aspect-ratio:4/3;border-right:1px solid var(--border-red);overflow:hidden;cursor:pointer}
+.cycle-gallery-item:last-child{border-right:none}
+.cycle-gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s}
+.cycle-gallery-item:hover img{transform:scale(1.05)}
+.cycle-gallery-controls{display:flex;gap:0.6rem}
+.cycle-arrow{width:36px;height:36px;border:1px solid var(--border-red);background:none;color:var(--mid);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-size:0.9rem}
+.cycle-arrow:hover{border-color:var(--xmas-red);color:var(--gold)}
+
+/* LIGHTBOX */
+.lightbox-overlay{position:fixed;inset:0;background:rgba(8,7,7,0.95);z-index:600;display:none;align-items:center;justify-content:center;padding:2rem}
+.lightbox-overlay.open{display:flex}
+.lightbox-content{position:relative;max-width:1000px;width:100%;display:flex;flex-direction:column;align-items:center}
+.lightbox-img-wrap{width:100%;display:flex;align-items:center;justify-content:center}
+.lightbox-img-wrap img{max-width:100%;max-height:78vh;object-fit:contain;border:1px solid var(--border-red)}
+.lightbox-close{position:absolute;top:-3rem;right:0;font-size:1.4rem;color:var(--mid);background:none;border:none;cursor:pointer;transition:color 0.2s}
+.lightbox-close:hover{color:var(--cream)}
+.lightbox-nav{display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:1.2rem}
+.lightbox-arrow{width:44px;height:44px;border:1px solid var(--border-red);background:none;color:var(--mid);cursor:pointer;font-size:1.1rem;transition:all 0.2s;display:flex;align-items:center;justify-content:center}
+.lightbox-arrow:hover{border-color:var(--xmas-red);color:var(--gold)}
+.lightbox-counter{font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--mid)}
+
+/* BOOK CTA */
+.book-s{padding:6rem 3rem;border-top:1px solid var(--border-red);text-align:center;position:relative;overflow:hidden}
+.book-bg-script{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Dancing Script',cursive;font-weight:600;font-size:12vw;color:rgba(192,40,30,0.05);pointer-events:none;white-space:nowrap;line-height:1}
+.book-sub{font-size:0.88rem;color:var(--mid);margin-bottom:2.5rem;margin-top:1rem}
+.book-actions{display:flex;gap:1.2rem;justify-content:center;align-items:center;flex-wrap:wrap;position:relative;z-index:2}
+.book-or{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid)}
+.book-wa{font-size:0.8rem;color:var(--gold);text-decoration:none;letter-spacing:0.06em}
+.book-wa:hover{color:var(--gold-lt)}
+
+/* FOOTER */
+footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem}
+.footer-logo-img{height:36px;width:auto;display:block}
+.footer-links{display:flex;gap:2rem;justify-content:center;list-style:none}
+.footer-links a{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none}
+.footer-links a:hover{color:var(--gold)}
+.footer-right{text-align:right}
+.footer-copy{font-size:0.62rem;letter-spacing:0.06em;color:rgba(122,111,111,0.5)}
+.footer-social{display:flex;gap:1.2rem;justify-content:flex-end;margin-top:0.5rem}
+.footer-social a{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(122,111,111,0.5);text-decoration:none}
+.footer-social a:hover{color:var(--red-lt)}
+
+/* BREADCRUMB */
+.breadcrumb{padding:6rem 3rem 1.5rem;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid)}
+.breadcrumb a{color:var(--mid);text-decoration:none}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:var(--gold)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav.main-nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .nav-phone{display:none}
+  .burger{display:flex}
+  .hero{min-height:auto;padding-top:64px}
+  .hero-bg,.hero-bg-img,.hero-overlay{display:none}
+  .hero-mobile-img{display:block}
+  .hero-content{padding:2rem 1.5rem 3rem}
+  .section,.gallery-s,.book-s{padding-left:1.5rem;padding-right:1.5rem}
+  .steps-grid{grid-template-columns:1fr 1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .cycle-gallery-item{flex:0 0 100%}
+  footer{grid-template-columns:1fr;text-align:center}
+  .footer-right{text-align:center}
+  .footer-social{justify-content:center}
+  .breadcrumb,.hero-content{padding-left:1.5rem;padding-right:1.5rem}
+  .lightbox-close{top:-2.5rem}
+  .lightbox-img-wrap img{max-height:65vh}
+}
+@media(max-width:560px){
+  .steps-grid{grid-template-columns:1fr}
+  .santa-gallery-desktop{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="santaLightbox">
+  <div class="lightbox-content">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div class="lightbox-img-wrap">
+      <img id="santaLightboxImg" src="" alt="">
+    </div>
+    <div class="lightbox-nav">
+      <button class="lightbox-arrow" onclick="navLightbox(-1)">‹</button>
+      <span class="lightbox-counter" id="santaLightboxCounter"></span>
+      <button class="lightbox-arrow" onclick="navLightbox(1)">›</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="main-nav">
+  <a href="/" class="nav-logo-link">
+    <img src="/assets/images/logo.png" alt="Kennedy Executive Travel" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="/fleet/">Fleet</a></li>
+    <li><a href="/services/">Services</a></li>
+    <li><a href="/reviews/">Reviews</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:07961834904" class="nav-phone">07961 834 904</a>
+    <a href="https://wa.me/447961834904" class="nav-book">Book now</a>
+    <button class="burger" id="burgerBtn" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/fleet/">Fleet</a>
+  <a href="/services/">Services</a>
+  <a href="/reviews/">Reviews</a>
+  <a href="/contact/">Contact</a>
+</div>
+
+<!-- BREADCRUMB -->
+<p class="breadcrumb"><a href="/">Home</a> / <a href="/services/">Services</a> / <span>VIP Meet & Greet with Santa</span></p>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-bg-img"></div>
+  <div class="hero-overlay"></div>
+  <img class="hero-mobile-img" src="/assets/images/santa-hero.jpg" alt="VIP Meet and Greet with Santa">
+  <div class="hero-content">
+    <div class="hero-xmas">🎅🏼 🧝 🎁 ❄️</div>
+    <h1 class="hero-title">VIP Meet &amp; Greet<br>with <em>Santa</em> &amp; his<br><span class="red">Elves.</span></h1>
+    <p class="hero-sub">The doorbell rings. The Elves are at your door. Your children walk out to a Rudolph-themed vehicle — and the magic begins. Santa, his Elves and the Grinch, straight to your home across Central Scotland.</p>
+    <div class="hero-price-strip">
+      <span class="hero-price-num">£49</span>
+      <span class="hero-price-label">first child · £9 each additional · max 5 children</span>
+    </div>
+    <div class="hero-actions">
+      <a href="https://wa.me/447961834904" class="btn-xmas">Book via WhatsApp</a>
+      <a href="tel:07961834904" class="btn-outline-gold">Call 07961 834 904</a>
+    </div>
+  </div>
+</section>
+
+<!-- SNOWFLAKE DIVIDER -->
+<div class="divider">⛄ ❄️ 🌲 ⛄ ❄️ 🌲 ⛄ ❄️ 🌲</div>
+
+<!-- WHAT HAPPENS -->
+<section class="section">
+  <p class="eyebrow">The experience</p>
+  <h2 class="h2" style="margin-bottom:1.5rem">Here's what <em>happens.</em></h2>
+  <p class="steps-intro">Every booking is a full VIP experience at your front door. The Elves arrive first, lead the children to the Rudolph-themed vehicle, and the automatic door opens into Santa's Grotto where the real magic begins.</p>
+  <div class="steps-grid">
+    <div class="step"><div class="step-img"><img src="/assets/images/gallery-santa-1.jpg" alt="The Elves Arrive"></div><p class="step-title">The Elves Arrive</p><p class="step-desc">Your doorbell rings. The Elves are there to collect the children and walk them to the magical vehicle.</p></div>
+    <div class="step"><div class="step-img"><img src="/assets/images/gallery-santa-2.jpg" alt="The Grotto Opens"></div><p class="step-title">The Grotto Opens</p><p class="step-desc">The Rudolph-themed vehicle awaits. The automatic door opens to reveal Santa's Grotto inside.</p></div>
+    <div class="step"><div class="step-img"><img src="/assets/images/gallery-santa-3.jpg" alt="Meet Santa"></div><p class="step-title">Meet Santa</p><p class="step-desc">The children meet Father Christmas himself — a real, full VIP meet and greet experience.</p></div>
+    <div class="step"><div class="step-img"><img src="/assets/images/gallery-santa-4.jpg" alt="Post Your Letter"></div><p class="step-title">Post Your Letter</p><p class="step-desc">Children post their letter direct into Santa's post box on the vehicle.</p></div>
+    <div class="step"><div class="step-img"><img src="/assets/images/gallery-santa-5.jpg" alt="Story Time"></div><p class="step-title">Story Time</p><p class="step-desc">Santa reads a Christmas story with the children inside the grotto.</p></div>
+    <div class="step"><div class="step-img"><img src="/assets/images/gallery-santa-6.jpg" alt="Sing Along"></div><p class="step-title">Sing Along</p><p class="step-desc">Christmas songs with Santa and the Elves — a proper festive sing-along.</p></div>
+    <div class="step"><div class="step-img"><img src="/assets/images/gallery-santa-7.jpg" alt="The Wish List"></div><p class="step-title">The Wish List</p><p class="step-desc">Children tell Santa their Christmas wish list directly — no middleman required.</p></div>
+    <div class="step"><div class="step-img"><img src="/assets/images/gallery-santa-8.jpg" alt="Photo Opportunities"></div><p class="step-title">Photo Opportunities</p><p class="step-desc">Plenty of time for photos with Santa and the Elves — memories to keep forever.</p></div>
+    <div class="step"><div class="step-img"><img src="/assets/images/gallery-santa-9.jpg" alt="Naughty or Nice"></div><p class="step-title">Naughty or Nice?</p><p class="step-desc">Every child receives their personalised Naughty or Nice Certificate from Santa.</p></div>
+    <div class="step"><div class="step-img"><img src="/assets/images/gallery-santa-10.jpg" alt="The Gifts"></div><p class="step-title">The Gifts</p><p class="step-desc">Reindeer Dust, Hot Chocolate, Candy Cane and Santa's Gold Chocolate Coin for every child.</p></div>
+    <div class="step"><div class="step-img"><img src="/assets/images/gallery-santa-11.jpg" alt="The Grinch"></div><p class="step-title">The Grinch!</p><p class="step-desc">The Grinch chases the children back inside — trying to steal their treats! <em>(Optional — sorry, kids may cry! 😂)</em></p></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-s">
+  <div class="gallery-header">
+    <div>
+      <p class="eyebrow">Gallery</p>
+      <h2 class="h2" style="margin-bottom:0">See the <em>magic.</em></h2>
+    </div>
+    <div class="cycle-gallery-controls">
+      <button class="cycle-arrow" onclick="cycleGallery(-1)" aria-label="Previous">‹</button>
+      <button class="cycle-arrow" onclick="cycleGallery(1)" aria-label="Next">›</button>
+    </div>
+  </div>
+  <div class="cycle-gallery-viewport">
+    <div class="cycle-gallery-track" id="santaGalleryTrack">
+      <div class="cycle-gallery-item" onclick="openLightbox(0)"><img src="/assets/images/gallery-santa-12.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(1)"><img src="/assets/images/gallery-santa-13.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(2)"><img src="/assets/images/gallery-santa-14.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(3)"><img src="/assets/images/gallery-santa-15.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(4)"><img src="/assets/images/gallery-santa-16.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(5)"><img src="/assets/images/gallery-santa-17.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(6)"><img src="/assets/images/gallery-santa-18.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(7)"><img src="/assets/images/gallery-santa-19.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(8)"><img src="/assets/images/gallery-santa-20.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(9)"><img src="/assets/images/gallery-santa-21.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(10)"><img src="/assets/images/gallery-santa-22.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(11)"><img src="/assets/images/gallery-santa-23.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(12)"><img src="/assets/images/gallery-santa-24.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(13)"><img src="/assets/images/gallery-santa-25.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(14)"><img src="/assets/images/gallery-santa-26.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(15)"><img src="/assets/images/gallery-santa-27.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(16)"><img src="/assets/images/gallery-santa-28.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(17)"><img src="/assets/images/gallery-santa-29.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(18)"><img src="/assets/images/gallery-santa-30.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(19)"><img src="/assets/images/gallery-santa-31.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(20)"><img src="/assets/images/gallery-santa-32.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(21)"><img src="/assets/images/gallery-santa-33.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(22)"><img src="/assets/images/gallery-santa-34.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(23)"><img src="/assets/images/gallery-santa-35.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(24)"><img src="/assets/images/gallery-santa-36.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(25)"><img src="/assets/images/gallery-santa-37.jpg" alt="Santa Visit"></div>
+      <div class="cycle-gallery-item" onclick="openLightbox(26)"><img src="/assets/images/gallery-santa-38.jpg" alt="Santa Visit"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+  <p class="eyebrow">Pricing</p>
+  <h2 class="h2" style="margin-bottom:0.5rem">Simple, <em>transparent pricing.</em></h2>
+  <p style="font-size:0.88rem;color:var(--mid);margin-bottom:0;line-height:1.9">Dates and times organised at time of booking. Maximum 5 children per booking.</p>
+  <div class="pricing-grid">
+    <div class="pricing-card highlight">
+      <p class="pricing-label">First Child</p>
+      <p class="pricing-main">£49</p>
+      <p class="pricing-detail">The full experience — Elves, Santa, the Grotto, all gifts, the Grinch chase (optional). Includes the first child in the booking.</p>
+    </div>
+    <div class="pricing-card">
+      <p class="pricing-label">Each Additional Child</p>
+      <p class="pricing-main">£9 <sub>per child</sub></p>
+      <p class="pricing-detail">Added on top of the £49 first child price. <strong>Maximum 5 children per booking.</strong> Book early — dates fill quickly in December.</p>
+    </div>
+  </div>
+
+  <div class="notes-list">
+    <div class="note-item"><span class="note-icon">⚠️</span><span>All workers are fully <strong>PVG &amp; Disclosure checked.</strong> Parents are present for 100% of the experience — always.</span></div>
+    <div class="note-item"><span class="note-icon">🏠</span><span>We come <strong>straight to your door</strong> across Central Scotland. Dates and times are flexible — organised at the time of booking.</span></div>
+    <div class="note-item"><span class="note-icon">👹</span><span>The <strong>Grinch chase is optional</strong> — just let us know at booking if you'd like to include it or skip it.</span></div>
+    <div class="note-item"><span class="note-icon">🎅🏼</span><span>This is a <strong>fully immersive VIP experience</strong> — not a quick photo. Expect 20–30 minutes of pure Christmas magic per visit.</span></div>
+  </div>
+</section>
+
+<!-- BOOK CTA -->
+<section class="book-s">
+  <div class="book-bg-script">Ho Ho Ho</div>
+  <p class="eyebrow">Book your visit</p>
+  <h2 class="h2" style="max-width:none;font-size:clamp(2rem,4.5vw,3.5rem)">Give them a Christmas<br><em>they'll never forget.</em></h2>
+  <p class="book-sub">Message us on WhatsApp or give us a call to check available dates — they go fast in the festive season.</p>
+  <div class="book-actions">
+    <a href="https://wa.me/447961834904" class="btn-xmas">WhatsApp to book</a>
+    <span class="book-or">or</span>
+    <a href="tel:07961834904" class="btn-outline-gold">Call 07961 834 904</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="/assets/images/logo.png" alt="Kennedy Executive Travel" class="footer-logo-img">
+  <ul class="footer-links">
+    <li><a href="/fleet/">Fleet</a></li>
+    <li><a href="/services/">Services</a></li>
+    <li><a href="/reviews/">Reviews</a></li>
+    <li><a href="/contact/">Contact</a></li>
+    <li><a href="/privacy/">Privacy</a></li>
+  </ul>
+  <div class="footer-right">
+    <p class="footer-copy">© 2026 Kennedy Executive Travel · Central Scotland</p>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/kennedykabs">Facebook</a>
+      <a href="https://www.instagram.com/kennedy_executive_travel">Instagram</a>
+      <a href="https://www.tiktok.com/@kennedy.executive">TikTok</a>
+      <a href="https://x.com/kennedy_travel">X</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('burgerBtn').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+/* CAROUSEL */
+var GALLERY_IMAGES = [];
+for (var i = 12; i <= 38; i++) {
+  GALLERY_IMAGES.push('assets/images/gallery-santa-' + i + '.jpg');
+}
+var TOTAL = GALLERY_IMAGES.length; // 33
+var carouselIndex = 0;
+var carouselTimer = null;
+
+function getPerView() {
+  return window.innerWidth <= 900 ? 1 : 4;
+}
+
+function setCarouselPos() {
+  var track = document.getElementById('santaGalleryTrack');
+  if (!track) return;
+  var perView = getPerView();
+  var maxIndex = Math.max(0, TOTAL - perView);
+  if (carouselIndex > maxIndex) carouselIndex = maxIndex;
+  track.style.transform = 'translateX(-' + (carouselIndex * (100 / perView)) + '%)';
+}
+
+function cycleGallery(dir) {
+  var perView = getPerView();
+  var maxIndex = Math.max(0, TOTAL - perView);
+  carouselIndex += dir;
+  if (carouselIndex < 0) carouselIndex = maxIndex;
+  if (carouselIndex > maxIndex) carouselIndex = 0;
+  setCarouselPos();
+  resetAutoplay();
+}
+
+function startAutoplay() {
+  carouselTimer = setInterval(function() {
+    var perView = getPerView();
+    var maxIndex = Math.max(0, TOTAL - perView);
+    var next;
+    do { next = Math.floor(Math.random() * (maxIndex + 1)); }
+    while (next === carouselIndex && maxIndex > 0);
+    carouselIndex = next;
+    setCarouselPos();
+  }, 3000);
+}
+
+function resetAutoplay() {
+  clearInterval(carouselTimer);
+  startAutoplay();
+}
+
+window.addEventListener('load', function() {
+  startAutoplay();
+  var viewport = document.querySelector('.cycle-gallery-viewport');
+  if (viewport) {
+    viewport.addEventListener('mouseenter', function() { clearInterval(carouselTimer); });
+    viewport.addEventListener('mouseleave', startAutoplay);
+  }
+});
+window.addEventListener('resize', setCarouselPos);
+
+/* LIGHTBOX (for carousel images 12-44) */
+var lbIndex = 0;
+
+function openLightbox(idx) {
+  lbIndex = idx;
+  showLightboxImg();
+  document.getElementById('santaLightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function showLightboxImg() {
+  document.getElementById('santaLightboxImg').src = GALLERY_IMAGES[lbIndex];
+  document.getElementById('santaLightboxCounter').textContent = (lbIndex + 1) + ' / ' + TOTAL;
+}
+
+function navLightbox(dir) {
+  lbIndex = (lbIndex + dir + TOTAL) % TOTAL;
+  showLightboxImg();
+}
+
+function closeLightbox() {
+  document.getElementById('santaLightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('santaLightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('santaLightbox').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') navLightbox(-1);
+  if (e.key === 'ArrowRight') navLightbox(1);
+});
+</script>
+</body>
+</html>
