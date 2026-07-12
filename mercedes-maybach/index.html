@@ -351,7 +351,13 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
       <!-- Return flight (airport + return only) -->
       <div class="modal-field" id="fieldReturnFlight" style="display:none">
         <label>Return flight number</label>
-        <input type="text" name="return_flight" placeholder="e.g. EZY456">
+        <input type="text" name="return_flight" id="modalReturnFlight" placeholder="e.g. EZY456">
+      </div>
+
+      <!-- Return airport, if different (airport + return only) -->
+      <div class="modal-field" id="fieldReturnAirport" style="display:none">
+        <label>Return airport <span style="font-weight:400;color:var(--mid)">(if different)</span></label>
+        <input type="text" name="return_airport" placeholder="Leave blank if same as outgoing airport">
       </div>
 
       <!-- Notes -->
@@ -717,9 +723,17 @@ function formLogic() {
   var retDateTime = document.getElementById('fieldReturnDateTime');
   var retAddress = document.getElementById('fieldReturnAddress');
   var retFlight = document.getElementById('fieldReturnFlight');
+  var retFlightInput = document.getElementById('modalReturnFlight');
+  var retAirport = document.getElementById('fieldReturnAirport');
   if (retDateTime) retDateTime.style.display = hasReturn ? 'grid' : 'none';
   if (retAddress) retAddress.style.display = isAltReturn ? 'block' : 'none';
-  if (retFlight) retFlight.style.display = (isAirport && hasReturn) ? 'block' : 'none';
+  var showRetFlight = isAirport && hasReturn;
+  if (retFlight) retFlight.style.display = showRetFlight ? 'block' : 'none';
+  if (retAirport) retAirport.style.display = showRetFlight ? 'block' : 'none';
+  if (retFlightInput) {
+    if (showRetFlight) { retFlightInput.setAttribute('required', 'required'); }
+    else { retFlightInput.removeAttribute('required'); }
+  }
 }
 
 function toggleWaField() {
@@ -765,6 +779,7 @@ function captureReserveToDispatch(form) {
       return_time: hasReturn ? (g('return_time') || null) : null,
       return_dropoff: returnVal === 'yes_alt' ? g('return_pickup') : '',
       return_flight: g('return_flight'),
+      return_airport: g('return_airport'),
       car_seat: fd.get('car_seat') === 'yes',
       trailer: fd.get('trailer') === 'yes',
       status: 'new',
@@ -793,8 +808,16 @@ function captureReserveToDispatch(form) {
   var modal = document.getElementById('reserveModal');
   var form = modal ? modal.querySelector('form') : null;
   if (form) {
-    form.addEventListener('submit', function () {
-      // Intentionally NOT calling preventDefault — the browser still
+    var submitted = false;
+    form.addEventListener('submit', function (e) {
+      // Guard against duplicate submissions from a fast double-tap/double-click
+      // or Enter-key repeat — without this, each extra submit event fired
+      // another Supabase insert, creating duplicate Pipeline entries.
+      if (submitted) { e.preventDefault(); return; }
+      submitted = true;
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+      // Intentionally NOT calling preventDefault otherwise — the browser still
       // submits normally to FormSubmit. This just also fires the
       // Supabase insert in parallel before the page navigates away.
       captureReserveToDispatch(form);
