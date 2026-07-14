@@ -95,11 +95,14 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-
 .btn-red{font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;background:var(--red);color:var(--cream);padding:1rem 2.5rem;text-decoration:none;display:inline-block;transition:background 0.2s;cursor:pointer;border:none;width:100%}
 .btn-red:hover{background:var(--red-lt)}
 .form-note{font-size:0.7rem;color:var(--mid);text-align:center;margin-top:1.2rem;line-height:1.6}
+.form-error{display:none;background:rgba(158,28,28,.12);border:1px solid var(--border-red);border-radius:8px;padding:0.9rem 1rem;margin-top:1rem;color:var(--cream);font-size:0.82rem;line-height:1.6}
+.form-error a{color:var(--red);font-weight:600;text-decoration:none}
+.form-thankyou{display:none;text-align:center;padding:2.5rem 1rem}
+.form-thankyou-icon{width:52px;height:52px;border-radius:50%;background:var(--red);color:#fff;font-size:26px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem}
+.form-thankyou h3{color:var(--cream);font-size:1.3rem;font-weight:400;margin-bottom:0.6rem}
+.form-thankyou p{color:var(--mid);font-size:0.88rem;line-height:1.6}
 
 /* MAP PLACEHOLDER */
-.map-section{padding:0 3rem 5rem}
-.map-box{aspect-ratio:21/6;background:#1e1313;border:1px solid var(--border-red);overflow:hidden}
-.map-box img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* FOOTER */
 footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem}
@@ -120,7 +123,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
   .coverage-areas{grid-template-columns:1fr}
   nav.main-nav{padding:0 1.5rem}
   .nav-links{display:none}
-  .breadcrumb,.page-header,.contact-grid,.map-section{padding-left:1.5rem;padding-right:1.5rem}
+  .breadcrumb,.page-header,.contact-grid{padding-left:1.5rem;padding-right:1.5rem}
   .form-box{padding:2rem}
   footer{grid-template-columns:1fr;text-align:center}
   .footer-right{text-align:center}
@@ -226,6 +229,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
   </div>
 
   <div class="form-box">
+    <div id="contactFormWrap">
     <h2 class="form-title">Send an enquiry</h2>
     <p class="form-sub">Start with the basics — we'll ask for more depending on your journey type.</p>
     <form action="https://formsubmit.co/kennedyexecutivetravel@gmail.com" method="POST">
@@ -402,14 +406,16 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
       </div><!-- end cCoreFields -->
 
       <button type="submit" class="btn-red">Send enquiry</button>
+      <div class="form-error" id="contactError">Sorry, something went wrong sending your request. Please try again, or contact us directly:<br>📞 <a href="tel:+447961834904">07961 834 904</a> &nbsp;·&nbsp; 💬 <a href="https://wa.me/447961834904">WhatsApp</a></div>
       <p class="form-note">We'll get back to you personally — usually within a few hours.</p>
     </form>
+    </div>
+    <div class="form-thankyou" id="contactThankYou">
+      <div class="form-thankyou-icon">✓</div>
+      <h3>Request received</h3>
+      <p>Thanks — we've got your details and will get back to you personally, usually within a few hours.</p>
+    </div>
   </div>
-</div>
-
-<!-- MAP -->
-<div class="map-section">
-  <div class="map-box"><img src="/assets/images/map-coverage-area.jpg" alt="Map of areas covered by Kennedy Executive Travel"></div>
 </div>
 
 <!-- FOOTER -->
@@ -453,81 +459,115 @@ var SUPA_URL = 'https://mpdrshyxefrptitbqnbi.supabase.co';
 var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wZHJzaHl4ZWZycHRpdGJxbmJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5NzcyNzIsImV4cCI6MjA5ODU1MzI3Mn0.5bkceScowY-26qnG0FkMXaqTZstLQe3GvbO8eooesFs';
 
 function captureLeadToDispatch(form) {
+  return new Promise(function (resolve) {
+    try {
+      var fd = new FormData(form);
+      var g = function (key) { return (fd.get(key) || '').toString().trim(); };
+
+      var returnVal = g('return_journey'); // '', 'yes_same', 'yes_alt'
+      var hasReturn = returnVal === 'yes_same' || returnVal === 'yes_alt';
+
+      var extraNotes = [];
+      if (g('message')) extraNotes.push(g('message'));
+
+      var payload = {
+        name: g('name'),
+        phone: g('phone'),
+        wa_phone: g('whatsapp'),
+        email: g('email'),
+        channel: 'Website form',
+        occasion: g('journey_type'),
+        vehicle: g('vehicle'),
+        pax: g('passengers'),
+        pickup: g('pickup'),
+        dropoff: g('dropoff'),
+        job_date: g('date') || null,
+        job_time: g('time') || null,
+        flight: g('outbound_flight'),
+        return_journey: hasReturn ? 'yes' : '',
+        return_date: hasReturn ? (g('return_date') || null) : null,
+        return_time: hasReturn ? (g('return_time') || null) : null,
+        return_dropoff: returnVal === 'yes_alt' ? g('return_pickup') : '',
+        return_flight: g('return_flight'),
+        return_airport: g('return_airport'),
+        car_seat: fd.get('car_seat') === 'yes',
+        trailer: fd.get('trailer') === 'yes',
+        wedding_venue: g('wedding_venue'),
+        wedding_vehicles: g('wedding_vehicles'),
+        num_children: g('num_children'),
+        children_ages: g('children_ages'),
+        grinch: g('grinch'),
+        licence: g('licence'),
+        status: 'new',
+        notes: extraNotes.join('\n')
+      };
+
+      fetch(SUPA_URL + '/rest/v1/jobs', {
+        method: 'POST',
+        headers: {
+          'apikey': SUPA_KEY,
+          'Authorization': 'Bearer ' + SUPA_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload)
+      }).then(function (r) {
+        resolve(r.ok);
+      }).catch(function (err) {
+        console.error('Dispatch capture failed:', err);
+        resolve(false);
+      });
+    } catch (err) {
+      console.error('Dispatch capture error:', err);
+      resolve(false);
+    }
+  });
+}
+
+function sendLeadBackupEmail(form) {
   try {
     var fd = new FormData(form);
-    var g = function (key) { return (fd.get(key) || '').toString().trim(); };
-
-    var returnVal = g('return_journey'); // '', 'yes_same', 'yes_alt'
-    var hasReturn = returnVal === 'yes_same' || returnVal === 'yes_alt';
-
-    var extraNotes = [];
-    if (g('message')) extraNotes.push(g('message'));
-
-    var payload = {
-      name: g('name'),
-      phone: g('phone'),
-      email: g('email'),
-      channel: 'Website form',
-      occasion: g('journey_type'),
-      vehicle: g('vehicle'),
-      pax: g('passengers'),
-      pickup: g('pickup'),
-      dropoff: g('dropoff'),
-      job_date: g('date') || null,
-      job_time: g('time') || null,
-      flight: g('outbound_flight'),
-      return_journey: hasReturn ? 'yes' : '',
-      return_date: hasReturn ? (g('return_date') || null) : null,
-      return_time: hasReturn ? (g('return_time') || null) : null,
-      return_dropoff: returnVal === 'yes_alt' ? g('return_pickup') : '',
-      return_flight: g('return_flight'),
-      return_airport: g('return_airport'),
-      car_seat: fd.get('car_seat') === 'yes',
-      trailer: fd.get('trailer') === 'yes',
-      wedding_venue: g('wedding_venue'),
-      wedding_vehicles: g('wedding_vehicles'),
-      num_children: g('num_children'),
-      children_ages: g('children_ages'),
-      grinch: g('grinch'),
-      licence: g('licence'),
-      status: 'new',
-      notes: extraNotes.join('\n')
-    };
-
-    fetch(SUPA_URL + '/rest/v1/jobs', {
+    fetch('https://formsubmit.co/ajax/kennedyexecutivetravel@gmail.com', {
       method: 'POST',
-      keepalive: true,
-      headers: {
-        'apikey': SUPA_KEY,
-        'Authorization': 'Bearer ' + SUPA_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify(payload)
+      headers: { 'Accept': 'application/json' },
+      body: fd
     }).catch(function (err) {
-      console.error('Dispatch capture failed (email still sent):', err);
+      console.error('Backup email failed (booking still captured):', err);
     });
   } catch (err) {
-    console.error('Dispatch capture error:', err);
+    console.error('Backup email error:', err);
   }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
   var form = document.querySelector('.form-box form');
   if (form) {
-    var submitted = false;
+    form._submitted = false;
     form.addEventListener('submit', function (e) {
-      // Guard against duplicate submissions from a fast double-tap/double-click
-      // or Enter-key repeat — without this, each extra submit event fired
-      // another Supabase insert, creating duplicate Pipeline entries.
-      if (submitted) { e.preventDefault(); return; }
-      submitted = true;
+      e.preventDefault();
+      if (form._submitted) return;
+      if (!form.reportValidity()) return;
+      form._submitted = true;
       var btn = form.querySelector('button[type="submit"]');
+      var errEl = document.getElementById('contactError');
+      if (errEl) errEl.style.display = 'none';
       if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
-      // Intentionally NOT calling preventDefault otherwise — the browser still
-      // submits normally to FormSubmit. This just also fires the
-      // Supabase insert in parallel before the page navigates away.
-      captureLeadToDispatch(form);
+
+      sendLeadBackupEmail(form);
+
+      captureLeadToDispatch(form).then(function (ok) {
+        if (ok) {
+          var wrap = document.getElementById('contactFormWrap');
+          var ty = document.getElementById('contactThankYou');
+          if (wrap) wrap.style.display = 'none';
+          if (ty) ty.style.display = 'block';
+          form.reset();
+        } else {
+          form._submitted = false;
+          if (btn) { btn.disabled = false; btn.textContent = 'Send enquiry'; }
+          if (errEl) errEl.style.display = 'block';
+        }
+      });
     });
   }
 });

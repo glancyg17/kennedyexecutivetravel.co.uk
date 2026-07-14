@@ -202,6 +202,12 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 .check-item input[type="checkbox"]:checked::after{content:'✓';display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.7rem;width:100%;height:100%}
 .check-label strong{color:var(--cream);font-weight:400;display:block;font-size:0.85rem}
 .check-label span{font-size:0.75rem}
+.modal-error{display:none;background:rgba(158,28,28,.12);border:1px solid var(--border-red);border-radius:8px;padding:0.9rem 1rem;margin-bottom:1rem;color:var(--cream);font-size:0.82rem;line-height:1.6}
+.modal-error a{color:var(--red);font-weight:600;text-decoration:none}
+.modal-thankyou{display:none;text-align:center;padding:2.5rem 1rem 1.5rem}
+.modal-thankyou-icon{width:52px;height:52px;border-radius:50%;background:var(--red);color:#fff;font-size:26px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem}
+.modal-thankyou h3{color:var(--cream);font-size:1.3rem;font-weight:400;margin-bottom:0.6rem}
+.modal-thankyou p{color:var(--mid);font-size:0.88rem;line-height:1.6;margin-bottom:1.4rem}
 </style>
 </head>
 <body>
@@ -210,6 +216,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 <div class="modal-overlay" id="reserveModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalFormWrap">
     <p class="modal-eyebrow">Reserve your journey</p>
     <h2 class="modal-title">Make a reservation</h2>
         <form action="https://formsubmit.co/kennedyexecutivetravel@gmail.com" method="POST">
@@ -337,8 +344,16 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
       <div class="modal-field"><label>Additional notes</label><textarea name="notes" placeholder="Number of passengers, luggage, special requests..."></textarea></div>
 
       <button type="submit" class="modal-submit">Send reservation request</button>
+      <div class="modal-error" id="modalError">Sorry, something went wrong sending your request. Please try again, or contact us directly:<br>📞 <a href="tel:+447961834904">07961 834 904</a> &nbsp;·&nbsp; 💬 <a href="https://wa.me/447961834904">WhatsApp</a></div>
       <p class="modal-note">We'll confirm availability and pricing within a few hours.</p>
     </form>
+    </div>
+    <div class="modal-thankyou" id="modalThankYou">
+      <div class="modal-thankyou-icon">✓</div>
+      <h3>Request received</h3>
+      <p>Thanks — we've got your details and will confirm availability and pricing within a few hours.</p>
+      <button type="button" class="modal-submit" onclick="closeModal()">Close</button>
+    </div>
   </div>
 </div>
 
@@ -606,6 +621,19 @@ function openModal(vehicle) {
   if (journeyType) journeyType.value = '';
   if (returnJourney) returnJourney.value = '';
   formLogic();
+  // Reset in case this modal was already submitted earlier in the session
+  var wrap = document.getElementById('modalFormWrap');
+  var ty = document.getElementById('modalThankYou');
+  var err = document.getElementById('modalError');
+  var form = wrap ? wrap.querySelector('form') : null;
+  if (wrap) wrap.style.display = 'block';
+  if (ty) ty.style.display = 'none';
+  if (err) err.style.display = 'none';
+  if (form) {
+    form._submitted = false;
+    var btn = form.querySelector('button[type="submit"]');
+    if (btn) { btn.disabled = false; btn.textContent = 'Send reservation request'; }
+  }
   document.getElementById('reserveModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -652,52 +680,72 @@ var SUPA_URL = 'https://mpdrshyxefrptitbqnbi.supabase.co';
 var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wZHJzaHl4ZWZycHRpdGJxbmJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5NzcyNzIsImV4cCI6MjA5ODU1MzI3Mn0.5bkceScowY-26qnG0FkMXaqTZstLQe3GvbO8eooesFs';
 
 function captureReserveToDispatch(form) {
+  return new Promise(function (resolve) {
+    try {
+      var fd = new FormData(form);
+      var g = function (key) { return (fd.get(key) || '').toString().trim(); };
+
+      var returnVal = g('return_journey'); // '', 'yes_same', 'yes_alt'
+      var hasReturn = returnVal === 'yes_same' || returnVal === 'yes_alt';
+
+      var payload = {
+        name: g('name'),
+        phone: g('phone'),
+        wa_phone: g('whatsapp'),
+        email: g('email'),
+        channel: 'Website reserve modal',
+        occasion: g('journey_type'),
+        vehicle: g('vehicle'),
+        pickup: g('pickup'),
+        dropoff: g('dropoff'),
+        job_date: g('date') || null,
+        job_time: g('time') || null,
+        return_journey: hasReturn ? 'yes' : '',
+        return_date: hasReturn ? (g('return_date') || null) : null,
+        return_time: hasReturn ? (g('return_time') || null) : null,
+        return_dropoff: returnVal === 'yes_alt' ? g('return_pickup') : '',
+        return_flight: g('return_flight'),
+        return_airport: g('return_airport'),
+        car_seat: fd.get('car_seat') === 'yes',
+        trailer: fd.get('trailer') === 'yes',
+        status: 'new',
+        notes: g('notes')
+      };
+
+      fetch(SUPA_URL + '/rest/v1/jobs', {
+        method: 'POST',
+        headers: {
+          'apikey': SUPA_KEY,
+          'Authorization': 'Bearer ' + SUPA_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload)
+      }).then(function (r) {
+        resolve(r.ok);
+      }).catch(function (err) {
+        console.error('Dispatch capture failed:', err);
+        resolve(false);
+      });
+    } catch (err) {
+      console.error('Dispatch capture error:', err);
+      resolve(false);
+    }
+  });
+}
+
+function sendReserveBackupEmail(form) {
   try {
     var fd = new FormData(form);
-    var g = function (key) { return (fd.get(key) || '').toString().trim(); };
-
-    var returnVal = g('return_journey'); // '', 'yes_same', 'yes_alt'
-    var hasReturn = returnVal === 'yes_same' || returnVal === 'yes_alt';
-
-    var payload = {
-      name: g('name'),
-      phone: g('phone'),
-      wa_phone: g('whatsapp'),
-      email: g('email'),
-      channel: 'Website reserve modal',
-      occasion: g('journey_type'),
-      vehicle: g('vehicle'),
-      pickup: g('pickup'),
-      dropoff: g('dropoff'),
-      job_date: g('date') || null,
-      job_time: g('time') || null,
-      return_journey: hasReturn ? 'yes' : '',
-      return_date: hasReturn ? (g('return_date') || null) : null,
-      return_time: hasReturn ? (g('return_time') || null) : null,
-      return_dropoff: returnVal === 'yes_alt' ? g('return_pickup') : '',
-      return_flight: g('return_flight'),
-      return_airport: g('return_airport'),
-      car_seat: fd.get('car_seat') === 'yes',
-      trailer: fd.get('trailer') === 'yes',
-      status: 'new',
-      notes: g('notes')
-    };
-
-    fetch(SUPA_URL + '/rest/v1/jobs', {
+    fetch('https://formsubmit.co/ajax/kennedyexecutivetravel@gmail.com', {
       method: 'POST',
-      keepalive: true,
-      headers: {
-        'apikey': SUPA_KEY,
-        'Authorization': 'Bearer ' + SUPA_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify(payload)
+      headers: { 'Accept': 'application/json' },
+      body: fd
     }).catch(function (err) {
-      console.error('Dispatch capture failed (email still sent):', err);
+      console.error('Backup email failed (booking still captured):', err);
     });
   } catch (err) {
-    console.error('Dispatch capture error:', err);
+    console.error('Backup email error:', err);
   }
 }
 
@@ -705,19 +753,32 @@ function captureReserveToDispatch(form) {
   var modal = document.getElementById('reserveModal');
   var form = modal ? modal.querySelector('form') : null;
   if (form) {
-    var submitted = false;
+    form._submitted = false;
     form.addEventListener('submit', function (e) {
-      // Guard against duplicate submissions from a fast double-tap/double-click
-      // or Enter-key repeat — without this, each extra submit event fired
-      // another Supabase insert, creating duplicate Pipeline entries.
-      if (submitted) { e.preventDefault(); return; }
-      submitted = true;
+      e.preventDefault();
+      if (form._submitted) return;
+      if (!form.reportValidity()) return;
+      form._submitted = true;
       var btn = form.querySelector('button[type="submit"]');
+      var errEl = document.getElementById('modalError');
+      if (errEl) errEl.style.display = 'none';
       if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
-      // Intentionally NOT calling preventDefault otherwise — the browser still
-      // submits normally to FormSubmit. This just also fires the
-      // Supabase insert in parallel before the page navigates away.
-      captureReserveToDispatch(form);
+
+      sendReserveBackupEmail(form);
+
+      captureReserveToDispatch(form).then(function (ok) {
+        if (ok) {
+          var wrap = document.getElementById('modalFormWrap');
+          var ty = document.getElementById('modalThankYou');
+          if (wrap) wrap.style.display = 'none';
+          if (ty) ty.style.display = 'block';
+          form.reset();
+        } else {
+          form._submitted = false;
+          if (btn) { btn.disabled = false; btn.textContent = 'Send reservation request'; }
+          if (errEl) errEl.style.display = 'block';
+        }
+      });
     });
   }
 })();
