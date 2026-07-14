@@ -720,10 +720,15 @@ function captureReserveToDispatch(form) {
 function sendReserveBackupEmail(form) {
   try {
     var fd = new FormData(form);
+    var obj = {};
+    fd.forEach(function (value, key) { obj[key] = value; });
     fetch('https://formsubmit.co/ajax/kennedyexecutivetravel@gmail.com', {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: fd
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(obj)
     }).catch(function (err) {
       console.error('Backup email failed (booking still captured):', err);
     });
