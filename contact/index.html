@@ -549,7 +549,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!form.reportValidity()) return;
       form._submitted = true;
       var btn = form.querySelector('button[type="submit"]');
-<<<<<<< HEAD
       var errEl = document.getElementById('contactError');
       if (errEl) errEl.style.display = 'none';
       if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
@@ -569,12 +568,6 @@ document.addEventListener('DOMContentLoaded', function () {
           if (errEl) errEl.style.display = 'block';
         }
       });
-=======
-setTimeout(function () { if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; } }, 0);      // Intentionally NOT calling preventDefault otherwise — the browser still
-      // submits normally to FormSubmit. This just also fires the
-      // Supabase insert in parallel before the page navigates away.
-      captureLeadToDispatch(form);
->>>>>>> 4e8ecdf212ea1b30ab60490e7e1d3a51e02c54f9
     });
   }
 });
