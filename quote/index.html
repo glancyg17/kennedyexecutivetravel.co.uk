@@ -39,7 +39,10 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 /* FORM WRAPPER — centered single column, no sidebar */
 .quote-wrap{flex:1;display:flex;justify-content:center;padding:2.5rem 1.5rem 1rem}
 .form-box{width:100%;max-width:520px;border:1px solid var(--border-red);padding:2.2rem}
-.field{margin-bottom:1.3rem}
+.field{margin-bottom:1.3rem;position:relative}
+.airport-suggest{position:absolute;left:0;right:0;top:100%;background:var(--black);border:1px solid var(--border-red);border-radius:8px;margin-top:4px;z-index:60;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.airport-suggest-item{padding:0.7rem 0.9rem;font-size:0.85rem;color:var(--cream);cursor:pointer}
+.airport-suggest-item:hover,.airport-suggest-item.active{background:var(--red)}
 .field label{display:block;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:0.6rem}
 .check-group{display:flex;flex-direction:column;gap:0.7rem;margin-bottom:1.3rem}
 .check-item{display:flex;align-items:flex-start;gap:0.8rem;cursor:pointer;font-size:0.85rem;color:var(--mid);line-height:1.5}
@@ -194,8 +197,8 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 
         <!-- Pick-up / Drop-off (hidden for Santa) -->
         <div id="qPickupFields">
-          <div class="field"><label>Pick-up location</label><input type="text" name="pickup" placeholder="Address or airport"></div>
-          <div class="field"><label>Drop-off location</label><input type="text" name="dropoff" placeholder="Destination"></div>
+          <div class="field"><label>Pick-up location</label><input type="text" name="pickup" placeholder="First line + postcode, e.g. 14 Bath Street, G2 4JZ" required data-addr="1"></div>
+          <div class="field"><label>Drop-off location</label><input type="text" name="dropoff" placeholder="First line + postcode, e.g. 1 Princes Street, EH2 2QP" required data-addr="1"></div>
         </div>
 
         <!-- AIRPORT: flight number -->
@@ -252,7 +255,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
           </div>
           <div class="field" id="qReturnAddress" style="display:none">
             <label>Return pick-up address</label>
-            <input type="text" name="return_pickup" placeholder="Address for return pick-up">
+            <input type="text" name="return_pickup" placeholder="First line + postcode, e.g. 14 Bath Street, G2 4JZ" required data-addr="1">
           </div>
           <div class="field" id="qReturnFlight" style="display:none">
             <label>Return flight number</label>
@@ -433,6 +436,72 @@ function sendQuoteBackupEmail(form) {
   }
 }
 
+var AIRPORT_SUGGESTIONS = [
+  { prefix: 'gl', label: 'Glasgow Airport', value: 'Glasgow Airport, PA3 2SW' },
+  { prefix: 'ed', label: 'Edinburgh Airport', value: 'Edinburgh Airport, EH12 9DN' },
+  { prefix: 'pr', label: 'Glasgow Prestwick Airport', value: 'Glasgow Prestwick Airport, KA9 2PL' },
+  { prefix: 'ma', label: 'Manchester Airport', value: 'Manchester Airport, M90 1QX' },
+  { prefix: 'ne', label: 'Newcastle Airport', value: 'Newcastle Airport, NE13 8BZ' }
+];
+
+function setupAirportAutocomplete(input) {
+  var box = document.createElement('div');
+  box.className = 'airport-suggest';
+  box.style.display = 'none';
+  var parent = input.parentNode;
+  parent.appendChild(box);
+
+  function hide() { box.style.display = 'none'; box.innerHTML = ''; }
+
+  input.addEventListener('input', function () {
+    var val = input.value.trim().toLowerCase();
+    if (val.length < 2) { hide(); return; }
+    var prefix = val.slice(0, 2);
+    var matches = AIRPORT_SUGGESTIONS.filter(function (a) { return a.prefix === prefix; });
+    if (!matches.length) { hide(); return; }
+    box.innerHTML = '';
+    matches.forEach(function (a) {
+      var item = document.createElement('div');
+      item.className = 'airport-suggest-item';
+      item.textContent = a.label;
+      // mousedown (not click) fires before the input's blur event, so the
+      // suggestion registers before the dropdown gets hidden by blur
+      item.addEventListener('mousedown', function (evt) {
+        evt.preventDefault();
+        input.value = a.value;
+        hide();
+        input.dispatchEvent(new Event('change'));
+      });
+      box.appendChild(item);
+    });
+    box.style.display = 'block';
+  });
+
+  input.addEventListener('blur', function () {
+    setTimeout(hide, 150);
+  });
+}
+
+function hasUkPostcode(addr) {
+  return /[A-Za-z]{1,2}\d[A-Za-z\d]?\s*\d[A-Za-z]{2}\s*$/.test((addr || '').trim());
+}
+function validateAddressFields(form) {
+  var fields = form.querySelectorAll('[data-addr="1"]');
+  fields.forEach(function (f) {
+    // Hidden fields (Santa hides pickup/dropoff, "same address" hides the
+    // return pick-up field) are skipped, same as native required behaviour.
+    if (f.offsetParent === null) { f.setCustomValidity(''); return; }
+    var val = f.value.trim();
+    if (!val) { f.setCustomValidity(''); return; }
+    if (/airport/i.test(val)) { f.setCustomValidity(''); return; }
+    if (!hasUkPostcode(val)) {
+      f.setCustomValidity('Please include the postcode, e.g. "14 Bath Street, G2 4JZ"');
+    } else {
+      f.setCustomValidity('');
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   var form = document.querySelector('.form-box form');
   if (form) {
@@ -440,6 +509,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (form._submitted) return;
+      validateAddressFields(form);
       if (!form.reportValidity()) return;
       form._submitted = true;
       var btn = form.querySelector('button[type="submit"]');
@@ -465,6 +535,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+document.querySelectorAll('[data-addr="1"]').forEach(setupAirportAutocomplete);
 </script>
 </body>
 </html>
