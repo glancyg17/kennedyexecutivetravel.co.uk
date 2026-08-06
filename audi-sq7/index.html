@@ -172,6 +172,12 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 .modal-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--cream);margin-bottom:0.3rem}
 .modal-vehicle{font-size:0.78rem;color:var(--gold);margin-bottom:2rem;letter-spacing:0.05em}
 .modal-field{margin-bottom:1.2rem;position:relative}
+.stop-add-btn{display:block;width:100%;background:none;border:1px dashed var(--border-red);border-radius:8px;padding:0.6rem;font-size:0.8rem;font-weight:600;color:var(--red);cursor:pointer;font-family:inherit;margin:-0.5rem 0 1.2rem}
+.stop-row{margin-bottom:0.8rem;position:relative}
+.stop-row label{display:block;font-size:0.78rem;color:var(--mid);margin-bottom:0.3rem}
+.stop-row-inner{display:flex;gap:0.5rem;align-items:center}
+.stop-row-inner input{flex:1}
+.stop-remove-btn{flex-shrink:0;width:2.2rem;height:2.2rem;background:none;border:1px solid var(--border-red);border-radius:8px;color:var(--red);font-size:1.1rem;line-height:1;cursor:pointer;font-family:inherit}
 .airport-suggest{position:absolute;left:0;right:0;top:100%;background:var(--black);border:1px solid var(--border-red);border-radius:8px;margin-top:4px;z-index:60;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.4)}
 .airport-suggest-item{padding:0.7rem 0.9rem;font-size:0.85rem;color:var(--cream);cursor:pointer}
 .airport-suggest-item:hover,.airport-suggest-item.active{background:var(--red)}
@@ -333,8 +339,12 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 
       <!-- Pick-up -->
       <div class="modal-field"><label>Pick-up location</label><input type="text" name="pickup" placeholder="First line + postcode, e.g. 14 Bath Street, G2 4JZ" required data-addr="1"></div>
+      <div id="pickupExtra"></div>
+      <button type="button" class="stop-add-btn" onclick="addStopField('pickupExtra','pickup_extra[]','Additional pick-up')">+ Add another pick-up</button>
       <!-- Drop-off -->
       <div class="modal-field"><label>Drop-off location</label><input type="text" name="dropoff" placeholder="First line + postcode, e.g. 1 Princes Street, EH2 2QP" required data-addr="1"></div>
+      <div id="dropoffExtra"></div>
+      <button type="button" class="stop-add-btn" onclick="addStopField('dropoffExtra','dropoff_extra[]','Additional drop-off')">+ Add another drop-off</button>
 
       <!-- Return journey -->
       <div class="modal-field">
@@ -374,6 +384,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
       <div class="modal-field"><label>Additional notes</label><textarea name="notes" placeholder="Number of passengers, luggage, special requests..."></textarea></div>
 
       <button type="submit" class="modal-submit">Send reservation request</button>
+      <div class="modal-error" id="modalValidationMsg" style="display:none"></div>
       <div class="modal-error" id="modalError">Sorry, something went wrong sending your request. Please try again, or contact us directly:<br>📞 <a href="tel:+447961834904">07961 834 904</a> &nbsp;·&nbsp; 💬 <a href="https://wa.me/447961834904">WhatsApp</a></div>
       <p class="modal-note">We'll confirm availability and pricing within a few hours.</p>
     </form>
@@ -779,9 +790,11 @@ function captureReserveToDispatch(form) {
     try {
       var fd = new FormData(form);
       var g = function (key) { return (fd.get(key) || '').toString().trim(); };
+      var getAll = function (key) { return fd.getAll(key).map(function (v) { return v.toString().trim(); }).filter(Boolean); };
 
       var returnVal = g('return_journey'); // '', 'yes_same', 'yes_alt'
       var hasReturn = returnVal === 'yes_same' || returnVal === 'yes_alt';
+      var stops = getAll('pickup_extra[]').concat(getAll('dropoff_extra[]'));
 
       var payload = {
         name: g('name'),
@@ -793,6 +806,7 @@ function captureReserveToDispatch(form) {
         vehicle: g('vehicle'),
         pickup: g('pickup'),
         dropoff: g('dropoff'),
+        stops: stops,
         job_date: g('date') || null,
         job_time: g('time') || null,
         return_journey: hasReturn ? 'yes' : '',
@@ -833,7 +847,14 @@ function sendReserveBackupEmail(form) {
   try {
     var fd = new FormData(form);
     var obj = {};
-    fd.forEach(function (value, key) { obj[key] = value; });
+    fd.forEach(function (value, key) {
+      if (obj.hasOwnProperty(key)) {
+        if (Array.isArray(obj[key])) obj[key].push(value);
+        else obj[key] = [obj[key], value];
+      } else {
+        obj[key] = value;
+      }
+    });
     fetch('https://formsubmit.co/ajax/kennedyexecutivetravel@gmail.com', {
       method: 'POST',
       headers: {
@@ -856,6 +877,36 @@ var AIRPORT_SUGGESTIONS = [
   { prefix: 'ma', label: 'Manchester Airport', value: 'Manchester Airport, M90 1QX' },
   { prefix: 'ne', label: 'Newcastle Airport', value: 'Newcastle Airport, NE13 8BZ' }
 ];
+
+/* Repeatable "+ Add another pick-up / drop-off" fields. These feed into the
+   same "stops" array the dispatch app already supports (extra pick-ups
+   first, then extra drop-offs, in order) — no dispatch app changes needed. */
+function addStopField(containerId, fieldName, label) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+  var idx = container.children.length + 1;
+  var row = document.createElement('div');
+  row.className = 'modal-field stop-row';
+  row.innerHTML =
+    '<label>' + label + ' ' + idx + '</label>' +
+    '<div class="stop-row-inner">' +
+      '<input type="text" name="' + fieldName + '" placeholder="First line + postcode" data-addr="1">' +
+      '<button type="button" class="stop-remove-btn" aria-label="Remove this stop">×</button>' +
+    '</div>';
+  var input = row.querySelector('input');
+  var removeBtn = row.querySelector('.stop-remove-btn');
+  removeBtn.addEventListener('click', function () {
+    row.remove();
+    renumberStopFields(container, label);
+  });
+  container.appendChild(row);
+  setupAirportAutocomplete(input);
+  input.focus();
+}
+function renumberStopFields(container, label) {
+  var labels = container.querySelectorAll('.stop-row label');
+  labels.forEach(function (lbl, i) { lbl.textContent = label + ' ' + (i + 1); });
+}
 
 function setupAirportAutocomplete(input) {
   var box = document.createElement('div');
@@ -895,26 +946,6 @@ function setupAirportAutocomplete(input) {
   });
 }
 
-function hasUkPostcode(addr) {
-  return /[A-Za-z]{1,2}\d[A-Za-z\d]?\s*\d[A-Za-z]{2}\s*$/.test((addr || '').trim());
-}
-function validateAddressFields(form) {
-  var fields = form.querySelectorAll('[data-addr="1"]');
-  fields.forEach(function (f) {
-    // Hidden fields (Santa hides pickup/dropoff, "same address" hides the
-    // return pick-up field) are skipped, same as native required behaviour.
-    if (f.offsetParent === null) { f.setCustomValidity(''); return; }
-    var val = f.value.trim();
-    if (!val) { f.setCustomValidity(''); return; }
-    if (/airport/i.test(val)) { f.setCustomValidity(''); return; }
-    if (!hasUkPostcode(val)) {
-      f.setCustomValidity('Please include the postcode, e.g. "14 Bath Street, G2 4JZ"');
-    } else {
-      f.setCustomValidity('');
-    }
-  });
-}
-
 (function () {
   var modal = document.getElementById('reserveModal');
   var form = modal ? modal.querySelector('form') : null;
@@ -923,12 +954,28 @@ function validateAddressFields(form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (form._submitted) return;
-      validateAddressFields(form);
-      if (!form.reportValidity()) return;
+      var errEl = document.getElementById('modalError');
+      var valEl = document.getElementById('modalValidationMsg');
+      if (!form.checkValidity()) {
+        // Native validation bubbles get clipped inside this modal's
+        // scrollable container, so show our own always-visible message
+        // instead of relying on form.reportValidity()'s built-in UI.
+        var invalid = form.querySelector(':invalid');
+        if (errEl) errEl.style.display = 'none';
+        if (valEl) {
+          valEl.textContent = (invalid && invalid.validationMessage) ? invalid.validationMessage : 'Please check the highlighted field and try again.';
+          valEl.style.display = 'block';
+        }
+        if (invalid) {
+          invalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setTimeout(function () { invalid.focus(); }, 300);
+        }
+        return;
+      }
+      if (valEl) valEl.style.display = 'none';
+      if (errEl) errEl.style.display = 'none';
       form._submitted = true;
       var btn = form.querySelector('button[type="submit"]');
-      var errEl = document.getElementById('modalError');
-      if (errEl) errEl.style.display = 'none';
       if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
 
       sendReserveBackupEmail(form);
