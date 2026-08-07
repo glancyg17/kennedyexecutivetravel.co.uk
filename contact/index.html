@@ -263,7 +263,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
         <input type="tel" name="whatsapp" id="cWaInput" placeholder="07700 000000">
       </div>
 
-      <div class="field"><label>Email address</label><input type="email" name="email" required placeholder="your@email.com"></div>
+      <div class="field"><label>Email address</label><input type="email" name="email" placeholder="your@email.com"></div>
 
       <!-- Always: Journey type -->
       <div class="field">
@@ -321,8 +321,8 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 
         <!-- Date / Time -->
         <div class="field-row">
-          <div class="field"><label>Preferred date</label><input type="date" name="date"></div>
-          <div class="field"><label>Preferred time</label><input type="time" name="time"></div>
+          <div class="field"><label>Preferred date</label><input type="date" name="date" required></div>
+          <div class="field"><label>Preferred time</label><input type="time" name="time" required></div>
         </div>
 
         <!-- Extras -->
@@ -606,6 +606,13 @@ function renumberStopFields(container, label) {
   labels.forEach(function (lbl, i) { lbl.textContent = label + ' ' + (i + 1); });
 }
 
+function getFieldLabel(field) {
+  var container = field.closest(".modal-field, .field, .stop-row");
+  var label = container ? container.querySelector("label") : null;
+  if (label) return label.textContent.replace(/\s*\(.*\)\s*$/, "").trim();
+  return field.placeholder || field.name || "the highlighted field";
+}
+
 function setupAirportAutocomplete(input) {
   var box = document.createElement('div');
   box.className = 'airport-suggest';
@@ -657,7 +664,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var invalid = form.querySelector(':invalid');
         if (errEl) errEl.style.display = 'none';
         if (valEl) {
-          valEl.textContent = (invalid && invalid.validationMessage) ? invalid.validationMessage : 'Please check the highlighted field and try again.';
+          valEl.textContent = invalid ? ('Please fill in: ' + getFieldLabel(invalid)) : 'Please check the highlighted field and try again.';
           valEl.style.display = 'block';
         }
         if (invalid) {
