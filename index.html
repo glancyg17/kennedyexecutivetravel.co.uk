@@ -83,19 +83,20 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-
 }
 
 /* SECONDARY NEW ADDITION (smaller, secondary banner) */
-.showcase-secondary{position:relative;overflow:hidden;border-bottom:1px solid var(--border-red);background:var(--black2)}
-.showcase-secondary-img{position:relative;width:100%;height:420px;background:#1a1212}
+.showcase-secondary{position:relative;overflow:hidden;border-bottom:1px solid var(--border-red);background:var(--black2);display:grid;grid-template-columns:10% 40% 1fr}
+.showcase-secondary-img{grid-column:2;position:relative;height:420px;background:#1a1212}
 .showcase-secondary-img img{width:100%;height:100%;object-fit:cover;display:block}
 .showcase-secondary-badge{position:absolute;top:1.5rem;left:1.5rem;font-size:0.56rem;letter-spacing:0.22em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:0.4rem 0.9rem;z-index:2}
-.showcase-secondary-body{padding:2.5rem 3rem;display:flex;flex-direction:column;justify-content:center}
+.showcase-secondary-body{grid-column:3;padding:2.5rem 3rem;display:flex;flex-direction:column;justify-content:center}
 .showcase-secondary-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,2.6vw,2.1rem);font-weight:300;color:var(--cream);line-height:1.2;margin-bottom:0.8rem}
 .showcase-secondary-title em{font-style:italic;color:var(--gold)}
 .showcase-secondary-copy{font-size:0.85rem;color:var(--mid);line-height:1.8;max-width:640px;margin-bottom:1.4rem}
 .showcase-secondary-copy strong{color:var(--cream);font-weight:400}
 .showcase-secondary-actions{display:flex;gap:0.8rem;flex-wrap:wrap;align-items:center}
 @media(max-width:900px){
-  .showcase-secondary-img{height:260px}
-  .showcase-secondary-body{padding:2rem 1.5rem}
+  .showcase-secondary{display:block}
+  .showcase-secondary-img{grid-column:auto;width:100%;height:260px}
+  .showcase-secondary-body{grid-column:auto;padding:2rem 1.5rem}
 }
 
 .ticker-wrap{overflow:hidden;border-top:1px solid var(--border-red);border-bottom:1px solid var(--border-red);padding:1rem 0;background:var(--black2);cursor:grab}
