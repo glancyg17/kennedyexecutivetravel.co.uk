@@ -290,7 +290,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
         <!-- Vehicle preference -->
         <div class="field">
           <label>Vehicle preference</label>
-          <select name="vehicle">
+          <select name="vehicle" id="cVehicle" onchange="cLogic()">
             <option value="">Not sure / any vehicle</option>
             <option value="Rolls-Royce Ghost">Rolls-Royce Ghost — VIP</option>
           <option value="Bentley Flying Spur">Bentley Flying Spur — VIP</option>
@@ -306,6 +306,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
             <option value="Mini Bus 9-11 Seater">Mini Bus — 9-11 Passengers</option>
             <option value="Mini Bus 12-14 Seater">Mini Bus — 12-14 Passengers</option>
             <option value="Mini Bus 15-16 Seater">Mini Bus — 15-16 Passengers</option>
+            <option value="Wheelchair Accessible Minibus">Wheelchair Accessible Minibus — 8 Passengers</option>
           </select>
         </div>
 
@@ -335,6 +336,10 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
           <label class="check-item">
             <input type="checkbox" name="trailer" value="yes">
             <span class="check-label"><strong>Trailer required — £49 charge</strong><span>Extra luggage space via trailer, charged at a flat fee of £49</span></span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="wheelchair_access" value="yes" id="cWheelchair">
+            <span class="check-label"><strong>Wheelchair access required</strong><span>Let us know if you need our wheelchair-accessible minibus with rear loading lift</span></span>
           </label>
         </div>
 
@@ -510,6 +515,7 @@ function captureLeadToDispatch(form) {
         return_airport: g('return_airport'),
         car_seat: fd.get('car_seat') === 'yes',
         trailer: fd.get('trailer') === 'yes',
+        wheelchair_access: fd.get('wheelchair_access') === 'yes',
         wedding_venue: g('wedding_venue'),
         wedding_vehicles: g('wedding_vehicles'),
         num_children: g('num_children'),
@@ -747,6 +753,9 @@ function cLogic() {
     if (showRetFlight) { retFlightInput.setAttribute('required', 'required'); }
     else { retFlightInput.removeAttribute('required'); }
   }
+  var vehSel = document.getElementById('cVehicle');
+  var wcBox = document.getElementById('cWheelchair');
+  if (vehSel && wcBox && vehSel.value === 'Wheelchair Accessible Minibus') { wcBox.checked = true; }
 }
 
 document.querySelectorAll('[data-addr="1"]').forEach(setupAirportAutocomplete);
