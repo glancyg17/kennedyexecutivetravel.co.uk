@@ -1,0 +1,17 @@
+# Files that live in the repo but must NOT be published on the website.
+# (Same format as .gitignore. Keep _headers: Cloudflare reads it and never serves it.)
+.git
+.github
+.gitignore
+.assetsignore
+.wrangler
+node_modules
+.DS_Store
+wrangler.jsonc
+package.json
+package-lock.json
+CLAUDE.md
+README.md
+docs
+_config.yml
+CNAME

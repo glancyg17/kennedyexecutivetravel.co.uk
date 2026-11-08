@@ -1,0 +1,15 @@
+{
+  // kennedyexecutivetravel.co.uk: static site served by Cloudflare Workers (static assets, no Worker code).
+  // The name MUST match the Worker created in the Cloudflare dashboard (Workers Builds
+  // fails or deploys to a new Worker if it differs).
+  "name": "kennedyexecutivetravel-co-uk",
+  "compatibility_date": "2026-11-05",
+  "assets": {
+    "directory": "./",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+  // Custom domains are deliberately NOT set here. Adding them to this file makes
+  // `wrangler deploy` attach the domain and move live traffic. Attach them at cutover
+  // (dashboard: Workers & Pages > kennedyexecutivetravel-co-uk > Settings > Domains & Routes).
+}
