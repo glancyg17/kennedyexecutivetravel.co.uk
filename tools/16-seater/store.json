@@ -1,0 +1,148 @@
+{
+ "entries": [
+  {
+   "id": "home-card-name",
+   "file": "index.html",
+   "show": "<h3 class=\"fleet-lower-name\">Mini Buses &amp; Ford Transit</h3>",
+   "hide": "<h3 class=\"fleet-lower-name\">Mini Bus</h3>"
+  },
+  {
+   "id": "home-card-spec",
+   "file": "index.html",
+   "show": "8 to 16 passengers · 8, 12, 14 &amp; 17-seat options<br>",
+   "hide": "Up to 8 passengers · 8-seat mini bus<br>"
+  },
+  {
+   "id": "home-prom",
+   "file": "index.html",
+   "show": "Groups up to 16 · Glow sticks",
+   "hide": "Groups up to 8 · Glow sticks"
+  },
+  {
+   "id": "svc-prom-tag",
+   "file": "services/index.html",
+   "show": "<span class=\"svc-tag\">Groups up to 16</span>",
+   "hide": "<span class=\"svc-tag\">Groups up to 8</span>"
+  },
+  {
+   "id": "exec-group-card",
+   "file": "executive/index.html",
+   "show": "8 to 16 passengers — hen dos",
+   "hide": "Up to 8 passengers — hen dos"
+  },
+  {
+   "id": "fleet-meta",
+   "file": "fleet/index.html",
+   "show": "to mini buses for 16 — explore",
+   "hide": "to group mini buses — explore"
+  },
+  {
+   "id": "fleet-intro",
+   "file": "fleet/index.html",
+   "show": "to a mini bus for sixteen, every vehicle",
+   "hide": "to a group mini bus, every vehicle"
+  },
+  {
+   "id": "fleet-tier-desc",
+   "file": "fleet/index.html",
+   "show": "Group travel done properly — 8 to 16 passengers,",
+   "hide": "Group travel done properly — up to 8 passengers,"
+  },
+  {
+   "id": "fleet-minibus-spec",
+   "file": "fleet/index.html",
+   "show": "8, 12 &amp; 14-seat options · Diesel · Manual<br>",
+   "hide": "8-seat · Diesel · Manual<br>"
+  },
+  {
+   "id": "fleet-grid-cols",
+   "file": "fleet/index.html",
+   "show": "<div class=\"fleet-grid-wide\">",
+   "hide": "<div class=\"fleet-grid-wide fleet-grid-two\">"
+  },
+  {
+   "id": "fleet-transit-card",
+   "file": "fleet/index.html",
+   "show": "<div class=\"fleet-card-wide\">\n      <a href=\"/group/\" style=\"text-decoration:none;color:inherit;display:flex;flex-direction:column;flex:1\">\n        <div class=\"fleet-lower-img\" style=\"aspect-ratio:16/9\"><img src=\"/assets/images/transit-hero.jpg\" alt=\"Ford Transit 17-Seater\"></div>\n        <div class=\"fleet-lower-body\">\n          <p class=\"fleet-lower-tier\">Mini Bus</p>\n          <h3 class=\"fleet-lower-name\">Ford Transit 17-Seater</h3>\n          <p class=\"fleet-lower-spec\">Up to 16 passengers · 2016 · Diesel · Manual<br>Our largest vehicle — for bigger groups travelling together.</p>\n          <div class=\"fleet-lower-row\">\n            <span class=\"fleet-lower-price\">£109 <sub>from</sub></span>\n            <span class=\"fleet-lower-link\">View range →</span>\n          </div>\n        </div>\n      </a>\n    </div>",
+   "hide": "<!--@opt:fleet-transit-card-->"
+  },
+  {
+   "id": "group-meta",
+   "file": "group/index.html",
+   "show": "Mini buses and group transport for 8 to 16 passengers",
+   "hide": "Mini bus and group transport for up to 8 passengers"
+  },
+  {
+   "id": "group-intro",
+   "file": "group/index.html",
+   "show": "our mini buses and Ford Transit cover groups of 8 to 16 passengers",
+   "hide": "our mini bus covers groups of up to 8 passengers"
+  },
+  {
+   "id": "group-desc",
+   "file": "group/index.html",
+   "show": "Available in 8, 12 and 14-seat configurations, our mini buses are the go-to",
+   "hide": "Our 8-seat mini bus is the go-to"
+  },
+  {
+   "id": "group-spec",
+   "file": "group/index.html",
+   "show": "<strong>Passengers</strong>8 / 12 / 14 seats",
+   "hide": "<strong>Passengers</strong>8 seats"
+  },
+  {
+   "id": "group-transit-block",
+   "file": "group/index.html",
+   "show": "<!-- FORD TRANSIT 17-SEATER -->\n<div class=\"vehicle-block\">\n  <div class=\"vehicle-grid\">\n    <div class=\"vehicle-images\">\n      <div class=\"vehicle-img\"><img src=\"/assets/images/transit-hero.jpg\" alt=\"Ford Transit 17-Seater\"></div>\n      <div class=\"vehicle-img\"><img src=\"/assets/images/transit-2.jpg\" alt=\"Ford Transit interior\"></div>\n    </div>\n    <div class=\"vehicle-info\">\n      <p class=\"vehicle-tier\">Mini Bus</p>\n      <h2 class=\"vehicle-name\">Ford Transit 17-Seater</h2>\n      <p class=\"vehicle-desc\">Our largest group vehicle, seating up to 16 passengers plus driver. Ideal for larger weddings, school proms, sports teams, and bigger corporate group transfers — all travelling together, all on schedule.</p>\n      <div class=\"vehicle-spec-row\">\n        <div><strong>Passengers</strong>Up to 16</div>\n        <div><strong>Year</strong>2016</div>\n        <div><strong>Fuel</strong>Diesel</div>\n        <div><strong>Transmission</strong>Manual</div>\n      </div>\n      <div class=\"vehicle-price-row\">\n        <span class=\"vehicle-price\">£109 <sub>from</sub></span>\n        <button class=\"btn-red\" onclick=\"openModal('Ford Transit 17-Seater')\">Reserve now</button>\n      </div>\n    </div>\n  </div>\n</div>",
+   "hide": "<!--@opt:group-transit-block-->"
+  },
+  {
+   "id": "ap-meta",
+   "file": "airport-prices/index.html",
+   "show": "Standard, VIP Executive and Minibus options",
+   "hide": "Standard and VIP Executive options"
+  },
+  {
+   "id": "ap-intro",
+   "file": "airport-prices/index.html",
+   "show": "to see standard, VIP executive and minibus rates.",
+   "hide": "to see standard and VIP executive rates."
+  },
+  {
+   "id": "ap-glasgow",
+   "file": "airport-prices/index.html",
+   "show": "<div class=\"price-tier\">\n        <p class=\"tier-label\">Minibus</p>\n        <div class=\"tier-row\"><span class=\"tier-pax\">9–10 Passengers</span><span class=\"tier-price\">£109</span></div>\n        <div class=\"tier-row\"><span class=\"tier-pax\">12–14 Passengers</span><span class=\"tier-price\">£129</span></div>\n        <div class=\"tier-row\"><span class=\"tier-pax\">15–16 Passengers</span><span class=\"tier-price\">£149</span></div>\n      </div>",
+   "hide": "<!--@opt:ap-glasgow-->"
+  },
+  {
+   "id": "ap-edinburgh",
+   "file": "airport-prices/index.html",
+   "show": "<div class=\"price-tier\">\n        <p class=\"tier-label\">Minibus</p>\n        <div class=\"tier-row\"><span class=\"tier-pax\">9–10 Passengers</span><span class=\"tier-price\">£129</span></div>\n        <div class=\"tier-row\"><span class=\"tier-pax\">12–14 Passengers</span><span class=\"tier-price\">£149</span></div>\n        <div class=\"tier-row\"><span class=\"tier-pax\">15–16 Passengers</span><span class=\"tier-price\">£169</span></div>\n      </div>",
+   "hide": "<!--@opt:ap-edinburgh-->"
+  },
+  {
+   "id": "ap-manchester",
+   "file": "airport-prices/index.html",
+   "show": "<div class=\"price-tier\">\n        <p class=\"tier-label\">Minibus</p>\n        <div class=\"tier-row\"><span class=\"tier-pax\">9–10 Passengers</span><span class=\"tier-price\">£599</span></div>\n        <div class=\"tier-row\"><span class=\"tier-pax\">12–14 Passengers</span><span class=\"tier-price\">£599</span></div>\n        <div class=\"tier-row\"><span class=\"tier-pax\">15–16 Passengers</span><span class=\"tier-price\">£599</span></div>\n      </div>",
+   "hide": "<!--@opt:ap-manchester-->"
+  },
+  {
+   "id": "ap-liverpool",
+   "file": "airport-prices/index.html",
+   "show": "<div class=\"price-tier\">\n        <p class=\"tier-label\">Minibus</p>\n        <div class=\"tier-row\"><span class=\"tier-pax\">9–10 Passengers</span><span class=\"tier-price\">£599</span></div>\n        <div class=\"tier-row\"><span class=\"tier-pax\">12–14 Passengers</span><span class=\"tier-price\">£599</span></div>\n        <div class=\"tier-row\"><span class=\"tier-pax\">15–16 Passengers</span><span class=\"tier-price\">£599</span></div>\n      </div>",
+   "hide": "<!--@opt:ap-liverpool-->"
+  },
+  {
+   "id": "llms-prom",
+   "file": "llms.txt",
+   "show": "Proms & parties (groups up to 16)",
+   "hide": "Proms & parties (groups up to 8)"
+  },
+  {
+   "id": "llms-minibus",
+   "file": "llms.txt",
+   "show": "8/12/14-seat mini buses and Ford Transit 17-seater (from £79)",
+   "hide": "8-seat mini bus (from £79)"
+  }
+ ]
+}

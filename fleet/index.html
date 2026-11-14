@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Fleet | Kennedy Executive Travel</title>
-<meta name="description" content="From the Mercedes G63 AMG to mini buses for 16 — explore our full fleet of chauffeur vehicles across Glasgow, Edinburgh & Central Scotland. From £39.">
+<meta name="description" content="From the Mercedes G63 AMG to group mini buses — explore our full fleet of chauffeur vehicles across Glasgow, Edinburgh & Central Scotland. From £39.">
 <link rel="canonical" href="https://kennedyexecutivetravel.co.uk/fleet/">
 <meta property="og:image" content="https://kennedyexecutivetravel.co.uk/assets/images/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -112,6 +112,7 @@ nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-
 .fleet-card-wide{position:relative;overflow:hidden;border-right:1px solid var(--border-red);transition:background 0.3s;display:flex;flex-direction:column}
 .fleet-card-wide:last-child{border-right:none}
 .fleet-card-wide:hover{background:rgba(158,28,28,0.04)}
+.fleet-grid-two{grid-template-columns:repeat(2,1fr)}
 
 /* BOOK CTA */
 .book-s{padding:6rem 3rem;text-align:center;position:relative;overflow:hidden}
@@ -409,7 +410,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
 <div class="page-header">
   <p class="eyebrow">The fleet</p>
   <h1 class="page-title">Many vehicles.<br><em>One standard of service.</em></h1>
-  <p class="page-intro">From the statement presence of a Mercedes G63 AMG to a mini bus for sixteen, every vehicle in our fleet is maintained to the same standard and driven with the same care. Browse by range below, or jump straight to what you need.</p>
+  <p class="page-intro">From the statement presence of a Mercedes G63 AMG to a group mini bus, every vehicle in our fleet is maintained to the same standard and driven with the same care. Browse by range below, or jump straight to what you need.</p>
 </div>
 
 <!-- TIER JUMP NAV -->
@@ -569,18 +570,18 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
   <div class="tier-header">
     <div>
       <h2 class="h2">Mini Buses</h2>
-      <p class="tier-desc">Group travel done properly — 8 to 16 passengers, one pickup, one drop-off. Perfect for hen &amp; stag parties, weddings, proms and airport groups.</p>
+      <p class="tier-desc">Group travel done properly — up to 8 passengers, one pickup, one drop-off. Perfect for hen &amp; stag parties, weddings, proms and airport groups.</p>
     </div>
     <p class="tier-price-note">From £79</p>
   </div>
-  <div class="fleet-grid-wide">
+  <div class="fleet-grid-wide fleet-grid-two">
     <div class="fleet-card-wide">
       <a href="/group/" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;flex:1">
         <div class="fleet-lower-img" style="aspect-ratio:16/9"><img src="/assets/images/minibus-hero.jpg" alt="Mini Bus"></div>
         <div class="fleet-lower-body">
           <p class="fleet-lower-tier">Mini Bus</p>
           <h3 class="fleet-lower-name">Mini Buses</h3>
-          <p class="fleet-lower-spec">8, 12 &amp; 14-seat options · Diesel · Manual<br>For hen &amp; stag parties, weddings and group outings.</p>
+          <p class="fleet-lower-spec">8-seat · Diesel · Manual<br>For hen &amp; stag parties, weddings and group outings.</p>
           <div class="fleet-lower-row">
             <span class="fleet-lower-price">£99 <sub>from</sub></span>
             <span class="fleet-lower-link">View range →</span>
@@ -588,20 +589,7 @@ footer{padding:3rem;border-top:1px solid var(--border-red);display:grid;grid-tem
         </div>
       </a>
     </div>
-    <div class="fleet-card-wide">
-      <a href="/group/" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;flex:1">
-        <div class="fleet-lower-img" style="aspect-ratio:16/9"><img src="/assets/images/transit-hero.jpg" alt="Ford Transit 17-Seater"></div>
-        <div class="fleet-lower-body">
-          <p class="fleet-lower-tier">Mini Bus</p>
-          <h3 class="fleet-lower-name">Ford Transit 17-Seater</h3>
-          <p class="fleet-lower-spec">Up to 16 passengers · 2016 · Diesel · Manual<br>Our largest vehicle — for bigger groups travelling together.</p>
-          <div class="fleet-lower-row">
-            <span class="fleet-lower-price">£109 <sub>from</sub></span>
-            <span class="fleet-lower-link">View range →</span>
-          </div>
-        </div>
-      </a>
-    </div>
+    <!--@opt:fleet-transit-card-->
     <div class="fleet-card-wide">
       <a href="/group/" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;flex:1">
         <div class="fleet-lower-img" style="aspect-ratio:16/9"><img src="/assets/images/transit-wheelchair-01.jpg" alt="Wheelchair Accessible Minibus"></div>

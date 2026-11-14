@@ -15,3 +15,6 @@ README.md
 docs
 _config.yml
 CNAME
+
+# 16-seater visibility switch (dev tooling, not part of the website)
+tools
